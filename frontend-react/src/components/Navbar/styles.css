@@ -1,0 +1,108 @@
+.navbar-container {
+    background-color: #0f4a8d;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15%;
+    height: 100vh;
+}
+
+.navbar-header {
+    /* background-color: greenyellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    width: 100%;
+}
+.navbar-header-icon {
+    margin-left: 75%;
+    height: 10vh;
+    cursor: pointer;
+}
+
+.navbar-header-logo {
+    height: 20vh;
+    width: 100%;
+    /* background-color: yellowgreen; */
+}
+.navbar-header-title {
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 100%;
+    font-weight: 200;
+    font-size: 20px;
+}
+
+.navbar-body {
+    /* background-color: goldenrod; */
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes closed-chevron {
+    to {
+        transform: rotate(-180deg);
+    }
+}
+@keyframes closed-navbar {
+    to {
+        width: 5vw;
+    }
+}
+@keyframes opened-chevron {
+    from {
+        transform: rotate(-180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+@keyframes opened-navbar {
+    from {
+        width: 5%;
+    }
+    to {
+        width: 15%;
+    }
+}
+
+
+.navbar-container-closed {
+    animation: closed-navbar;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+}
+
+.navbar-icon-closed {
+    animation: closed-chevron;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+    margin: 0;
+}
+
+.navbar-container-opened {
+    animation: opened-navbar;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+}
+
+.navbar-icon-opened {
+    animation: opened-chevron;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+}
+
+.navbar-header-logo-closed,
+.navbar-header-title-closed {
+    visibility: hidden;
+}
+

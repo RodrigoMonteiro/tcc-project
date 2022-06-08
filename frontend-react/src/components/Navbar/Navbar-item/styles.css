@@ -1,0 +1,32 @@
+.item-container {
+    background-color: #0f4a8d;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 7vh;
+    width: 90%;
+    margin-bottom: 3vh;
+    cursor: pointer;
+}
+
+.item-container:hover {
+    color: #0f4a8d;
+    background-color: #fff;
+    opacity: 0.95;
+    transition: 0.25s;
+}
+
+@keyframes item-closed {
+    to {
+        width: 75%;
+    }
+}
+.navbar-closed {
+    animation: item-closed;
+    animation-fill-mode: forwards;
+    animation-duration: 0.75s;
+}
+.nameItem-closed {
+    display: none;
+}
