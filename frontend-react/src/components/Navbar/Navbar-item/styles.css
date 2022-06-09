@@ -16,17 +16,35 @@
     opacity: 0.95;
     transition: 0.25s;
 }
+.item-container .item-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+.item-container .item-name {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 @keyframes item-closed {
     to {
         width: 75%;
     }
 }
+
 .navbar-closed {
     animation: item-closed;
     animation-fill-mode: forwards;
     animation-duration: 0.75s;
 }
 .nameItem-closed {
-    display: none;
+    visibility: hidden;
+}
+.icon-closed {
+    position: absolute;
+    width: 70% !important;
+    
 }

@@ -37,13 +37,15 @@ export function Navbar() {
         </div>
       </div>
       <div className={`navbar-body ${isOpen ? "" : "navbar-body-closed"}`}>
-        {List.map((el) => (
-          <NavbarItem
-            name={el.name}
-            icon={el.icon}
-            isOpened={isOpen}
-          ></NavbarItem>
-        ))}
+        {List.map((el) => {
+          return (
+            <NavbarItem
+              name={el.name}
+              icon={el.icon}
+              isOpened={isOpen}
+            ></NavbarItem>
+          );
+        })}
       </div>
     </div>
   );

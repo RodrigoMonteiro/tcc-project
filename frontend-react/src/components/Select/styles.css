@@ -1,0 +1,46 @@
+.select-container {
+    visibility: hidden;
+    position: absolute;
+    top: 12.5%;
+    right: 7px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1976d2;
+    border-radius: 10px;
+    width: 12.5%;
+    height: 15%;
+}
+
+@keyframes select-opened {
+   from{
+       opacity: 0;
+       visibility: hidden;
+   }
+    to {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+@keyframes select-closed {
+    from{
+        visibility: visible;
+        opacity: 1;
+   }
+    to {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+.select-open {
+    animation-name: select-opened;
+    animation-fill-mode: forwards;
+    animation-duration: .25s;
+}
+.select-close {
+    animation-name: select-closed;
+    animation-fill-mode: forwards;
+    animation-duration: .25s;
+}

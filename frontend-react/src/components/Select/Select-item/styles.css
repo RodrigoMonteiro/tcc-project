@@ -1,0 +1,32 @@
+.selectItem-container{
+    display: flex;
+    justify-content: space-around;
+    width: 96.5%;
+    height: 42%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.selectItem-container:hover{
+    background-color: white;
+    color: #1976d2;
+    opacity: 0.95;
+    transform: 0.25;
+}
+
+.selectItem-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    /* background-color: yellowgreen; */
+    
+}
+
+.selectItem-title{
+    width: 75%;
+    /* background-color: brown; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
