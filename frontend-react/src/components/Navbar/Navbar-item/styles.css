@@ -46,5 +46,10 @@
 .icon-closed {
     position: absolute;
     width: 70% !important;
-    
+}
+.isItemSelected {
+    color: #0f4a8d;
+    background-color: #fff;
+    opacity: 0.95;
+    transition: 0.25s;
 }

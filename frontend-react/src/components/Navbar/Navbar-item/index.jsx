@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import "./styles.css";
 import {
   BsListUl,
@@ -6,9 +7,22 @@ import {
   BsStopwatchFill,
   BsFillPencilFill,
 } from "react-icons/bs";
+
 import { MdOutlineEditCalendar } from "react-icons/md";
+
+import { GlobalContext } from "../../../providers/globalProps";
+
 export function NavbarItem(props) {
-  const { name, icon, isOpened } = props;
+  const [itemSelected , setItemSelected] = useState(false)
+  const { setGlobalProps } = React.useContext(GlobalContext);
+  const { name, icon, isOpened, changeCurrentItem, currentItem } = props;
+  
+  
+  function toggleItemSelected(){
+
+    setItemSelected(!itemSelected)
+  }
+
   function createIcon() {
     switch (icon) {
       case "BsFillHouseDoorFill":
@@ -25,8 +39,22 @@ export function NavbarItem(props) {
         return <MdOutlineEditCalendar />;
     }
   }
+  
   return (
-    <div className={`item-container ${isOpened ? "" : "navbar-closed"}`}>
+    <div
+      className={`item-container 
+      ${isOpened ? "" : "navbar-closed"}  
+      ${itemSelected ? "isItemSelected" : ""}  
+       
+      
+      `}
+      onClick={() => {
+        setGlobalProps({ titleName: name });
+      toggleItemSelected()
+
+
+      }}
+    >
       <span className={`item-icon ${isOpened ? "" : "icon-closed"}`}>
         {createIcon()}
       </span>

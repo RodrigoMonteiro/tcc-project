@@ -3,11 +3,19 @@ import { FaChevronLeft } from "react-icons/fa";
 import { useState } from "react";
 import { navbarItemList as List } from "./navbar-items";
 import "./styles.css";
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(true);
+  const[currentItem, setCurrentItem] = useState("");
+
+  function changeCurrentItemSelected(name) {
+    setCurrentItem(name);
+  }
+
   function toggleOpen() {
     setIsOpen(!isOpen);
   }
+
   return (
     <div
       className={`navbar-container ${
@@ -40,9 +48,12 @@ export function Navbar() {
         {List.map((el) => {
           return (
             <NavbarItem
+              key={el.name}
               name={el.name}
               icon={el.icon}
               isOpened={isOpen}
+              changeCurrentItem={changeCurrentItemSelected}
+              currentItem={currentItem}
             ></NavbarItem>
           );
         })}

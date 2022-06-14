@@ -1,9 +1,9 @@
 
-export const navbarItemList = [
-  { name: "Início", icon: "BsFillHouseDoorFill" },
-  { name: "Cadastro de semestres", icon: "BsFillCalendar3WeekFill" },
-  { name: "Horário do semestre", icon: "BsStopwatchFill" },
-  { name: "Hórario de estudos", icon: "MdOutlineEditCalendar" },
-  { name: "Anotações", icon: "BsFillPencilFill" },
-  { name: "Tarefas", icon: "BsListUl" },
+export var navbarItemList = [
+  { name: "Início", icon: "BsFillHouseDoorFill" , isSelected: true },
+  { name: "Cadastro de semestres", icon: "BsFillCalendar3WeekFill" , isSelected: false},
+  { name: "Horário do semestre", icon: "BsStopwatchFill" , isSelected: false},
+  { name: "Hórario de estudos", icon: "MdOutlineEditCalendar", isSelected: true},
+  { name: "Anotações", icon: "BsFillPencilFill", isSelected: false},
+  { name: "Tarefas", icon: "BsListUl", isSelected: true}
 ];

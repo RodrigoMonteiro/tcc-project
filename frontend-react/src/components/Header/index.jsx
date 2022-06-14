@@ -1,18 +1,24 @@
+import React, { useState } from "react";
 import "./styles.css";
-import { FaUserAlt } from "react-icons/fa";
+import {GlobalContext} from '../../providers/globalProps'
 import { Switch } from "../Switch";
-import { useState } from "react";
+import { FaUserAlt } from "react-icons/fa";
 import { Select } from "../Select/index";
+
 export function Header(props) {
+  
+  const {globalProps} = React.useContext(GlobalContext)
   const [isSelectOpen, setIsSelectOpen] = useState(false);
+
   function toggleSelect() {
     setIsSelectOpen(!isSelectOpen);
     console.log(isSelectOpen);
   }
+  
   return (
     <div className="header-container">
       <span className="header-title">
-        <h1>Home</h1>
+        <h1>{globalProps.titleName}</h1>
       </span>
       <Switch
         rounded={true}
