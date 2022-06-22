@@ -4,7 +4,8 @@ export const GlobalContext = React.createContext({});
 
 export const GlobalProvider = (props) => {
     const [globalProps, setGlobalProps] = useState({
-        titleName: "Testando..."
+        titleName: "Início",
+        isNavbarOpen: true
     })
   
   return ( 

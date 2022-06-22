@@ -1,9 +1,26 @@
-
 export var navbarItemList = [
-  { name: "Início", icon: "BsFillHouseDoorFill" , isSelected: true },
-  { name: "Cadastro de semestres", icon: "BsFillCalendar3WeekFill" , isSelected: false},
-  { name: "Horário do semestre", icon: "BsStopwatchFill" , isSelected: false},
-  { name: "Hórario de estudos", icon: "MdOutlineEditCalendar", isSelected: false},
-  { name: "Anotações", icon: "BsFillPencilFill", isSelected: false},
-  { name: "Tarefas", icon: "BsListUl", isSelected: false}
+  { name: "Início", component: "Inicio", icon: "BsFillHouseDoorFill" },
+  {
+    name: "Cadastro de semestres",
+    component: "CadastroSemestre",
+    icon: "BsFillCalendar3WeekFill",
+  },
+  {
+    name: "Horário do semestre",
+    component: "HorarioSemestre",
+    icon: "BsStopwatchFill",
+  },
+  {
+    name: "Hórario de estudos",
+    component: "HorarioEstudo",
+    icon: "MdOutlineEditCalendar",
+  },
+  { name: "Tarefas", 
+  component: "Tarefas",
+   icon: "BsListUl"
+   },
+  { name: "Anotações",
+   component: "Anotacoes",
+    icon: "BsFillPencilFill"
+   }
 ];

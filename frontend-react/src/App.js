@@ -7,6 +7,7 @@ import GlobalStyle from "./theme/global";
 
 import { Header } from "./components/Header";
 import { Navbar } from "./components/Navbar";
+import {  Views} from "./views";
 
 function App() {
   const [isLightTheme, setIsLightTheme] = useState(true);
@@ -18,6 +19,7 @@ function App() {
       <div className="App-container">
         <Header isLight={isLightTheme} changeTheme={toggleTheme}></Header>
         <Navbar></Navbar>
+        <Views></Views>
         <GlobalStyle></GlobalStyle>
       </div>
     </ThemeProvider>

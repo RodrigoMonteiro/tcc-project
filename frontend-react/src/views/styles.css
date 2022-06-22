@@ -1,0 +1,44 @@
+.views-container{
+    position: absolute;
+    right: 0;
+    top: 10vh;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.views-container-navbar-opened{
+    animation: views-container-opened-navbar;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+    background-color: blueviolet;
+    color: white;
+}
+
+.views-container-navbar-closed{
+    animation: views-container-closed-navbar;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+    color: white;
+    background-color: red;
+}
+
+@keyframes views-container-closed-navbar {
+    from{
+        width: 80%;
+    }
+    to {
+        width: 95%;
+    }
+}
+@keyframes views-container-opened-navbar {
+    from{
+        width: 95%;
+    }
+    to {
+        width: 80%;
+    }
+}
+

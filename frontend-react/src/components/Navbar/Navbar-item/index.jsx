@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import "./styles.css";
 import {
   BsListUl,
@@ -21,7 +21,7 @@ export function NavbarItem(props) {
 
    function toggleItemSelected() {
     changeSelectedName(name)
-    console.log(name)
+  
    
   }
 
@@ -52,8 +52,9 @@ export function NavbarItem(props) {
       
       `}
       onClick={() => {
-        setGlobalProps({ titleName: name });
+        setGlobalProps({ titleName: name});
         toggleItemSelected()
+        
      
       }}
     >
