@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import {
   BsListUl,
@@ -13,15 +13,18 @@ import { MdOutlineEditCalendar } from "react-icons/md";
 import { GlobalContext } from "../../../providers/globalProps";
 
 export function NavbarItem(props) {
-  const [itemSelected , setItemSelected] = useState(false)
-  const { setGlobalProps } = React.useContext(GlobalContext);
-  const { name, icon, isOpened, changeCurrentItem, currentItem } = props;
-  
-  
-  function toggleItemSelected(){
 
-    setItemSelected(!itemSelected)
+
+  const { setGlobalProps } = React.useContext(GlobalContext);
+  const { name, icon, isOpened, nameSelected, changeSelectedName } =
+    props;
+
+   function toggleItemSelected() {
+    changeSelectedName(name)
+    console.log(name)
+   
   }
+
 
   function createIcon() {
     switch (icon) {
@@ -39,20 +42,19 @@ export function NavbarItem(props) {
         return <MdOutlineEditCalendar />;
     }
   }
-  
+
   return (
     <div
       className={`item-container 
       ${isOpened ? "" : "navbar-closed"}  
-      ${itemSelected ? "isItemSelected" : ""}  
+      ${name ===  nameSelected ? "isItemSelected" : ""}  
        
       
       `}
       onClick={() => {
         setGlobalProps({ titleName: name });
-      toggleItemSelected()
-
-
+        toggleItemSelected()
+     
       }}
     >
       <span className={`item-icon ${isOpened ? "" : "icon-closed"}`}>

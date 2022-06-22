@@ -6,15 +6,20 @@ import "./styles.css";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(true);
-  const[currentItem, setCurrentItem] = useState("");
+  const [nameSelectedItem, setNameSelectedItem] = useState("Início");
 
-  function changeCurrentItemSelected(name) {
-    setCurrentItem(name);
-  }
 
   function toggleOpen() {
     setIsOpen(!isOpen);
   }
+
+  function changeSelectedName(name){
+    setNameSelectedItem(name)
+  }
+
+
+  
+  
 
   return (
     <div
@@ -52,8 +57,9 @@ export function Navbar() {
               name={el.name}
               icon={el.icon}
               isOpened={isOpen}
-              changeCurrentItem={changeCurrentItemSelected}
-              currentItem={currentItem}
+              
+              nameSelected={nameSelectedItem}
+              changeSelectedName={changeSelectedName}
             ></NavbarItem>
           );
         })}
