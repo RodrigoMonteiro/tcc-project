@@ -1,4 +1,4 @@
-.home-container{
+.home-container-new-account{
     color: white;
     background-color: #1976d2;
     width: 100vw;
@@ -10,7 +10,7 @@
 span{
     font-size: 1.05rem;
 }
-.home-form-container{
+.home-form-container-new-account{
     background-color: white;
     color: #1976d2;
     border-radius: 10px;
@@ -22,28 +22,28 @@ span{
     align-items: center;
 }
 
-.home-form-header{
+.home-form-header-new-account{
     width: 100%;
-    height: 40%;
+    height: 20%;
     color: #1976d2;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 }
-.home-form-header > img{
-    height: 80%;
+.home-form-header-new-account > img{
+    height: 70%;
     width: 100%;
 }
-.home-form-header > h2{
-    height: 20%;
+.home-form-header-new-account > h2{
+    height: 30%;
     width: 100%;
     text-align: center;
 }
 
-.home-form-body{
+.home-form-body-new-account{
     width: 80%;
-    height: 60%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -68,8 +68,8 @@ span{
     font-size: 1.05rem;
 }
 
-.home-form-body-btn{
-    width: 30%;
+.home-form-body-btn-create-account{
+    width: 45%;
     height: 10%;
     align-self: center;
     border-radius: 7px;
@@ -78,16 +78,19 @@ span{
     color: white;
     font-size: 1.1rem;
     cursor: pointer;
+    margin-top: 10px;
 }
 
-.home-form-body-btn:hover{
+.home-form-body-btn-create-account:hover{
     transition: 0.25;
 opacity: 0.95;
 
 
 }
 
-.cadastrar{
+.home-span-create-account{
     width: 100%;
     text-align: center;
+    margin-bottom: 30px;
+    
 }

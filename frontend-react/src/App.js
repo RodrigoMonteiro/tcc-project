@@ -8,6 +8,8 @@ import GlobalStyle from "./theme/global";
 import { Header } from "./components/Header";
 import { Navbar } from "./components/Navbar";
 import {  Views} from "./views";
+// import { Home } from "./views/Home";
+// import { HomeNewAccount } from "./views/Home/HomeNewAccount";
 
 function App() {
   const [isLightTheme, setIsLightTheme] = useState(true);
@@ -20,6 +22,8 @@ function App() {
         <Header isLight={isLightTheme} changeTheme={toggleTheme}></Header>
         <Navbar></Navbar>
         <Views></Views>
+        {/* <Home></Home> */}
+        {/* <HomeNewAccount></HomeNewAccount> */}
         <GlobalStyle></GlobalStyle>
       </div>
     </ThemeProvider>
