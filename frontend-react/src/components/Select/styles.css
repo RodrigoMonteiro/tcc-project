@@ -11,6 +11,7 @@
     border-radius: 10px;
     width: 12.5%;
     height: 15%;
+    z-index: 2;
 }
 
 @keyframes select-opened {

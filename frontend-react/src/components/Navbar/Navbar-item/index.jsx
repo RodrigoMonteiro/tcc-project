@@ -15,7 +15,7 @@ import { GlobalContext } from "../../../providers/globalProps";
 export function NavbarItem(props) {
 
 
-  const { setGlobalProps } = React.useContext(GlobalContext);
+  const { globalProps,  setGlobalProps } = React.useContext(GlobalContext);
   const { name, icon, isOpened, nameSelected, changeSelectedName } =
     props;
 
@@ -52,8 +52,10 @@ export function NavbarItem(props) {
       
       `}
       onClick={() => {
-        setGlobalProps({ titleName: name});
+        setGlobalProps({ ...globalProps ,titleName: name });
         toggleItemSelected()
+
+       
         
      
       }}
