@@ -11,7 +11,7 @@
     background-color: white;
     color: #1976d2;
     opacity: 0.95;
-    transform: 0.25;
+    transition: 0.25s;
 }
 
 .selectItem-icon{

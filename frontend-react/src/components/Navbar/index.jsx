@@ -1,17 +1,10 @@
 import React, { useContext } from "react";
+import {Link} from 'react-router-dom'
 import { NavbarItem } from "./Navbar-item";
 import { FaChevronLeft } from "react-icons/fa";
 import { useState } from "react";
 import { navbarItemList as List } from "./navbar-items";
 
-// import { Home } from "../../views/Home";
-// import { CadastroSemestre } from "../../views/CadastroSemestre";
-// import { Anotacoes } from "../../views/Anotacoes";
-// import { Tarefas } from "../../views/Tarefas";
-// import { HorarioEstudo } from "../../views/HorarioEstudo";
-// import { HorarioSemestre } from "../../views/HorarioSemestre";
-
-// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { GlobalContext } from "../../providers/globalProps";
 import "./styles.css";
 
@@ -47,7 +40,6 @@ export function Navbar() {
             setGlobalProps({
               ...globalProps,
               titleName: nameSelectedItem,
-             
             });
             toggleOpen();
           }}
@@ -68,19 +60,25 @@ export function Navbar() {
         </div>
       </div>
       <div className={`navbar-body ${isOpen ? "" : "navbar-body-closed"}`}>
-        {List.map((el) => {
-          return (
-            <NavbarItem
-              key={el.name}
-              name={el.name}
-              icon={el.icon}
-              isOpened={isOpen}
-              nameSelected={nameSelectedItem}
-              changeSelectedName={changeSelectedName}
-            
-            ></NavbarItem>
-          );
-        })}
+     
+          {List.map((el) => {
+            return (
+              <Link
+                className="link-container"
+                to={el.component}
+              >
+                <NavbarItem
+                  key={el.name}
+                  name={el.name}
+                  icon={el.icon}
+                  isOpened={isOpen}
+                  nameSelected={nameSelectedItem}
+                  changeSelectedName={changeSelectedName}
+                ></NavbarItem>
+              </Link>
+            );
+          })}
+       
       </div>
     </div>
   );

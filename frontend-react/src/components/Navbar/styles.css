@@ -7,7 +7,21 @@
     height: 100vh;
     z-index: 1;
 }
-
+.link-container{
+    
+    background-color: #0f4a8d;
+    font-size: medium;
+    color: #c4c4c4;
+     height: 60vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    
+    
+}
 .navbar-header {
     display: flex;
     flex-direction: column;
@@ -39,7 +53,6 @@
 }
 
 .navbar-body {
-    /* background-color: goldenrod; */
     height: 60vh;
     width: 100%;
     display: flex;

@@ -53,11 +53,7 @@ export function NavbarItem(props) {
       `}
       onClick={() => {
         setGlobalProps({ ...globalProps ,titleName: name });
-        toggleItemSelected()
-
-       
-        
-     
+        toggleItemSelected() 
       }}
     >
       <span className={`item-icon ${isOpened ? "" : "icon-closed"}`}>
