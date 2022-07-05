@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./styles.css";
-import {GlobalContext} from '../../providers/globalProps'
+import { GlobalContext } from "../../providers/globalProps";
 import { Switch } from "../Switch";
 import { FaUserAlt } from "react-icons/fa";
 import { Select } from "../Select/index";
 
 export function Header(props) {
-  
-  const {globalProps} = React.useContext(GlobalContext)
+  const { globalProps } = useContext(GlobalContext);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   function toggleSelect() {
@@ -15,6 +14,7 @@ export function Header(props) {
     console.log(isSelectOpen);
   }
   
+
   return (
     <div className="header-container">
       <span className="header-title">
@@ -28,7 +28,12 @@ export function Header(props) {
         }}
       ></Switch>
       <div className="header-btn">
-        <FaUserAlt onClick={() => toggleSelect()} size={24}></FaUserAlt>
+        <FaUserAlt
+          onClick={() => {
+            toggleSelect();
+          }}
+          size={24}
+        ></FaUserAlt>
         <Select isOpen={isSelectOpen}></Select>
       </div>
     </div>

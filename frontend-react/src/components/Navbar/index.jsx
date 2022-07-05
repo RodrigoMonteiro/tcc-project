@@ -12,7 +12,6 @@ export function Navbar() {
   const { globalProps, setGlobalProps } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(true);
   const [nameSelectedItem, setNameSelectedItem] = useState("Início");
-
   function toggleOpen() {
     setIsOpen(!isOpen);
     setGlobalProps({...globalProps , isNavbarOpen: isOpen})
@@ -63,10 +62,7 @@ export function Navbar() {
      
           {List.map((el) => {
             return (
-              <Link
-                className="link-container"
-                to={el.component}
-              >
+              <Link className="link-container" to={`/${el.component}`}>
                 <NavbarItem
                   key={el.name}
                   name={el.name}
