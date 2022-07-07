@@ -1,0 +1,27 @@
+.inicio-container {
+    /* background-color: red; */
+    height: 100%;
+}
+.inicio-title {
+    margin-top: 3%;
+    text-align: center;
+    color: #0f4a8d;
+}
+
+.inicio-subtitle {
+    margin-top: 2%;
+    text-align: center;
+    color: #000;
+    font-size: 1.25rem;
+}
+.accordion-title , .accordion-content {
+    font-family: 'Oswald' , sans-serif !important;
+    font-size: 1.1rem !important;
+}
+.accordion-content{
+    font-size: 1rem !important;
+    
+}
+.inicio-body{
+    margin-top: 5%;
+}

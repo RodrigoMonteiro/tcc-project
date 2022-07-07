@@ -3,6 +3,7 @@
     right: 0;
     top: 10vh;
     height: 90vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,7 +14,7 @@
     animation: views-container-opened-navbar;
     animation-duration: 0.75s;
     animation-fill-mode: forwards;
-    background-color: blueviolet;
+    background-color: #c4c4c4;
     color: white;
 }
 
@@ -22,7 +23,7 @@
     animation-duration: 0.75s;
     animation-fill-mode: forwards;
     color: white;
-    background-color: red;
+    background-color: #c4c4c4;
 }
 
 @keyframes views-container-closed-navbar {

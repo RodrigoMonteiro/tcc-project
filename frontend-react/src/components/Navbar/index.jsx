@@ -48,7 +48,10 @@ export function Navbar() {
             isOpen ? "" : "navbar-header-logo-closed"
           }`}
         >
-          <span>LOGO OVER HERE</span>
+          <img
+            src="logo.png"
+            alt="LOGO OVER HERE"
+          />
         </div>
         <div
           className={`navbar-header-title ${
@@ -59,22 +62,20 @@ export function Navbar() {
         </div>
       </div>
       <div className={`navbar-body ${isOpen ? "" : "navbar-body-closed"}`}>
-     
-          {List.map((el) => {
-            return (
-              <Link className="link-container" to={`/${el.component}`}>
-                <NavbarItem
-                  key={el.name}
-                  name={el.name}
-                  icon={el.icon}
-                  isOpened={isOpen}
-                  nameSelected={nameSelectedItem}
-                  changeSelectedName={changeSelectedName}
-                ></NavbarItem>
-              </Link>
-            );
-          })}
-       
+        {List.map((el) => {
+          return (
+            <Link className="link-container" to={`/${el.component}`}>
+              <NavbarItem
+                key={el.name}
+                name={el.name}
+                icon={el.icon}
+                isOpened={isOpen}
+                nameSelected={nameSelectedItem}
+                changeSelectedName={changeSelectedName}
+              ></NavbarItem>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
