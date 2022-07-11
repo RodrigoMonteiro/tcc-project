@@ -11,7 +11,6 @@
 .cadastro-semestre-options {
     width: 50%;
     display: flex;
-    /* background-color: brown; */
     justify-content: space-around;
 }
 
@@ -26,7 +25,7 @@
 
 
 
-.cadastro-semestre-card {
+.cadastro-semestre-card-cadastrar {
     margin-top: 5%;
     display: flex;
     flex-direction: column;
@@ -38,55 +37,43 @@
     background-color: white;
 }
 
-.cadastro-semestre-input{
-    margin-top: 1.5%;
-    width: 70%;
-    height: 8%;
-    border-radius: 5px;
-    border-style: none;
-    padding-left: 5px;
-    background-color: #c4c4c4;
-    font-size: 1.1rem;
-    cursor: pointer;
-}
-
-.cadastro-semestre-span{
-    margin-top: 5%;
-    margin-left: 15%;
-    align-self: flex-start;
-    font-size: 1.15rem;
+.card-cadastrar-semestre{
     color: #0f4a8d;
-    
+    font-size: 1.1rem;
+    margin-bottom: 7%;
 }
 
-.cadastro-semestre-informacao{
+
+.cadastro-semestre-informacao-cadastrar{
  margin-top: 5%;
     color: #0f4a8d;
 }
 
-.cadastro-semestre-btn-actions{
-    width: 70%;
+.cadastro-semestre-btn-actions-cadastrar, .cadastro-semestre-btn-actions-editar{
+    width: 75%;
     height: 7.5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10%;
-    
+    margin-top: 7%;
+}
+.cadastro-semestre-btn-actions-editar{
+    margin-top: 0;
 }
 
-.btn-salvar{
+.btn-salvar-cadastrar,  .btn-adicionar-disciplina{
     border-radius: 5px;
     border-style: none;
     background-color:#0f4a8d;
     color: white;
-    width: 30%;
+    width: 45%;
     height: 100%;
     font-size: 1.05rem;
     cursor: pointer;
 }
 
-.btn-adicionar-semestre{
-    font-size: 1.1rem;
+.btn-adicionar-semestre-cadastrar{
+    font-size: 1.05rem;
     border-radius: 5px;
     border-style: none;
     background-color:#0f4a8d;
@@ -95,3 +82,40 @@
     height: 100%;
     cursor: pointer;
 }
+
+
+.btn-deletar-semestre{
+    font-size: 1.05rem;
+    border-radius: 5px;
+    border-style: none;
+    background-color:red;
+    color: white;
+    width: 40%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.cadastro-semestre-span-editar{
+    margin-top: 3%;
+    margin-bottom: 5%;
+    color: #0f4a8d;
+}
+
+.cadastro-semestre-card-editar{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+    height: 65%;
+    width: 35%;
+    background-color: white
+}
+ .cadastro-semestre-tableRow-editar , .cadastro-semestre-tableHeader-editar , .cadastro-semestre-tableBody-editar{
+    font-family: 'Oswald', 'sans-serif';
+    padding: 8px;
+    font-size: 1.05rem;
+}
+
+
