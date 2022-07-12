@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
-import NativeSelect from "@mui/material/NativeSelect";
 import Select from "@mui/material/Select";
 import { useState } from "react";
 
@@ -26,12 +25,12 @@ export function HorarioSemestre() {
       <div className="horario-semestre-options-contanier">
         <Box sx={{ minWidth: 180 }}>
           <FormControl fullWidth>
-            <InputLabel id="demo-select-small">Turno</InputLabel>
+            <InputLabel id="demo-select-small">Semestre</InputLabel>
             <Select
               labelId="demo-select-small"
               id="demo-select-small"
               value={semestreSelected}
-              label="Turno"
+              label="Semestre"
               onChange={handleChangeSemestre}
             >
               <MenuItem value={"2021.1"}>2021.1</MenuItem>
