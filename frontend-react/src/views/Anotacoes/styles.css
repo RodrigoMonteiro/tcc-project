@@ -1,0 +1,103 @@
+.anotacoes-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.anotacoes-options-contanier {
+    margin-top: 5%;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.anotacoes-tabela-container {
+    width: 70%;
+    align-self: center;
+    margin-top: 3%;
+    height: 50%;
+    border-radius: 5px;
+    background-color: #c4c4c4;
+}
+.anotacoes-tabela-header-container {
+    border-radius: 5px 5px 0 0 ;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.anotacoes-tabela-header-descricao,
+.anotacoes-tabela-header-criacao,
+.anotacoes-tabela-header-disciplina,
+.anotacoes-tabela-header-visualizar,
+.anotacoes-tabela-header-acoes
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f4a8d;
+    width: 15%;
+    height: 100%;
+    margin-right: 1px;
+}
+.anotacoes-tabela-header-descricao{
+    border-radius: 5px 0 0 0;
+    width: 40%;
+}
+.anotacoes-tabela-header-acoes{
+    border-radius: 0 5px 0 0;
+}
+
+.anotacoes-tabela-body-container{
+    display: flex;
+    width: 100%;
+    height: 10%;
+}
+
+.anotacoes-tabela-body-descricao,
+.anotacoes-tabela-body-disciplina,
+.anotacoes-tabela-body-criado,
+.anotacoes-tabela-body-visualizar,
+.anotacoes-tabela-body-acoes
+{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    width: 15%;
+    height: 100%;
+    margin-top: 1px;
+    margin-right: 1px;
+    cursor: pointer;
+}
+.anotacoes-tabela-body-descricao{
+    width: 40%;
+}
+.anotacoes-tabela-body-acoes
+{
+    padding: 4.45px;
+    justify-content: space-around;
+}
+.btn-criar-anotacao{
+margin-top: 3%;
+margin-bottom: 6% ;
+width: 20%;
+color: white;
+background-color: #0f4a8d;
+border-style: none;
+border-radius: 5px;
+height: 30px;
+font-size: 1.01rem;
+cursor: pointer;
+}
+
+.btn-criar-anotacao:hover{
+    transition: 0.25s;
+    opacity: 90%;
+}
