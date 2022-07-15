@@ -1,20 +1,49 @@
 import './styles.css'
+import {useState, useContext} from 'react'
 import {GlobalContext} from '../../providers/globalProps'
-import { useContext } from 'react';
+
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputLabel from "@mui/material/InputLabel";
+
 export function Home(){
   const {globalProps , setGlobalProps} = useContext(GlobalContext) 
+  const [email , setEmail ] = useState("")
+  const [senha , setSenha ] = useState("")
+  const [visibilidadeSenha , setVisibilidadeSenha] = useState(false)
+
+  function toggleVisibilidadeSenha(){
+    setVisibilidadeSenha(!visibilidadeSenha)
+  }
+  
   function login(){
     setGlobalProps({
       ...globalProps,
       isLogged: true
     })
   }
+
   function createNewAccountPage(){
     setGlobalProps({
       ...globalProps,
       hasAccount: !globalProps.hasAccount
     })
   }
+function handleChangeEmail(event){
+setEmail(event.target.value)
+}
+function handleChangeSenha(event){
+setSenha(event.target.value)
+}
+const handleMouseDownPassword = (event) => {
+  event.preventDefault();
+};
   return (
     <div className="home-container">
       <div className="home-form-container">
@@ -23,23 +52,52 @@ export function Home(){
           <h2>Otimize seu tempo</h2>
         </div>
         <div className="home-form-body">
-          <div className="home-form-body-input-email">
-            <span>Email:</span>
-            <input className="home-form-body-input-field" type="text" />
-          </div>
-          <div className="home-form-body-input-password">
-            <span>Senha:</span>
-            <input className="home-form-body-input-field" type="text" />
-          </div>
+          <Box component="form" sx={{ width: "100%" }}>
+            <TextField
+              id="email-field"
+              label="Email"
+              variant="filled"
+              value={email}
+              onChange={handleChangeEmail}
+              fullWidth
+            />
+          </Box>
+       
+          <FormControl sx={{ mt: 2, width: "100%" }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">
+              Senha
+            </InputLabel>
+            <OutlinedInput
+              id="senha-field"
+              type={visibilidadeSenha ? "text" : "password"}
+              value={senha}
+              onChange={handleChangeSenha}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle senha visibility"
+                    onClick={toggleVisibilidadeSenha}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {visibilidadeSenha ? (
+                      <VisibilityOff />
+                    ) : (
+                      <Visibility />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
+
           <button className="home-form-body-btn" onClick={login}>
             Entrar
           </button>
           <span className="cadastrar">
             Não possui conta? Se cadastre{" "}
-            <span
-              onClick={createNewAccountPage}
-              style={{ cursor: "pointer" }}
-            >
+            <span onClick={createNewAccountPage} style={{ cursor: "pointer" }}>
               <strong>aqui</strong>
             </span>
           </span>

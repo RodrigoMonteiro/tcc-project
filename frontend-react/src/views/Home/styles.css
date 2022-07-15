@@ -50,24 +50,6 @@ span{
     align-items: flex-start;
     
 }
-
-.home-form-body-input-email , .home-form-body-input-password {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.home-form-body-input-field{
-    margin-top: 5px;
-    height: 5vh;
-    border-radius: 7px;
-    border-style: none;
-    padding-left: 0.5vw;
-    background-color: #c4c4c4;
-    font-size: 1.05rem;
-}
-
 .home-form-body-btn{
     width: 30%;
     height: 10%;
