@@ -13,35 +13,14 @@
     height: 15%;
     z-index: 2;
 }
-
-@keyframes select-opened {
-   from{
-       opacity: 0;
-       visibility: hidden;
-   }
-    to {
-        visibility: visible;
-        opacity: 1;
-    }
-}
-@keyframes select-closed {
-    from{
-        visibility: visible;
-        opacity: 1;
-   }
-    to {
-        visibility: hidden;
-        opacity: 0;
-    }
-}
-
 .select-open {
-    animation-name: select-opened;
-    animation-fill-mode: forwards;
-    animation-duration: .25s;
+    transition: 0.25s; 
+    visibility: visible;
+    opacity: 1;
 }
+
 .select-close {
-    animation-name: select-closed;
-    animation-fill-mode: forwards;
-    animation-duration: .25s;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.25s; 
 }

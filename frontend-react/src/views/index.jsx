@@ -16,8 +16,10 @@ export function Views() {
     <div
       className={`views-container ${
         globalProps.isNavbarOpen
-          ? "views-container-navbar-closed"
-          : "views-container-navbar-opened"
+          ?
+          "views-container-navbar-closed"
+          :
+          "views-container-navbar-opened"
       }`}
     >
       <Routes>

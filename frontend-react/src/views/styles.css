@@ -10,7 +10,7 @@
 }
 
 
-.views-container-navbar-opened{
+.views-container-navbar-closed{
     animation: views-container-opened-navbar;
     animation-duration: 0.75s;
     animation-fill-mode: forwards;
@@ -18,7 +18,7 @@
     color: white;
 }
 
-.views-container-navbar-closed{
+.views-container-navbar-opened{
     animation: views-container-closed-navbar;
     animation-duration: 0.75s;
     animation-fill-mode: forwards;

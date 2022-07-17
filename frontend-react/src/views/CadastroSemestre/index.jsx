@@ -1,6 +1,11 @@
 import { useState } from "react";
 import "./styles.css";
 
+import {
+  MdMode,
+  MdOutlineDelete,
+} from "react-icons/md";
+
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,8 +22,18 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 export function CadastroSemestre() {
+
   const [optionCadastrarSelected, setOptionCadastrarSelected] = useState(true);
   const [optionEditarSelected, setOptionEditarSelected] = useState(false);
+
+
+const actionsBtn = (
+  <>
+    <MdOutlineDelete  color="red" size={18} />
+    <MdMode color="#0f4a8d"size={18} />
+  </>
+);
+ 
 
   function toggleSelected() {
     setOptionCadastrarSelected(!optionCadastrarSelected);
@@ -34,9 +49,20 @@ export function CadastroSemestre() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const columns = [
-    { id: "name", label: "Nome", minWidth: 100 ,color: '#0f4a8d'},
-    { id: "actions", label: "Ação", minWidth: 100, color: '#0f4a8d'}
-   
+    {
+      id: "name",
+      label: "Nome",
+      minWidth: 100,
+      color: "#0f4a8d",
+      kindText: "center",
+    },
+    {
+      id: "actions",
+      label: "Ações",
+      minWidth: 100,
+      color: "#0f4a8d",
+      kindText: "center",
+    },
   ];
 
   function createData(name, actions) {
@@ -45,8 +71,8 @@ export function CadastroSemestre() {
   }
 
   const rows = [
-    createData("Algoritmo", "actions buttons"),
-    createData("Cálculo 1", "actions buttons"),
+    createData("Algoritmo", actionsBtn),
+    createData("Cálculo 1", actionsBtn)
   ];
 
 
@@ -168,7 +194,9 @@ export function CadastroSemestre() {
                         style={{
                           minWidth: column.minWidth,
                           color: column.color,
+                          alignText: column.kindText
                         }}
+                      
                       >
                         {column.label}
                       </TableCell>

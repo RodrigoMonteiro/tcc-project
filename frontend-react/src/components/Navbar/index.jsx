@@ -10,13 +10,9 @@ import "./styles.css";
 
 export function Navbar() {
   const { globalProps, setGlobalProps } = useContext(GlobalContext);
-  const [isOpen, setIsOpen] = useState(true);
   const [nameSelectedItem, setNameSelectedItem] = useState("Início");
   function toggleOpen() {
-    setIsOpen(!isOpen);
-    setGlobalProps({...globalProps , isNavbarOpen: isOpen})
-
-
+    setGlobalProps({...globalProps , isNavbarOpen: !globalProps.isNavbarOpen})
   }
 
   function changeSelectedName(name) {
@@ -27,13 +23,17 @@ export function Navbar() {
   return (
     <div
       className={`navbar-container ${
-        isOpen ? "navbar-container-opened" : "navbar-container-closed"
+        globalProps.isNavbarOpen
+          ? "navbar-container-opened"
+          : "navbar-container-closed"
       }`}
     >
       <div className="navbar-header">
         <FaChevronLeft
           className={`navbar-header-icon ${
-            isOpen ? "navbar-icon-opened" : "navbar-icon-closed"
+            globalProps.isNavbarOpen
+              ? "navbar-icon-opened"
+              : "navbar-icon-closed"
           }`}
           onClick={() => {
             setGlobalProps({
@@ -45,31 +45,32 @@ export function Navbar() {
         ></FaChevronLeft>
         <div
           className={`navbar-header-logo ${
-            isOpen ? "" : "navbar-header-logo-closed"
+            globalProps.isNavbarOpen ? "" : "navbar-header-logo-closed"
           }`}
         >
-          <img
-            src="logo.png"
-            alt="LOGO OVER HERE"
-          />
+          <img src="logo.png" alt="LOGO OVER HERE" />
         </div>
         <div
           className={`navbar-header-title ${
-            isOpen ? "" : "navbar-header-title-closed"
+            globalProps.isNavbarOpen ? "" : "navbar-header-title-closed"
           }`}
         >
           <h3>Otimize seu tempo</h3>
         </div>
       </div>
-      <div className={`navbar-body ${isOpen ? "" : "navbar-body-closed"}`}>
+      <div
+        className={`navbar-body ${
+          globalProps.isNavbarOpen ? "" : "navbar-body-closed"
+        }`}
+      >
         {List.map((el) => {
           return (
-            <Link className="link-container" to={`/${el.component}`}>
+            <Link key={el.id} className="link-container" to={`/${el.component}`}>
               <NavbarItem
                 key={el.name}
                 name={el.name}
                 icon={el.icon}
-                isOpened={isOpen}
+                isOpened={globalProps.isNavbarOpen}
                 nameSelected={nameSelectedItem}
                 changeSelectedName={changeSelectedName}
               ></NavbarItem>
