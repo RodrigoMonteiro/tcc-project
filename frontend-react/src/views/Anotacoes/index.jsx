@@ -145,17 +145,18 @@ export function Anotacoes() {
               label="Descrição"
               multiline
               rows={7}
-              defaultValue="Descreva a tarefa aqui..."
+              defaultValue=""
+              placeholder="Descreva a tarefa aqui..."
               fullWidth
-              style={{marginTop: 40}}
+              style={{ marginTop: 40 }}
             />
           </DialogContent>
           <DialogActions>
             <button className="btn-dialog-close" onClick={handleClose}>
-              Cancel
+              Cancelar
             </button>
             <button className="btn-dialog-submit" onClick={handleClose}>
-              Subscribe
+             Salvar
             </button>
           </DialogActions>
         </Dialog>
