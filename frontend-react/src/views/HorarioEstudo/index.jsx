@@ -10,6 +10,12 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import { useState } from "react";
@@ -19,6 +25,8 @@ export function HorarioEstudo() {
   const [turnoEstudoSelected, setIsTurnoEstudoSelected] = useState("Matutino");
   const [semestreEstudoSelected, setSemestreEstudoSelected] = useState("2021.1");
   const [acaoEstudoSelected, setAcaoEstudoSelected] = useState("Visualizar");
+  const [openDialogHorarioEstudo, setOpenDialogHorarioEstudo] = useState(false);
+ 
 
    const theme = createTheme({
      typography: {
@@ -27,6 +35,17 @@ export function HorarioEstudo() {
        },
      },
    });
+
+   const handleClickOpen = () => {
+     setOpenDialogHorarioEstudo(true);
+   };
+
+   const handleClose = () => {
+     setOpenDialogHorarioEstudo(false);
+   };
+   
+
+   
 
   function handleChangeFimSemana(event) {
     setIsFimSemana(event.target.value);
@@ -170,8 +189,94 @@ export function HorarioEstudo() {
           </div>
         </div>
         <div className="btn-add-horario-container">
-          <button className="btn-add-horario">+ Adicionar Horário</button>
+          <button className="btn-add-horario" onClick={handleClickOpen}>
+            + Adicionar Horário
+          </button>
         </div>
+
+        <Dialog
+          fullWidth="lg"
+          open={openDialogHorarioEstudo}
+          onClose={handleClose}
+        >
+          <DialogTitle >Criar novo horário</DialogTitle>
+
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="horario-estudo-horario-dialog"
+              label="Horário"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="horario-estudo-segunda-dialog"
+              label="Segunda-feira"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="horario-estudo-terca-dialog"
+              label="Terça-feira"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="horario-estudo-quarta-dialog"
+              label="Quarta-feira"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="horario-estudo-quinta-dialog"
+              label="Quinta-feira"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="horario-estudo-sexta-dialog"
+              label="Sexta-feira"
+              fullWidth
+            />
+            {isFimSemana === 'Sim' ?
+            <>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="horario-estudo-sabado-dialog"
+              label="Sabado"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="horario-estudo-domingo-dialog"
+              label="Domingo"
+              fullWidth
+            />
+            </>  :
+            <></>
+            }
+            
+          </DialogContent>
+
+          <DialogActions>
+            <button className="btn-dialog-close" onClick={handleClose}>
+              Cancelar
+            </button>
+            <button className="btn-dialog-submit" onClick={handleClose}>
+              Salvar
+            </button>
+          </DialogActions>
+        </Dialog>
+
+       
       </div>
     </ThemeProvider>
   );

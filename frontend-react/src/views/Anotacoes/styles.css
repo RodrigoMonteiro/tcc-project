@@ -97,7 +97,7 @@ font-size: 1.01rem;
 cursor: pointer;
 }
 
-.btn-criar-anotacao:hover , .btn-dialog-close:hover{
+.btn-criar-anotacao:hover , .btn-dialog-close:hover , .btn-dialog-submit{
     transition: 0.25s;
     opacity: 90%;
 }
