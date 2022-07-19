@@ -1,10 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 
-import {
-  MdMode,
-  MdOutlineDelete,
-} from "react-icons/md";
+import { MdMode, MdOutlineDelete } from "react-icons/md";
 
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -21,19 +18,37 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 export function CadastroSemestre() {
 
   const [optionCadastrarSelected, setOptionCadastrarSelected] = useState(true);
   const [optionEditarSelected, setOptionEditarSelected] = useState(false);
 
+  const actionsBtn = (
+    <>
+      <MdMode
+        color="#0f4a8d"
+        size={18}
+        style={{ marginRight: 15, cursor: "pointer" }}
+      />
+      <MdOutlineDelete
+        color="red"
+        size={18}
+        style={{ marginLeft: 15, cursor: "pointer" }}
+      />
+    </>
+  );
 
-const actionsBtn = (
-  <>
-    <MdOutlineDelete  color="red" size={18} />
-    <MdMode color="#0f4a8d"size={18} />
-  </>
-);
- 
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: "'Oswald' , 'sans-serif'",
+     
+    },
+  },
+});
 
   function toggleSelected() {
     setOptionCadastrarSelected(!optionCadastrarSelected);
@@ -66,18 +81,18 @@ const actionsBtn = (
   ];
 
   function createData(name, actions) {
-    
     return { name, actions };
   }
 
   const rows = [
     createData("Algoritmo", actionsBtn),
-    createData("Cálculo 1", actionsBtn)
+    createData("Cálculo 1", actionsBtn),
   ];
 
-
-
   return (
+    <ThemeProvider theme={theme}>
+
+    
     <div className="cadastro-semestre-container">
       <div className="cadastro-semestre-options">
         <span
@@ -101,18 +116,18 @@ const actionsBtn = (
       {optionCadastrarSelected ? (
         <div className="cadastro-semestre-card-cadastrar">
           <span className="card-cadastrar-semestre">Novo semestre</span>
-          <Box component="form" sx={{ width: 3 / 4 , mb: 2}}>
+          <Box component="form" sx={{ width: 3 / 4, mb: 2 }}>
             <TextField
               id="filled-basic"
               label="Nome do semestre"
               variant="filled"
               fullWidth
-              />
+            />
           </Box>
           <span className="cadastro-semestre-informacao-cadastrar">
             Disciplinas que pertencem a este período
           </span>
-          <Box component="form" sx={{ width: 3 / 4, mt:2 }}>
+          <Box component="form" sx={{ width: 3 / 4, mt: 2 }}>
             <TextField
               id="filled-basic"
               label="Nome da disciplina"
@@ -186,17 +201,23 @@ const actionsBtn = (
             <TableContainer sx={{ maxHeight: 300 }} centered>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead className="tableheader">
-                  <TableRow>
+                  <TableRow
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                      width: "165%",
+                      fontFamily: "'Oswald' , 'sans-serif'",
+                      overflowX: "hidden",
+                    }}
+                  >
                     {columns.map((column) => (
                       <TableCell
                         className="cadastro-semestre-tableHeader-editar"
                         key={column.id}
                         style={{
-                          minWidth: column.minWidth,
                           color: column.color,
-                          alignText: column.kindText
                         }}
-                      
                       >
                         {column.label}
                       </TableCell>
@@ -245,5 +266,6 @@ const actionsBtn = (
         </div>
       )}
     </div>
+</ThemeProvider>
   );
-}
+                  }

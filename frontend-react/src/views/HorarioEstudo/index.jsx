@@ -10,6 +10,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 import { useState } from "react";
 
 export function HorarioEstudo() {
@@ -17,6 +19,14 @@ export function HorarioEstudo() {
   const [turnoEstudoSelected, setIsTurnoEstudoSelected] = useState("");
   const [semestreEstudoSelected, setSemestreEstudoSelected] = useState("");
   const [acaoEstudoSelected, setAcaoEstudoSelected] = useState("");
+
+   const theme = createTheme({
+     typography: {
+       allVariants: {
+         fontFamily: "'Oswald' , 'sans-serif'",
+       },
+     },
+   });
 
   function handleChangeFimSemana(event) {
     setIsFimSemana(event.target.value);
@@ -34,6 +44,7 @@ export function HorarioEstudo() {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="horario-estudo-container">
       <div className="horario-estudo-options-contanier">
         <Box sx={{ minWidth: 180 }}>
@@ -158,5 +169,6 @@ export function HorarioEstudo() {
         <button className="btn-add-horario">+ Adicionar Horário</button>
       </div>
     </div>
+    </ThemeProvider>
   );
 }
