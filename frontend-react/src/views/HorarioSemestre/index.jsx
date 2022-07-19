@@ -9,9 +9,9 @@ import { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function HorarioSemestre() {
-  const [turnoSelected , setIsTurnoSelected] = useState("")
-  const [acaoSelected , setAcaoSelected] = useState("")
-  const [semestreSelected , setSemestreSelected] = useState("")
+  const [turnoSelected , setIsTurnoSelected] = useState("Matutino")
+  const [acaoSelected , setAcaoSelected] = useState("Visualizar")
+  const [semestreSelected , setSemestreSelected] = useState("2021.1")
 
   const theme = createTheme({
     typography: {
@@ -43,6 +43,7 @@ export function HorarioSemestre() {
                 value={semestreSelected}
                 label="Semestre"
                 onChange={handleChangeSemestre}
+                defaultValue="2021.1"
               >
                 <MenuItem value={"2021.1"}>2021.1</MenuItem>
                 <MenuItem value={"2021.2"}>2021.2</MenuItem>
@@ -60,6 +61,7 @@ export function HorarioSemestre() {
                 value={turnoSelected}
                 label="Turno"
                 onChange={handleChangeTurno}
+                defaultValue="Matutino"
               >
                 <MenuItem value={"Matutino"}>Matutino</MenuItem>
                 <MenuItem value={"Vespertino"}>Vespertino</MenuItem>
@@ -76,9 +78,10 @@ export function HorarioSemestre() {
                 value={acaoSelected}
                 label="Ação"
                 onChange={handleChangeAcao}
+                defaultValue="Visualizar"
               >
-                <MenuItem value={"Matutino"}>Visualizar</MenuItem>
-                <MenuItem value={"Vespertino"}>Editar</MenuItem>
+                <MenuItem value={"Visualizar"}>Visualizar</MenuItem>
+                <MenuItem value={"Editar"}>Editar</MenuItem>
               </Select>
             </FormControl>
           </Box>

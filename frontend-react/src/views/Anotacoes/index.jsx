@@ -13,9 +13,16 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function Anotacoes() {
+  const [openDialog ,setOpenDialog] = useState(false)
   const [semestreAnotacoes, setSemestreAnotacoes] = useState("");
   const [disciplinaAnotacoes, setDisciplinaAnotacoes] = useState("");
 
@@ -26,6 +33,13 @@ export function Anotacoes() {
       },
     },
   });
+   const handleClickOpen = () => {
+     setOpenDialog(true);
+   };
+
+   const handleClose = () => {
+     setOpenDialog(false);
+   };
 
   function handleSemestreAnotacoes(event) {
     setSemestreAnotacoes(event.target.value);
@@ -112,8 +126,39 @@ export function Anotacoes() {
               <MdOutlineCheck />
             </div>
           </div>
-          <button className="btn-criar-anotacao">Criar Anotação</button>
+          <button className="btn-criar-anotacao" onClick={handleClickOpen}>
+            Criar Anotação
+          </button>
         </div>
+        <Dialog fullWidth="lg" open={openDialog} onClose={handleClose}>
+          <DialogTitle centered>Criar nova anotação</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="disciplina-dialog"
+              label="Disciplina"
+              fullWidth
+            />
+            <TextField
+              id="descricao-dialog"
+              label="Descrição"
+              multiline
+              rows={7}
+              defaultValue="Descreva a tarefa aqui..."
+              fullWidth
+              style={{marginTop: 40}}
+            />
+          </DialogContent>
+          <DialogActions>
+            <button className="btn-dialog-close" onClick={handleClose}>
+              Cancel
+            </button>
+            <button className="btn-dialog-submit" onClick={handleClose}>
+              Subscribe
+            </button>
+          </DialogActions>
+        </Dialog>
       </div>
     </ThemeProvider>
   );

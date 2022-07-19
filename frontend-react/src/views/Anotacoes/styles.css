@@ -84,7 +84,7 @@
     padding: 4.45px;
     justify-content: space-around;
 }
-.btn-criar-anotacao{
+.btn-criar-anotacao, .btn-dialog-close , .btn-dialog-submit{
 margin-top: 3%;
 margin-bottom: 6% ;
 width: 20%;
@@ -97,7 +97,17 @@ font-size: 1.01rem;
 cursor: pointer;
 }
 
-.btn-criar-anotacao:hover{
+.btn-criar-anotacao:hover , .btn-dialog-close:hover{
     transition: 0.25s;
     opacity: 90%;
 }
+.btn-dialog-close{
+width: 15%;
+background-color: red;
+}
+.btn-dialog-submit{
+width: 15%;
+margin-right: 18px;
+}
+
+
