@@ -1,6 +1,7 @@
 import "./styles.css";
 import { useState, useContext } from "react";
 import { GlobalContext } from "../../providers/globalProps";
+import { Link } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -98,10 +99,11 @@ export function Home() {
                 label="Password"
               />
             </FormControl>
-
-            <button className="home-form-body-btn" onClick={login}>
-              Entrar
-            </button>
+              <button className="home-form-body-btn" onClick={login}>
+            <Link to="inicio" style={{ textDecoration: 'none', color: 'white'}}>
+                Entrar
+            </Link>
+              </button>
             <span className="cadastrar">
               Não possui conta? Se cadastre{" "}
               <span

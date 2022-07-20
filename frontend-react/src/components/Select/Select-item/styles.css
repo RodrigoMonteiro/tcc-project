@@ -7,26 +7,37 @@
     cursor: pointer;
 }
 
-.selectItem-container:hover{
-    background-color: white;
-    color: #1976d2;
-    opacity: 0.95;
-    transition: 0.25s;
-}
-
 .selectItem-icon{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 25%;
-    /* background-color: yellowgreen; */
     
 }
 
 .selectItem-title{
     width: 75%;
-    /* background-color: brown; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
+
+a.link-select-item{
+display: flex;
+justify-content: space-around;
+align-items: center;
+width: 100%;
+text-decoration: none;
+border-radius: 5px;
+color: #c4c4c4;
+}
+
+a.link-select-item:hover{
+    transition: 0.25s;
+    opacity: 0.95;
+    background-color: #c4c4c4;
+    color: #1976d2;
+}
+
