@@ -53,7 +53,8 @@
 .tarefas-realizadas-tabela-header-disciplina,
 .tarefas-realizadas-tabela-header-descricao,
 .tarefas-realizadas-tabela-header-criado,
-.tarefas-realizadas-tabela-header-finalizado
+.tarefas-realizadas-tabela-header-finalizado,
+.tarefas-realizadas-tabela-header-acoes
 {
     
     display: flex;
@@ -69,7 +70,7 @@
     width: 40%;
     border-radius: 5px 0 0 0;
 }
-.tarefas-pendentes-tabela-header-acoes, .tarefas-realizadas-tabela-header-finalizado{
+.tarefas-pendentes-tabela-header-acoes, .tarefas-realizadas-tabela-header-acoes{
     border-radius: 0 5px 0 0;
 }
 
@@ -93,7 +94,8 @@
 .tarefas-realizadas-body-descricao,
 .tarefas-realizadas-body-disciplina,
 .tarefas-realizadas-body-criado,
-.tarefas-realizadas-body-finalizado
+.tarefas-realizadas-body-finalizado,
+.tarefas-realizadas-body-acoes
 
 {
     display: flex;

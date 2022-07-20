@@ -66,7 +66,7 @@
     border-style: none;
     background-color:#0f4a8d;
     color: white;
-    width: 45%;
+    width: 40%;
     height: 100%;
     font-size: 1.05rem;
     cursor: pointer;
@@ -78,7 +78,7 @@
     border-style: none;
     background-color:#0f4a8d;
     color: white;
-    width: 10%;
+    width: 40%;
     height: 100%;
     cursor: pointer;
 }

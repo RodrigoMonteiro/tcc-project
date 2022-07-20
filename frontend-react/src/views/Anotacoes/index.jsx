@@ -23,8 +23,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function Anotacoes() {
   const [openDialog ,setOpenDialog] = useState(false)
-  const [semestreAnotacoes, setSemestreAnotacoes] = useState("");
-  const [disciplinaAnotacoes, setDisciplinaAnotacoes] = useState("");
+  const [semestreAnotacoes, setSemestreAnotacoes] = useState("2021.1");
 
   const theme = createTheme({
     typography: {
@@ -44,16 +43,23 @@ export function Anotacoes() {
   function handleSemestreAnotacoes(event) {
     setSemestreAnotacoes(event.target.value);
   }
-
-  function handleDisciplinaAnotacoes(event) {
-    setDisciplinaAnotacoes(event.target.value);
+  function editAnotacoes(){
+    console.log("Editar anotações...")
   }
+  function visualizarAnotacoes(){
+    console.log("visualizar anotações...")
+  }
+  function deletarAnotacoes(){
+    console.log("deletar anotações...")
+  }
+
+  
 
   return (
     <ThemeProvider theme={theme}>
       <div className="anotacoes-container">
         <div className="anotacoes-options-contanier">
-          <Box sx={{ minWidth: 180 }}>
+          <Box sx={{ minWidth: 240 }}>
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Semestre</InputLabel>
               <Select
@@ -62,27 +68,12 @@ export function Anotacoes() {
                 value={semestreAnotacoes}
                 label="Semestre"
                 onChange={handleSemestreAnotacoes}
+                defaultValue={"2021.1"}
               >
                 <MenuItem value={"2021.1"}>2021.1</MenuItem>
                 <MenuItem value={"2021.2"}>2021.2</MenuItem>
                 <MenuItem value={"2022.1"}>2022.1</MenuItem>
                 <MenuItem value={"2022.2"}>2022.2</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Box sx={{ minWidth: 180 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-select-small">Disciplina</InputLabel>
-              <Select
-                labelId="disciplina-anotacoes"
-                id="disciplina-anotacoes-id"
-                value={disciplinaAnotacoes}
-                label="Disciplina"
-                onChange={handleDisciplinaAnotacoes}
-              >
-                <MenuItem value={"Matutino"}>Matutino</MenuItem>
-                <MenuItem value={"Vespertino"}>Vespertino</MenuItem>
-                <MenuItem value={"Noturno"}>Noturno</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -117,13 +108,12 @@ export function Anotacoes() {
             </div>
             <div className="anotacoes-tabela-body-visualizar">
               <span>
-                <MdRemoveRedEye />
+                <MdRemoveRedEye size={18} color={"#0f4a8d"} onClick={visualizarAnotacoes}/>
               </span>
             </div>
             <div className="anotacoes-tabela-body-acoes">
-              <MdMode />
-              <MdOutlineDelete />
-              <MdOutlineCheck />
+              <MdMode size={18} color={"#0f4a8d"} onClick={editAnotacoes}/>
+              <MdOutlineDelete size={18} color="red" onClick={deletarAnotacoes}/>
             </div>
           </div>
           <button className="btn-criar-anotacao" onClick={handleClickOpen}>
@@ -131,7 +121,7 @@ export function Anotacoes() {
           </button>
         </div>
         <Dialog fullWidth="lg" open={openDialog} onClose={handleClose}>
-          <DialogTitle centered>Criar nova anotação</DialogTitle>
+          <DialogTitle>Criar nova anotação</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -156,7 +146,7 @@ export function Anotacoes() {
               Cancelar
             </button>
             <button className="btn-dialog-submit" onClick={handleClose}>
-             Salvar
+              Salvar
             </button>
           </DialogActions>
         </Dialog>

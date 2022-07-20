@@ -44,6 +44,25 @@ export function Tarefas() {
     setTarefasRealizadas(false);
     setCriarTarefas(true);
   }
+  function visualizarTarefa(){
+    console.log("Visualizar tarefa...")
+  }
+  function editarTarefa(){
+    console.log("Editar tarefa...")
+  }
+  function deletarTarefa(){
+    console.log("Deletar tarefa...")
+  }
+  function concluirTarefa(){
+    console.log("Concluir tarefa...")
+  }
+  function deletarTarefaRealizada(){
+    console.log("Deletar tarefa realizada...")
+  }
+  function salvarTarefa() {
+    console.log("Salvar uma nova tarefa...");
+  }
+  
   return (
     <ThemeProvider theme={theme}>
       <div className="tarefas-container">
@@ -111,13 +130,26 @@ export function Tarefas() {
                 </div>
                 <div className="tarefas-pendentes-body-visualizar">
                   <span>
-                    <MdRemoveRedEye />
+                    <MdRemoveRedEye
+                      style={{ cursor: "pointer" }}
+                      size={18}
+                      color={"#0f4a8d"}
+                      onClick={visualizarTarefa}
+                    />
                   </span>
                 </div>
                 <div className="tarefas-pendentes-body-acoes">
-                  <MdMode />
-                  <MdOutlineDelete />
-                  <MdOutlineCheck />
+                  <MdMode size={18} color={"#0f4a8d"} onClick={editarTarefa} />
+                  <MdOutlineDelete
+                    size={18}
+                    color={"red"}
+                    onClick={deletarTarefa}
+                  />
+                  <MdOutlineCheck
+                    size={18}
+                    color={"green"}
+                    onClick={concluirTarefa}
+                  />
                 </div>
               </div>
             </div>
@@ -138,6 +170,9 @@ export function Tarefas() {
                 <div className="tarefas-realizadas-tabela-header-finalizado">
                   <span>Finalizado em</span>
                 </div>
+                <div className="tarefas-realizadas-tabela-header-acoes">
+                  <span>Ações</span>
+                </div>
               </div>
               <div className="tarefas-realizadas-body-container">
                 <div className="tarefas-realizadas-body-descricao">
@@ -151,6 +186,14 @@ export function Tarefas() {
                 </div>
                 <div className="tarefas-realizadas-body-finalizado">
                   <span>23/08/2022</span>
+                </div>
+                <div className="tarefas-realizadas-body-acoes">
+                  <MdOutlineDelete
+                    size={18}
+                    color={"red"}
+                    onClick={deletarTarefaRealizada}
+                    style={{ cursor: "pointer" }}
+                  />
                 </div>
               </div>
             </div>
@@ -206,7 +249,7 @@ export function Tarefas() {
                     </LocalizationProvider>
                   </Box>
                 </Box>
-                <button className="btn-salvar-tarefa">Salvar</button>
+                <button className="btn-salvar-tarefa" onClick={salvarTarefa}>Salvar</button>
               </div>
             </div>
           </>

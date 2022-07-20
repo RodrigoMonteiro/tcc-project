@@ -195,7 +195,6 @@ export function HorarioEstudo() {
         </div>
 
         <Dialog
-          fullWidth="lg"
           open={openDialogHorarioEstudo}
           onClose={handleClose}
         >

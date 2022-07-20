@@ -65,7 +65,7 @@ export function Navbar() {
       >
         {List.map((el) => {
           return (
-            <Link key={el.id} className="link-container" to={`/${el.component}`}>
+            <Link key={el.name} className="link-container" to={`/${el.component}`}>
               <NavbarItem
                 key={el.name}
                 name={el.name}

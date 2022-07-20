@@ -22,21 +22,25 @@ import TableRow from "@mui/material/TableRow";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function CadastroSemestre() {
-
+  
   const [optionCadastrarSelected, setOptionCadastrarSelected] = useState(true);
   const [optionEditarSelected, setOptionEditarSelected] = useState(false);
-
+  const [semestre, setSemestre] = useState("2021.1");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const actionsBtn = (
     <>
       <MdMode
         color="#0f4a8d"
         size={18}
         style={{ marginRight: 15, cursor: "pointer" }}
-      />
+        onClick ={editDisciplina}
+        />
       <MdOutlineDelete
         color="red"
         size={18}
         style={{ marginLeft: 15, cursor: "pointer" }}
+        onClick ={deleteDisciplina}
       />
     </>
   );
@@ -50,18 +54,31 @@ const theme = createTheme({
   },
 });
 
+function adicionarDisciplina(){
+  console.log("adicionar disciplina...")
+}
+function editDisciplina(){
+  console.log("Editar disciplina...")
+}
+function deleteDisciplina(){
+  console.log("Deletar disciplina...")
+}
+function deleteSemestre(){
+  console.log("Deletar semestre...")
+}
+function salvarSemestre(){
+  console.log("Salvar semestre...")
+}
+
   function toggleSelected() {
     setOptionCadastrarSelected(!optionCadastrarSelected);
     setOptionEditarSelected(!optionEditarSelected);
   }
 
-  const [semestre, setSemestre] = useState("Semestre");
 
-  const handleChange = (event) => {
+  const handleChangeSemestre = (event) => {
     setSemestre(event.target.value);
   };
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const columns = [
     {
@@ -136,8 +153,8 @@ const theme = createTheme({
             />
           </Box>
           <div className="cadastro-semestre-btn-actions-cadastrar">
-            <button className="btn-adicionar-semestre-cadastrar">+</button>
-            <button className="btn-salvar-cadastrar">Salvar Semestre</button>
+            <button className="btn-adicionar-semestre-cadastrar" onClick={adicionarDisciplina}>Adicionar disciplina</button>
+            <button className="btn-salvar-cadastrar" onClick={salvarSemestre}>Salvar Semestre</button>
           </div>
         </div>
       ) : (
@@ -153,29 +170,30 @@ const theme = createTheme({
                 id="editar semestre"
                 value={semestre}
                 label="Semestre"
-                onChange={handleChange}
+                defaultValue="2021.1"
+                onChange={handleChangeSemestre}
               >
                 <MenuItem
                   className="cadastro-semestre-menuItem-editar"
-                  value={2021.1}
+                  value={"2021.1"}
                 >
                   2021.1
                 </MenuItem>
                 <MenuItem
                   className="cadastro-semestre-menuItem-editar"
-                  value={2021.2}
+                  value={"2021.2"}
                 >
                   2021.2
                 </MenuItem>
                 <MenuItem
                   className="cadastro-semestre-menuItem-editar"
-                  value={2022.1}
+                  value={"2022.1"}
                 >
                   2022.1
                 </MenuItem>
                 <MenuItem
                   className="cadastro-semestre-menuItem-editar"
-                  value={2022.2}
+                  value={"2022.2"}
                 >
                   2022.2
                 </MenuItem>
@@ -198,7 +216,7 @@ const theme = createTheme({
             }}
             centered
           >
-            <TableContainer sx={{ maxHeight: 300 }} centered>
+            <TableContainer sx={{ maxHeight: 300 }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead className="tableheader">
                   <TableRow
@@ -258,8 +276,8 @@ const theme = createTheme({
             </TableContainer>
           </Paper>
           <div className="cadastro-semestre-btn-actions-editar">
-            <button className="btn-deletar-semestre">Deletar semestre</button>
-            <button className="btn-adicionar-disciplina">
+            <button className="btn-deletar-semestre" onClick={deleteSemestre}>Deletar semestre</button>
+            <button className="btn-adicionar-disciplina" onClick={adicionarDisciplina}>
               Adicionar disciplina
             </button>
           </div>
