@@ -1,4 +1,4 @@
-export let anotacoesList = [
+export const anotacoesList = [
   {
     anotacaoId: "1",
     descricaoAnotacao: "Descrição anotações 1",

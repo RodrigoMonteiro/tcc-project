@@ -1,3 +1,4 @@
+//NOSONAR
 import "./styles.css";
 import { useState } from "react";
 import {
@@ -7,8 +8,17 @@ import {
   MdOutlineCheck,
 } from "react-icons/md";
 
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import {
+  tarefasPendentesList,
+  tarefasRealizadasList,
+} from "../../providers/dataTest/tarefas";
+
+import Box from "@mui/material/Box";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -16,10 +26,47 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function Tarefas() {
+
   const [tarefasPendentes, setTarefasPendentes] = useState(true);
   const [tarefasRealizadas, setTarefasRealizadas] = useState(false);
   const [criarTarefas, setCriarTarefas] = useState(false);
   const [dataCriacao, setDataCriacao] = useState("");
+
+  const[openDialogVisualizarTarefa, setOpenDialogVisualizarTarefa] = useState(false)
+  const[openDialogEditarTarefa, setOpenDialogEditarTarefa] = useState(false)
+
+  const handleClickOpenVisualizarTarefa = () => {
+    setOpenDialogVisualizarTarefa(true);
+  };
+
+  const handleCloseVisualizarTarefa = () => {
+    setOpenDialogVisualizarTarefa(false);
+  };
+
+  const handleClickOpenEditarTarefa = () => {
+    setOpenDialogEditarTarefa(true);
+  };
+
+  const handleCloseEditarTarefa = () => {
+    setOpenDialogEditarTarefa(false);
+  };
+
+
+
+  const [tarefaPendente, setTarefaPendente] = useState({
+    tarefaId: "",
+    descricaoTarefa: "",
+    disciplinaTarefa: "",
+    criadoEm: "",
+    finalizadoEm: "",
+  });
+  const [tarefaRealizada, setTarefaRealizada] = useState({
+    tarefaId: "",
+    descricaoTarefa: "",
+    disciplinaTarefa: "",
+    criadoEm: "",
+    finalizadoEm: "",
+  });
 
   const theme = createTheme({
     typography: {
@@ -44,25 +91,25 @@ export function Tarefas() {
     setTarefasRealizadas(false);
     setCriarTarefas(true);
   }
-  function visualizarTarefa(){
-    console.log("Visualizar tarefa...")
+  function visualizarTarefa() {
+    console.log("Visualizar tarefa...");
   }
-  function editarTarefa(){
-    console.log("Editar tarefa...")
+  function editarTarefa() {
+    console.log("Editar tarefa...");
   }
-  function deletarTarefa(){
-    console.log("Deletar tarefa...")
+  function deletarTarefa() {
+    console.log("Deletar tarefa...");
   }
-  function concluirTarefa(){
-    console.log("Concluir tarefa...")
+  function concluirTarefa() {
+    console.log("Concluir tarefa...");
   }
-  function deletarTarefaRealizada(){
-    console.log("Deletar tarefa realizada...")
+  function deletarTarefaRealizada() {
+    console.log("Deletar tarefa realizada...");
   }
   function salvarTarefa() {
     console.log("Salvar uma nova tarefa...");
   }
-  
+
   return (
     <ThemeProvider theme={theme}>
       <div className="tarefas-container">
@@ -119,38 +166,48 @@ export function Tarefas() {
               </div>
 
               <div className="tarefas-pendentes-body-container">
-                <div className="tarefas-pendentes-body-descricao">
-                  <span>Descrição da tarefa</span>
-                </div>
-                <div className="tarefas-pendentes-body-disciplina">
-                  <span>Disciplina da tarefa</span>
-                </div>
-                <div className="tarefas-pendentes-body-criado">
-                  <span>22/08/2022</span>
-                </div>
-                <div className="tarefas-pendentes-body-visualizar">
-                  <span>
-                    <MdRemoveRedEye
-                      style={{ cursor: "pointer" }}
-                      size={18}
-                      color={"#0f4a8d"}
-                      onClick={visualizarTarefa}
-                    />
-                  </span>
-                </div>
-                <div className="tarefas-pendentes-body-acoes">
-                  <MdMode size={18} color={"#0f4a8d"} onClick={editarTarefa} />
-                  <MdOutlineDelete
-                    size={18}
-                    color={"red"}
-                    onClick={deletarTarefa}
-                  />
-                  <MdOutlineCheck
-                    size={18}
-                    color={"green"}
-                    onClick={concluirTarefa}
-                  />
-                </div>
+                {tarefasPendentesList.map((el) => {
+                  return (
+                    <div className="tarefas-pendentes-body-line">
+                      <div className="tarefas-pendentes-body-descricao">
+                        <span>{el.tarefaDescricao}</span>
+                      </div>
+                      <div className="tarefas-pendentes-body-disciplina">
+                        <span>{el.tarefaDisciplina}</span>
+                      </div>
+                      <div className="tarefas-pendentes-body-criado">
+                        <span>{el.tarefaCriadoEm}</span>
+                      </div>
+                      <div className="tarefas-pendentes-body-visualizar">
+                        <span>
+                          <MdRemoveRedEye
+                            style={{ cursor: "pointer" }}
+                            size={18}
+                            color={"#0f4a8d"}
+                            onClick={visualizarTarefa}
+                          />
+                        </span>
+                      </div>
+                      <div className="tarefas-pendentes-body-acoes">
+                        <MdMode
+                          size={18}
+                          color={"#0f4a8d"}
+                          onClick={editarTarefa}
+                        />
+                        <MdOutlineDelete
+                          size={18}
+                          color={"red"}
+                          onClick={deletarTarefa}
+                        />
+                        <MdOutlineCheck
+                          size={18}
+                          color={"green"}
+                          onClick={concluirTarefa}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </>
@@ -175,26 +232,32 @@ export function Tarefas() {
                 </div>
               </div>
               <div className="tarefas-realizadas-body-container">
-                <div className="tarefas-realizadas-body-descricao">
-                  <span>Descrição da tarefa</span>
-                </div>
-                <div className="tarefas-realizadas-body-disciplina">
-                  <span>Disciplina da tarefa</span>
-                </div>
-                <div className="tarefas-realizadas-body-criado">
-                  <span>22/08/2022</span>
-                </div>
-                <div className="tarefas-realizadas-body-finalizado">
-                  <span>23/08/2022</span>
-                </div>
-                <div className="tarefas-realizadas-body-acoes">
-                  <MdOutlineDelete
-                    size={18}
-                    color={"red"}
-                    onClick={deletarTarefaRealizada}
-                    style={{ cursor: "pointer" }}
-                  />
-                </div>
+                {tarefasRealizadasList.map((el) => {
+                  return (
+                    <div className="tarefas-realizadas-body-line">
+                      <div className="tarefas-realizadas-body-descricao">
+                        <span>{el.tarefaDescricao}</span>
+                      </div>
+                      <div className="tarefas-realizadas-body-disciplina">
+                        <span>{el.tarefaDisciplina}</span>
+                      </div>
+                      <div className="tarefas-realizadas-body-criado">
+                        <span>{el.tarefaCriadoEm}</span>
+                      </div>
+                      <div className="tarefas-realizadas-body-finalizado">
+                        <span>{el.tarefaFinalizadaEm}</span>
+                      </div>
+                      <div className="tarefas-realizadas-body-acoes">
+                        <MdOutlineDelete
+                          size={18}
+                          color={"red"}
+                          onClick={deletarTarefaRealizada}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </>
@@ -249,7 +312,9 @@ export function Tarefas() {
                     </LocalizationProvider>
                   </Box>
                 </Box>
-                <button className="btn-salvar-tarefa" onClick={salvarTarefa}>Salvar</button>
+                <button className="btn-salvar-tarefa" onClick={salvarTarefa}>
+                  Salvar
+                </button>
               </div>
             </div>
           </>
@@ -257,6 +322,53 @@ export function Tarefas() {
           ""
         )}
       </div>
+
+      <Dialog
+        fullWidth={"lg"}
+        open={openDialogVisualizarTarefa}
+        onClose={handleCloseVisualizarTarefa}
+      >
+        {tarefasPendentes ? (
+          <DialogTitle>Visualização da tarefa pendente</DialogTitle>
+        ) : (
+          <DialogTitle>Visualização da tarefa realizada</DialogTitle>
+        )}
+
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="disciplina-dialog"
+            label="Disciplina"
+            value={
+              tarefaPendente
+                ? tarefaPendente.disciplinaTarefa
+                : tarefaRealizada.disciplinaTarefa
+            }
+            disabled
+            fullWidth
+          />
+          <TextField
+            id="descricao-dialog"
+            label="Descrição"
+            multiline
+            rows={7}
+            value={
+              tarefaPendente
+                ? tarefaPendente.descricaoTarefa
+                : tarefaRealizada.descricaoTarefa
+            }
+            fullWidth
+            disabled
+            style={{ marginTop: 40 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <button className="btn-dialog-close" onClick={handleCloseVisualizarTarefa}>
+            Sair
+          </button>
+        </DialogActions>
+      </Dialog>
     </ThemeProvider>
   );
 }

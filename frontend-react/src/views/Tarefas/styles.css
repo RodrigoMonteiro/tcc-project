@@ -77,12 +77,10 @@
 
 
 .tarefas-pendentes-body-container, .tarefas-realizadas-body-container{
-    margin-top: 1px;
-    height: 10%;
-    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column ;
+    width: 100%;
+    height: 10%;
 
 }
 
@@ -146,4 +144,12 @@ cursor: pointer;
 .btn-salvar-tarefa:hover{
     transition: 0.25s;
     opacity: 90%;
+}
+
+.tarefas-pendentes-body-line , .tarefas-realizadas-body-line{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin-top: 1px;
+
 }

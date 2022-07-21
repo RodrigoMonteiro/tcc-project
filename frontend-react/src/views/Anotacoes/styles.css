@@ -110,10 +110,11 @@ cursor: pointer;
 }
 
 .btn-criar-anotacao{
-    width: 15%;
+width: 15%;
 margin-top: 0%;
 height: 56px;
 width: 240px;
+background-color: #1976d2;
 
 }
 
