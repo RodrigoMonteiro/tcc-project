@@ -17,7 +17,7 @@
 .anotacoes-tabela-container {
     width: 70%;
     align-self: center;
-    margin-top: 3%;
+    /* margin-top: 1%; */
     height: 50%;
     border-radius: 5px;
     background-color: #c4c4c4;
@@ -82,9 +82,14 @@
     margin-top: 1px;
     margin-right: 1px;
     cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .anotacoes-tabela-body-descricao{
+    padding: 5px;
     width: 40%;
+    justify-content: flex-start;
+    
 }
 .anotacoes-tabela-body-acoes
 {
@@ -105,7 +110,11 @@ cursor: pointer;
 }
 
 .btn-criar-anotacao{
-margin-top: 7%;
+    width: 15%;
+margin-top: 0%;
+height: 56px;
+width: 240px;
+
 }
 
 .btn-criar-anotacao:hover , .btn-dialog-close:hover , .btn-dialog-submit{

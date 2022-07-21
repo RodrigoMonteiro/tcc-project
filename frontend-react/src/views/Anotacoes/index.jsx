@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { MdRemoveRedEye, MdMode, MdOutlineDelete } from "react-icons/md";
 
-import  {anotacoesList }  from "../../providers/dataTest/anotacoes";
+import { anotacoesList } from "../../providers/dataTest/anotacoes";
 
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
@@ -20,7 +20,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function Anotacoes() {
-
   const theme = createTheme({
     typography: {
       allVariants: {
@@ -32,17 +31,40 @@ export function Anotacoes() {
   const [openDialogCriarAnotacao, setOpenDialogCriarAnotacao] = useState(false);
   const [openDialogVisualizar, setOpenDialogVisualizar] = useState(false);
   const [openDialogEditar, setOpenDialogEditar] = useState(false);
-  
+
   const [semestreAnotacoes, setSemestreAnotacoes] = useState("2021.1");
   const [anotacaoList, setAnotacoesList] = useState(anotacoesList);
-  
+
   const [editarAnotacao, setEditarAnotacao] = useState({
-    anotacaoId: "test2",
-    descricaoAnotacao: "EditarDescricaoAnotacao",
-    disciplinaAnotacao: "EditarDisciplinaAnotacao",
+    anotacaoId: "",
+    descricaoAnotacao: "",
+    disciplinaAnotacao: "",
+  });
+  const [novaAnotacao, setNovaAnotacao] = useState({
+    anotacaoId: "",
+    descricaoAnotacao: "",
+    disciplinaAnotacao: "",
+    criadoEm: "",
   });
 
+  function getData() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    let mm = today.getMonth() + 1;
+    let dd = today.getDate();
+    if (dd < 10) dd = "0" + dd;
+    if (mm < 10) mm = "0" + mm;
+    return `${dd}/${mm}/${yyyy}`;
+  }
 
+  function resetData() {
+    setNovaAnotacao({
+      anotacaoId: "",
+      criadoEm: "",
+      descricaoAnotacao: "",
+      disciplinaAnotacao: "",
+    });
+  }
   const handleClickOpenCriarAnotacao = () => {
     setOpenDialogCriarAnotacao(true);
   };
@@ -50,7 +72,6 @@ export function Anotacoes() {
   const handleCloseCriarAnotacao = () => {
     setOpenDialogCriarAnotacao(false);
   };
-
 
   const handleClickOpenVisualizar = () => {
     setOpenDialogVisualizar(true);
@@ -60,12 +81,11 @@ export function Anotacoes() {
     setOpenDialogVisualizar(false);
   };
 
-
   const handleClickOpenEditar = () => {
     setOpenDialogEditar(true);
   };
 
-  const handleCloseEditar= () => {
+  const handleCloseEditar = () => {
     setOpenDialogEditar(false);
   };
 
@@ -74,23 +94,42 @@ export function Anotacoes() {
   }
 
   function handleEditDescricaoAnotacoes(event) {
-    setEditarAnotacao({...editarAnotacao, descricaoAnotacao : event.target.value})
-    
+    setEditarAnotacao({
+      ...editarAnotacao,
+      descricaoAnotacao: event.target.value,
+    });
   }
   function handleEditDisciplinaAnotacoes(event) {
-    setEditarAnotacao({...editarAnotacao, disciplinaAnotacao : event.target.value})
-    
-  
+    setEditarAnotacao({
+      ...editarAnotacao,
+      disciplinaAnotacao: event.target.value,
+    });
   }
 
-  function editAnotacoes() {
-    console.log("Editar anotações...");
+  function handleNovaAnotacoesDescricao(event) {
+    setNovaAnotacao({
+      ...novaAnotacao,
+      descricaoAnotacao: event.target.value,
+    });
   }
-  function visualizarAnotacoes() {
-    console.log("visualizar anotações...");
+  function handleNovaAnotacoesDisciplina(event) {
+    setNovaAnotacao({
+      ...novaAnotacao,
+      disciplinaAnotacao: event.target.value,
+    });
   }
+
+  function editAnotacoes(id) {
+    anotacaoList.map((el) => {
+      if (el.anotacaoId === id) {
+        el.descricaoAnotacao = editarAnotacao.descricaoAnotacao;
+        el.disciplinaAnotacao = editarAnotacao.disciplinaAnotacao;
+      }
+    });
+  }
+
   function deletarAnotacoes(id) {
-   setAnotacoesList(anotacaoList.filter(el => el.anotacaoId !== id))
+    setAnotacoesList(anotacaoList.filter((el) => el.anotacaoId !== id));
   }
 
   return (
@@ -115,6 +154,12 @@ export function Anotacoes() {
               </Select>
             </FormControl>
           </Box>
+          <button
+            className="btn-criar-anotacao"
+            onClick={handleClickOpenCriarAnotacao}
+          >
+            Criar nova anotação
+          </button>
         </div>
         <div className="anotacoes-tabela-container">
           <div className="anotacoes-tabela-header-container">
@@ -154,7 +199,11 @@ export function Anotacoes() {
                         size={18}
                         color={"#0f4a8d"}
                         onClick={() => {
-                          visualizarAnotacoes();
+                          setEditarAnotacao({
+                            anotacaoId: el.anotacaoId,
+                            descricaoAnotacao: el.descricaoAnotacao,
+                            disciplinaAnotacao: el.disciplinaAnotacao,
+                          });
                           handleClickOpenVisualizar();
                         }}
                       />
@@ -166,6 +215,11 @@ export function Anotacoes() {
                       color={"#0f4a8d"}
                       onClick={() => {
                         editAnotacoes();
+                        setEditarAnotacao({
+                          anotacaoId: el.anotacaoId,
+                          descricaoAnotacao: el.descricaoAnotacao,
+                          disciplinaAnotacao: el.disciplinaAnotacao,
+                        });
                         handleClickOpenEditar();
                       }}
                     />
@@ -181,12 +235,7 @@ export function Anotacoes() {
               );
             })}
           </div>
-          <button
-            className="btn-criar-anotacao"
-            onClick={handleClickOpenCriarAnotacao}
-          >
-            Criar Anotação
-          </button>
+         
         </div>
 
         <Dialog
@@ -201,6 +250,9 @@ export function Anotacoes() {
               margin="dense"
               id="disciplina-dialog"
               label="Disciplina"
+              value={novaAnotacao.disciplinaAnotacao}
+              onChange={handleNovaAnotacoesDisciplina}
+              placeholder="Nome da disciplina"
               fullWidth
             />
             <TextField
@@ -208,8 +260,9 @@ export function Anotacoes() {
               label="Descrição"
               multiline
               rows={7}
-              defaultValue=""
-              placeholder="Descreva a tarefa aqui..."
+              value={novaAnotacao.descricaoAnotacao}
+              onChange={handleNovaAnotacoesDescricao}
+              placeholder="Descreva a nova tarefa aqui..."
               fullWidth
               style={{ marginTop: 40 }}
             />
@@ -223,7 +276,15 @@ export function Anotacoes() {
             </button>
             <button
               className="btn-dialog-submit"
-              onClick={handleCloseCriarAnotacao}
+              onClick={() => {
+                anotacaoList.push({
+                  ...novaAnotacao,
+                  anotacaoId: anotacaoList.length,
+                  criadoEm: getData(),
+                });
+                handleCloseCriarAnotacao();
+                resetData();
+              }}
             >
               Salvar
             </button>
@@ -261,7 +322,13 @@ export function Anotacoes() {
             <button className="btn-dialog-close" onClick={handleCloseEditar}>
               Cancelar
             </button>
-            <button className="btn-dialog-submit" onClick={handleCloseEditar}>
+            <button
+              className="btn-dialog-submit"
+              onClick={() => {
+                editAnotacoes(editarAnotacao.anotacaoId);
+                handleCloseEditar();
+              }}
+            >
               Salvar
             </button>
           </DialogActions>
