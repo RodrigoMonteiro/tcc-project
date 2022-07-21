@@ -32,7 +32,7 @@ export function SelectItem(props) {
         }
       }}
     >
-      <Link to="inicio" style={{ textDecoration: "none" }}  className="link-select-item">
+      <Link to="" style={{ textDecoration: "none" }}  className="link-select-item">
         <span className="selectItem-icon">{createIcon()}</span>
         <span className="selectItem-title">{name}</span>
       </Link>

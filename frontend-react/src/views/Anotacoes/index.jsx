@@ -1,11 +1,9 @@
 import "./styles.css";
 import { useState } from "react";
-import {
-  MdRemoveRedEye,
-  MdMode,
-  MdOutlineDelete,
-  MdOutlineCheck,
-} from "react-icons/md";
+
+import { MdRemoveRedEye, MdMode, MdOutlineDelete } from "react-icons/md";
+
+import  {anotacoesList }  from "../../providers/dataTest/anotacoes";
 
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
@@ -22,8 +20,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function Anotacoes() {
-  const [openDialog ,setOpenDialog] = useState(false)
-  const [semestreAnotacoes, setSemestreAnotacoes] = useState("2021.1");
 
   const theme = createTheme({
     typography: {
@@ -32,28 +28,70 @@ export function Anotacoes() {
       },
     },
   });
-   const handleClickOpen = () => {
-     setOpenDialog(true);
-   };
 
-   const handleClose = () => {
-     setOpenDialog(false);
-   };
+  const [openDialogCriarAnotacao, setOpenDialogCriarAnotacao] = useState(false);
+  const [openDialogVisualizar, setOpenDialogVisualizar] = useState(false);
+  const [openDialogEditar, setOpenDialogEditar] = useState(false);
+  
+  const [semestreAnotacoes, setSemestreAnotacoes] = useState("2021.1");
+  const [anotacaoList, setAnotacoesList] = useState(anotacoesList);
+  
+  const [editarAnotacao, setEditarAnotacao] = useState({
+    anotacaoId: "test2",
+    descricaoAnotacao: "EditarDescricaoAnotacao",
+    disciplinaAnotacao: "EditarDisciplinaAnotacao",
+  });
+
+
+  const handleClickOpenCriarAnotacao = () => {
+    setOpenDialogCriarAnotacao(true);
+  };
+
+  const handleCloseCriarAnotacao = () => {
+    setOpenDialogCriarAnotacao(false);
+  };
+
+
+  const handleClickOpenVisualizar = () => {
+    setOpenDialogVisualizar(true);
+  };
+
+  const handleCloseVisualizar = () => {
+    setOpenDialogVisualizar(false);
+  };
+
+
+  const handleClickOpenEditar = () => {
+    setOpenDialogEditar(true);
+  };
+
+  const handleCloseEditar= () => {
+    setOpenDialogEditar(false);
+  };
 
   function handleSemestreAnotacoes(event) {
     setSemestreAnotacoes(event.target.value);
   }
-  function editAnotacoes(){
-    console.log("Editar anotações...")
+
+  function handleEditDescricaoAnotacoes(event) {
+    setEditarAnotacao({...editarAnotacao, descricaoAnotacao : event.target.value})
+    
   }
-  function visualizarAnotacoes(){
-    console.log("visualizar anotações...")
-  }
-  function deletarAnotacoes(){
-    console.log("deletar anotações...")
+  function handleEditDisciplinaAnotacoes(event) {
+    setEditarAnotacao({...editarAnotacao, disciplinaAnotacao : event.target.value})
+    
+  
   }
 
-  
+  function editAnotacoes() {
+    console.log("Editar anotações...");
+  }
+  function visualizarAnotacoes() {
+    console.log("visualizar anotações...");
+  }
+  function deletarAnotacoes(id) {
+   setAnotacoesList(anotacaoList.filter(el => el.anotacaoId !== id))
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -96,31 +134,66 @@ export function Anotacoes() {
               <span>Ações</span>
             </div>
           </div>
+
           <div className="anotacoes-tabela-body-container">
-            <div className="anotacoes-tabela-body-descricao">
-              <span>Descrição anotações </span>
-            </div>
-            <div className="anotacoes-tabela-body-disciplina">
-              <span>Disciplina</span>
-            </div>
-            <div className="anotacoes-tabela-body-criado">
-              <span>Criação</span>
-            </div>
-            <div className="anotacoes-tabela-body-visualizar">
-              <span>
-                <MdRemoveRedEye size={18} color={"#0f4a8d"} onClick={visualizarAnotacoes}/>
-              </span>
-            </div>
-            <div className="anotacoes-tabela-body-acoes">
-              <MdMode size={18} color={"#0f4a8d"} onClick={editAnotacoes}/>
-              <MdOutlineDelete size={18} color="red" onClick={deletarAnotacoes}/>
-            </div>
+            {anotacaoList.map((el) => {
+              return (
+                <div key={el.id} className="anotacoes-tabela-body-line">
+                  <div className="anotacoes-tabela-body-descricao">
+                    <span>{el.descricaoAnotacao}</span>
+                  </div>
+                  <div className="anotacoes-tabela-body-disciplina">
+                    <span>{el.disciplinaAnotacao}</span>
+                  </div>
+                  <div className="anotacoes-tabela-body-criado">
+                    <span>{el.criadoEm}</span>
+                  </div>
+                  <div className="anotacoes-tabela-body-visualizar">
+                    <span>
+                      <MdRemoveRedEye
+                        size={18}
+                        color={"#0f4a8d"}
+                        onClick={() => {
+                          visualizarAnotacoes();
+                          handleClickOpenVisualizar();
+                        }}
+                      />
+                    </span>
+                  </div>
+                  <div className="anotacoes-tabela-body-acoes">
+                    <MdMode
+                      size={18}
+                      color={"#0f4a8d"}
+                      onClick={() => {
+                        editAnotacoes();
+                        handleClickOpenEditar();
+                      }}
+                    />
+                    <MdOutlineDelete
+                      size={18}
+                      color="red"
+                      onClick={() => {
+                        deletarAnotacoes(el.anotacaoId);
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <button className="btn-criar-anotacao" onClick={handleClickOpen}>
+          <button
+            className="btn-criar-anotacao"
+            onClick={handleClickOpenCriarAnotacao}
+          >
             Criar Anotação
           </button>
         </div>
-        <Dialog fullWidth="lg" open={openDialog} onClose={handleClose}>
+
+        <Dialog
+          fullWidth={"lg"}
+          open={openDialogCriarAnotacao}
+          onClose={handleCloseCriarAnotacao}
+        >
           <DialogTitle>Criar nova anotação</DialogTitle>
           <DialogContent>
             <TextField
@@ -142,11 +215,91 @@ export function Anotacoes() {
             />
           </DialogContent>
           <DialogActions>
-            <button className="btn-dialog-close" onClick={handleClose}>
+            <button
+              className="btn-dialog-close"
+              onClick={handleCloseCriarAnotacao}
+            >
               Cancelar
             </button>
-            <button className="btn-dialog-submit" onClick={handleClose}>
+            <button
+              className="btn-dialog-submit"
+              onClick={handleCloseCriarAnotacao}
+            >
               Salvar
+            </button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog
+          fullWidth={"lg"}
+          open={openDialogEditar}
+          onClose={handleCloseEditar}
+        >
+          <DialogTitle>Editar a anotação</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="disciplina-dialog-edit"
+              label="Disciplina"
+              fullWidth
+              value={editarAnotacao.disciplinaAnotacao}
+              onChange={handleEditDisciplinaAnotacoes}
+            />
+            <TextField
+              id="descricao-dialog-edit"
+              label="Descrição"
+              multiline
+              rows={7}
+              value={editarAnotacao.descricaoAnotacao}
+              onChange={handleEditDescricaoAnotacoes}
+              fullWidth
+              style={{ marginTop: 40 }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <button className="btn-dialog-close" onClick={handleCloseEditar}>
+              Cancelar
+            </button>
+            <button className="btn-dialog-submit" onClick={handleCloseEditar}>
+              Salvar
+            </button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog
+          fullWidth={"lg"}
+          open={openDialogVisualizar}
+          onClose={handleCloseVisualizar}
+        >
+          <DialogTitle>Visualização da anotação</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="disciplina-dialog"
+              label="Disciplina"
+              value={editarAnotacao.disciplinaAnotacao}
+              disabled
+              fullWidth
+            />
+            <TextField
+              id="descricao-dialog"
+              label="Descrição"
+              multiline
+              rows={7}
+              value={editarAnotacao.descricaoAnotacao}
+              fullWidth
+              disabled
+              style={{ marginTop: 40 }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <button
+              className="btn-dialog-close"
+              onClick={handleCloseVisualizar}
+            >
+              Sair
             </button>
           </DialogActions>
         </Dialog>
