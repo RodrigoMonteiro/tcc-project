@@ -200,9 +200,7 @@ export function Anotacoes() {
                         color={"#0f4a8d"}
                         onClick={() => {
                           setEditarAnotacao({
-                            anotacaoId: el.anotacaoId,
-                            descricaoAnotacao: el.descricaoAnotacao,
-                            disciplinaAnotacao: el.disciplinaAnotacao,
+                           ...el
                           });
                           handleClickOpenVisualizar();
                         }}
@@ -216,9 +214,7 @@ export function Anotacoes() {
                       onClick={() => {
                         editAnotacoes();
                         setEditarAnotacao({
-                          anotacaoId: el.anotacaoId,
-                          descricaoAnotacao: el.descricaoAnotacao,
-                          disciplinaAnotacao: el.disciplinaAnotacao,
+                          ...el
                         });
                         handleClickOpenEditar();
                       }}
@@ -325,7 +321,7 @@ export function Anotacoes() {
             <button
               className="btn-dialog-submit"
               onClick={() => {
-                editAnotacoes(editarAnotacao.anotacaoId);
+                editAnotacoes(editarAnotacao.anotacaoId); 
                 handleCloseEditar();
               }}
             >

@@ -14,26 +14,53 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import {
-  tarefasPendentesList,
-  tarefasRealizadasList,
+  tarefasPendentesList as listaTarefasPendentes,
+  tarefasRealizadasList as listaTarefasRealizadas,
 } from "../../providers/dataTest/tarefas";
 
 import Box from "@mui/material/Box";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function Tarefas() {
+  const [tarefasPendentesList, setTarefasPendentesList] = useState(
+    listaTarefasPendentes
+  );
+  const [tarefasRealizadasList, setTarefasRealizadasList] = useState(
+    listaTarefasRealizadas
+  );
 
-  const [tarefasPendentes, setTarefasPendentes] = useState(true);
-  const [tarefasRealizadas, setTarefasRealizadas] = useState(false);
-  const [criarTarefas, setCriarTarefas] = useState(false);
-  const [dataCriacao, setDataCriacao] = useState("");
+  const [isTarefasPendentes, setIsTarefasPendentes] = useState(true);
+  const [isTarefasRealizadas, setIsTarefasRealizadas] = useState(false);
+  const [isCriarTarefas, setIsCriarTarefas] = useState(false);
 
-  const[openDialogVisualizarTarefa, setOpenDialogVisualizarTarefa] = useState(false)
-  const[openDialogEditarTarefa, setOpenDialogEditarTarefa] = useState(false)
+  const [openDialogVisualizarTarefa, setOpenDialogVisualizarTarefa] =
+    useState(false);
+  const [openDialogEditarTarefa, setOpenDialogEditarTarefa] = useState(false);
+
+  const [tarefaPendente, setTarefaPendente] = useState({
+    tarefaId: "",
+    tarefaDescricao: "",
+    tarefaDisciplina: "",
+    tarefaCriadoEm: "",
+    tarefaFinalizadoEm: "",
+  });
+
+  const [tarefaRealizada, setTarefaRealizada] = useState({
+    tarefaId: "",
+    tarefaDescricao: "testerealizada",
+    tarefaDisciplina: "testerealizada",
+    tarefaCriadoEm: "",
+    tarefaFinalizadoEm: "",
+  });
+
+  const theme = createTheme({
+    typography: {
+      allVariants: {
+        fontFamily: "'Oswald' , 'sans-serif'",
+      },
+    },
+  });
 
   const handleClickOpenVisualizarTarefa = () => {
     setOpenDialogVisualizarTarefa(true);
@@ -51,63 +78,90 @@ export function Tarefas() {
     setOpenDialogEditarTarefa(false);
   };
 
-
-
-  const [tarefaPendente, setTarefaPendente] = useState({
-    tarefaId: "",
-    descricaoTarefa: "",
-    disciplinaTarefa: "",
-    criadoEm: "",
-    finalizadoEm: "",
-  });
-  const [tarefaRealizada, setTarefaRealizada] = useState({
-    tarefaId: "",
-    descricaoTarefa: "",
-    disciplinaTarefa: "",
-    criadoEm: "",
-    finalizadoEm: "",
-  });
-
-  const theme = createTheme({
-    typography: {
-      allVariants: {
-        fontFamily: "'Oswald' , 'sans-serif'",
-      },
-    },
-  });
-
-  function toggletarefasPendentes() {
-    setTarefasPendentes(true);
-    setTarefasRealizadas(false);
-    setCriarTarefas(false);
+  function handleDisciplinaTarefaPendente(event) {
+    setTarefaPendente({
+      ...tarefaPendente,
+      tarefaDisciplina: event.target.value,
+    });
   }
-  function toggletarefasRealizadas() {
-    setTarefasPendentes(false);
-    setTarefasRealizadas(true);
-    setCriarTarefas(false);
+  function handleDescricaoTarefaPendente(event) {
+    setTarefaPendente({
+      ...tarefaPendente,
+      tarefaDescricao: event.target.value,
+    });
+  }
+
+  function toggleTarefasPendentes() {
+    setIsTarefasPendentes(true);
+    setIsTarefasRealizadas(false);
+    setIsCriarTarefas(false);
+  }
+  function toggleTarefasRealizadas() {
+    setIsTarefasPendentes(false);
+    setIsTarefasRealizadas(true);
+    setIsCriarTarefas(false);
   }
   function toggleCriarTarefas() {
-    setTarefasPendentes(false);
-    setTarefasRealizadas(false);
-    setCriarTarefas(true);
+    setIsTarefasPendentes(false);
+    setIsTarefasRealizadas(false);
+    setIsCriarTarefas(true);
   }
-  function visualizarTarefa() {
-    console.log("Visualizar tarefa...");
+
+  function editTarefa(id) {
+    tarefasPendentesList.map((el) => {
+      if (el.tarefaId === id) {
+        el.tarefaDisciplina = tarefaPendente.tarefaDisciplina;
+        el.tarefaDescricao = tarefaPendente.tarefaDescricao;
+      }
+    });
   }
-  function editarTarefa() {
-    console.log("Editar tarefa...");
+  function deletarTarefaPendente(id) {
+    setTarefasPendentesList(
+      tarefasPendentesList.filter((el) => el.tarefaId !== id)
+    );
   }
-  function deletarTarefa() {
-    console.log("Deletar tarefa...");
+  function deletarTarefaRealizada(id) {
+    setTarefasRealizadasList(
+      tarefasRealizadasList.filter((el) => el.tarefaId !== id)
+    );
   }
-  function concluirTarefa() {
-    console.log("Concluir tarefa...");
+  function concluirTarefaPendente(id) {
+    tarefasPendentesList.map((el) => {
+      if (el.tarefaId === id) {
+        tarefasRealizadasList.push({ ...el, tarefaFinalizadaEm: getData() });
+        setTarefasPendentesList(
+          tarefasPendentesList.filter((e) => e.tarefaId !== id)
+        );
+      }
+    });
   }
-  function deletarTarefaRealizada() {
-    console.log("Deletar tarefa realizada...");
-  }
+
   function salvarTarefa() {
-    console.log("Salvar uma nova tarefa...");
+    tarefasPendentesList.push({
+      ...tarefaPendente,
+      tarefaId: tarefasPendentesList.length + tarefasRealizadasList.length,
+      tarefaCriadoEm: getData()
+    });
+  }
+
+  function getData() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    let mm = today.getMonth() + 1;
+    let dd = today.getDate();
+    if (dd < 10) dd = "0" + dd;
+    if (mm < 10) mm = "0" + mm;
+    return `${dd}/${mm}/${yyyy}`;
+  }
+
+  function resetDataTarefaPendente() {
+    setTarefaPendente({
+      tarefaId: "",
+      tarefaDescricao: "",
+      tarefaDisciplina: "",
+      tarefaCriadoEm: "",
+      tarefaFinalizadoEm: "",
+    });
   }
 
   return (
@@ -116,27 +170,27 @@ export function Tarefas() {
         <div className="tarefas-options-container">
           <span
             className={`tarefas-options-btn ${
-              tarefasPendentes
+              isTarefasPendentes
                 ? "tarefas-options-btn-tarefas-pendentes-selected"
                 : ""
             }`}
-            onClick={toggletarefasPendentes}
+            onClick={toggleTarefasPendentes}
           >
             Tarefas Pendentes
           </span>
           <span
             className={`tarefas-options-btn ${
-              tarefasRealizadas
+              isTarefasRealizadas
                 ? "tarefas-options-btn-tarefas-realizadas-selected"
                 : ""
             }`}
-            onClick={toggletarefasRealizadas}
+            onClick={toggleTarefasRealizadas}
           >
             Tarefas realizadas
           </span>
           <span
             className={`tarefas-options-btn ${
-              criarTarefas ? "tarefas-options-btn-criar-tarefas-selected" : ""
+              isCriarTarefas ? "tarefas-options-btn-criar-tarefas-selected" : ""
             }`}
             onClick={toggleCriarTarefas}
           >
@@ -144,12 +198,12 @@ export function Tarefas() {
           </span>
         </div>
 
-        {tarefasPendentes ? (
+        {isTarefasPendentes ? (
           <>
             <div className="tarefas-pendentes-container">
               <div className="tarefas-pendentes-header-container">
                 <div className="tarefas-pendentes-tabela-header-descricao">
-                  <span>Descrição</span>
+                  <span>Descrição da tarefa</span>
                 </div>
                 <div className="tarefas-pendentes-tabela-header-disciplina">
                   <span>Disciplina</span>
@@ -168,7 +222,10 @@ export function Tarefas() {
               <div className="tarefas-pendentes-body-container">
                 {tarefasPendentesList.map((el) => {
                   return (
-                    <div className="tarefas-pendentes-body-line">
+                    <div
+                      key={el.tarefaId}
+                      className="tarefas-pendentes-body-line"
+                    >
                       <div className="tarefas-pendentes-body-descricao">
                         <span>{el.tarefaDescricao}</span>
                       </div>
@@ -184,7 +241,13 @@ export function Tarefas() {
                             style={{ cursor: "pointer" }}
                             size={18}
                             color={"#0f4a8d"}
-                            onClick={visualizarTarefa}
+                            onClick={() => {
+                              setTarefaPendente({
+                                ...el,
+                              });
+
+                              handleClickOpenVisualizarTarefa();
+                            }}
                           />
                         </span>
                       </div>
@@ -192,17 +255,26 @@ export function Tarefas() {
                         <MdMode
                           size={18}
                           color={"#0f4a8d"}
-                          onClick={editarTarefa}
+                          onClick={() => {
+                            setTarefaPendente({
+                              ...el,
+                            });
+                            handleClickOpenEditarTarefa();
+                          }}
                         />
                         <MdOutlineDelete
                           size={18}
                           color={"red"}
-                          onClick={deletarTarefa}
+                          onClick={() => {
+                            deletarTarefaPendente(el.tarefaId);
+                          }}
                         />
                         <MdOutlineCheck
                           size={18}
                           color={"green"}
-                          onClick={concluirTarefa}
+                          onClick={() => {
+                            concluirTarefaPendente(el.tarefaId);
+                          }}
                         />
                       </div>
                     </div>
@@ -211,12 +283,12 @@ export function Tarefas() {
               </div>
             </div>
           </>
-        ) : tarefasRealizadas ? (
+        ) : isTarefasRealizadas ? (
           <>
             <div className="tarefas-realizadas-container">
               <div className="tarefas-realizadas-header-container">
                 <div className="tarefas-realizadas-tabela-header-descricao">
-                  <span>Descrição</span>
+                  <span>Descrição da tarefa</span>
                 </div>
                 <div className="tarefas-realizadas-tabela-header-disciplina">
                   <span>Disciplina</span>
@@ -234,7 +306,10 @@ export function Tarefas() {
               <div className="tarefas-realizadas-body-container">
                 {tarefasRealizadasList.map((el) => {
                   return (
-                    <div className="tarefas-realizadas-body-line">
+                    <div
+                      key={el.tarefaId}
+                      className="tarefas-realizadas-body-line"
+                    >
                       <div className="tarefas-realizadas-body-descricao">
                         <span>{el.tarefaDescricao}</span>
                       </div>
@@ -251,7 +326,9 @@ export function Tarefas() {
                         <MdOutlineDelete
                           size={18}
                           color={"red"}
-                          onClick={deletarTarefaRealizada}
+                          onClick={() => {
+                            deletarTarefaRealizada(el.tarefaId);
+                          }}
                           style={{ cursor: "pointer" }}
                         />
                       </div>
@@ -261,7 +338,7 @@ export function Tarefas() {
               </div>
             </div>
           </>
-        ) : criarTarefas ? (
+        ) : isCriarTarefas ? (
           <>
             <div className="criar-tarefas-container">
               <div className="criar-tarefas-card-container">
@@ -273,8 +350,8 @@ export function Tarefas() {
                   component="form"
                   sx={{
                     m: 2,
+                    width: "85%",
                   }}
-                  fullWidth
                 >
                   <TextField
                     sx={{
@@ -283,6 +360,8 @@ export function Tarefas() {
                     id="outlined-basic"
                     label="Nome da tarefa"
                     variant="outlined"
+                    value={tarefaPendente.tarefaDescricao}
+                    onChange={handleDescricaoTarefaPendente}
                   />
                   <TextField
                     sx={{
@@ -292,27 +371,17 @@ export function Tarefas() {
                     id="outlined-basic"
                     label="Pertence a disciplina"
                     variant="outlined"
+                    value={tarefaPendente.tarefaDisciplina}
+                    onChange={handleDisciplinaTarefaPendente}
                   />
-                  <Box fullWidth sx={{ mt: 3 }}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        label="Data de criação"
-                        data={dataCriacao}
-                        onChange={(newValue) => {
-                          setDataCriacao(newValue);
-                        }}
-                        renderInput={(params) => (
-                          <TextField
-                            sx={{ width: "100%" }}
-                            {...params}
-                            centered
-                          />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </Box>
                 </Box>
-                <button className="btn-salvar-tarefa" onClick={salvarTarefa}>
+                <button
+                  className="btn-salvar-tarefa"
+                  onClick={() => {
+                    salvarTarefa();
+                    resetDataTarefaPendente();
+                  }}
+                >
                   Salvar
                 </button>
               </div>
@@ -328,23 +397,14 @@ export function Tarefas() {
         open={openDialogVisualizarTarefa}
         onClose={handleCloseVisualizarTarefa}
       >
-        {tarefasPendentes ? (
-          <DialogTitle>Visualização da tarefa pendente</DialogTitle>
-        ) : (
-          <DialogTitle>Visualização da tarefa realizada</DialogTitle>
-        )}
-
+        <DialogTitle>Visualização da tarefa pendente</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             id="disciplina-dialog"
             label="Disciplina"
-            value={
-              tarefaPendente
-                ? tarefaPendente.disciplinaTarefa
-                : tarefaRealizada.disciplinaTarefa
-            }
+            value={tarefaPendente.tarefaDisciplina}
             disabled
             fullWidth
           />
@@ -353,19 +413,64 @@ export function Tarefas() {
             label="Descrição"
             multiline
             rows={7}
-            value={
-              tarefaPendente
-                ? tarefaPendente.descricaoTarefa
-                : tarefaRealizada.descricaoTarefa
-            }
+            value={tarefaPendente.tarefaDescricao}
             fullWidth
             disabled
             style={{ marginTop: 40 }}
           />
         </DialogContent>
         <DialogActions>
-          <button className="btn-dialog-close" onClick={handleCloseVisualizarTarefa}>
+          <button
+            className="btn-dialog-close"
+            onClick={handleCloseVisualizarTarefa}
+          >
             Sair
+          </button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        fullWidth={"lg"}
+        open={openDialogEditarTarefa}
+        onClose={handleCloseEditarTarefa}
+      >
+        <DialogTitle>Editar tarefa</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="disciplina-dialog"
+            label="Disciplina"
+            value={tarefaPendente.tarefaDisciplina}
+            onChange={handleDisciplinaTarefaPendente}
+            fullWidth
+          />
+          <TextField
+            id="descricao-dialog"
+            label="Descrição"
+            multiline
+            rows={7}
+            value={tarefaPendente.tarefaDescricao}
+            onChange={handleDescricaoTarefaPendente}
+            fullWidth
+            style={{ marginTop: 40 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <button
+            className="btn-dialog-close"
+            onClick={handleCloseEditarTarefa}
+          >
+            Sair
+          </button>
+          <button
+            className="btn-dialog-submit"
+            onClick={() => {
+              editTarefa(tarefaPendente.tarefaId);
+              handleCloseEditarTarefa();
+            }}
+          >
+            Salvar
           </button>
         </DialogActions>
       </Dialog>
