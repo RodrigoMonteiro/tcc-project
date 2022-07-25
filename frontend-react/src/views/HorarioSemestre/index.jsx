@@ -108,7 +108,11 @@ export function HorarioSemestre() {
             </div>
           </div>
 
-          <div className="horario-semestre-tabela-body">
+          <div
+            className={`horario-semestre-tabela-body ${
+              acaoSelected === "Visualizar" ? "visualizar-mode" : ""
+            }`}
+          >
             {turnoSelected === "Matutino" ? (
               <>
                 <div className="horario-semestre-tabela-horario">

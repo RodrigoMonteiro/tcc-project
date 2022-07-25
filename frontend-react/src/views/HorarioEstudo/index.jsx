@@ -16,10 +16,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { horarioEstudoMatutinoList as listaHorarioEstudoMatutino,
-  horarioEstudoVespertinoList as listaHorarioVespertino,
-   horarioEstudoNoturnoList as listaHorarioEstudoNoturno,
-   horarioEstudoMatutinoList,
+import {
+  horarioEstudoMatutino as listaHorarioEstudoMatutino,
+  horarioEstudoVespertino as listaHorarioEstudoVespertino,
+  horarioEstudoNoturno as listaHorarioEstudoNoturno,
 } from "../../providers/dataTest/horarioEstudo";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -34,10 +34,17 @@ export function HorarioEstudo() {
   const [acaoEstudoSelected, setAcaoEstudoSelected] = useState("Visualizar");
   const [openDialogHorarioEstudo, setOpenDialogHorarioEstudo] = useState(false);
 
-  const [horarioEstudoMatutinoList, setHorarioEstudoMatutinoList] =
-    useState(listaHorarioEstudoMatutino);
+  const [horarioEstudoMatutinoList, setHorarioEstudoMatutinoList] = useState(
+    listaHorarioEstudoMatutino
+  );
+  const [horarioEstudoVespertinoList, setHorarioEstudoVespertinoList] =
+    useState(listaHorarioEstudoVespertino);
+  const [horarioEstudoNoturnoList, setHorarioEstudoNoturnoList] = useState(
+    listaHorarioEstudoNoturno
+  );
 
   const [horarioEstudo, setHorarioEstudo] = useState({
+    horarioEstudoId: "",
     horarioInicio: "",
     horarioFim: "",
     segunda: "",
@@ -48,6 +55,7 @@ export function HorarioEstudo() {
     sabado: "",
     domingo: "",
   });
+
   const theme = createTheme({
     typography: {
       allVariants: {
@@ -84,6 +92,68 @@ export function HorarioEstudo() {
   }
   function handleChangeHorarioEstudoHorarioFim(event) {
     setHorarioEstudo({ ...horarioEstudo, horarioFim: event.target.value });
+  }
+  function handleChangeHorarioEstudoSegunda(event) {
+    setHorarioEstudo({ ...horarioEstudo, segunda: event.target.value });
+  }
+  function handleChangeHorarioEstudoTerca(event) {
+    setHorarioEstudo({ ...horarioEstudo, terca: event.target.value });
+  }
+  function handleChangeHorarioEstudoQuarta(event) {
+    setHorarioEstudo({ ...horarioEstudo, quarta: event.target.value });
+  }
+  function handleChangeHorarioEstudoQuinta(event) {
+    setHorarioEstudo({ ...horarioEstudo, quinta: event.target.value });
+  }
+  function handleChangeHorarioEstudoSexta(event) {
+    setHorarioEstudo({ ...horarioEstudo, sexta: event.target.value });
+  }
+  function handleChangeHorarioEstudoSabado(event) {
+    setHorarioEstudo({ ...horarioEstudo, sabado: event.target.value });
+  }
+  function handleChangeHorarioEstudoDomingo(event) {
+    setHorarioEstudo({ ...horarioEstudo, domingo: event.target.value });
+  }
+  function salvarHorario() {
+    if (turnoEstudoSelected === "Matutino") {
+      horarioEstudoMatutinoList.push({
+        ...horarioEstudo,
+        horarioEstudoId:
+          horarioEstudoMatutinoList.length +
+          horarioEstudoVespertinoList.length +
+          horarioEstudoNoturnoList.length+1
+      });
+    } else if (turnoEstudoSelected === "Vespertino") {
+      horarioEstudoVespertinoList.push({
+        ...horarioEstudo,
+        horarioEstudoId:
+          horarioEstudoMatutinoList.length +
+          horarioEstudoVespertinoList.length +
+          horarioEstudoNoturnoList.length+1
+      });
+    } else {
+      horarioEstudoNoturnoList.push({
+        ...horarioEstudo,
+        horarioEstudoId:
+          horarioEstudoMatutinoList.length +
+          horarioEstudoVespertinoList.length +
+          horarioEstudoNoturnoList.length+1
+      });
+    }
+  }
+  function resetHorarioEstudoData() {
+    setHorarioEstudo({
+      horarioEstudoId: "",
+      horarioInicio: "",
+      horarioFim: "",
+      segunda: "",
+      terca: "",
+      quarta: "",
+      quinta: "",
+      sexta: "",
+      sabado: "",
+      domingo: "",
+    });
   }
 
   return (
@@ -168,7 +238,9 @@ export function HorarioEstudo() {
           </div>
         </div>
         <div className="horario-estudo-tabela-container">
-          <div className="horario-estudo-tabela-header-container">
+          <div
+            className={`horario-estudo-tabela-header-container`}
+          >
             {isFimSemana === "Sim" ? (
               <>
                 <div className="horario-estudo-tabela-header-horario">
@@ -219,44 +291,133 @@ export function HorarioEstudo() {
               </>
             )}
           </div>
-          <div className="horario-estudo-tabela-container">
-            {horarioEstudoMatutinoList.map((el) => {
-              return (
-                <div className="horario-estudo-tabela-body-line">
-                  <div className="anotacoes-tabela-body-horario">
-                    <span>{`${el.horarioInicio} - ${el.horarioFim}`}</span>
-                  </div>
-                  <div className="anotacoes-tabela-body-segunda">
-                    <span>{el.segunda}</span>
-                  </div>
-                  <div className="anotacoes-tabela-body-terca">
-                    <span>{el.terca}</span>
-                  </div>
-                  <div className="anotacoes-tabela-body-quarta">
-                    <span>{el.quarta}</span>
-                  </div>
-                  <div className="anotacoes-tabela-body-quinta">
-                    <span>{el.quinta}</span>
-                  </div>
-                  <div className="anotacoes-tabela-body-sexta">
-                    <span>{el.sexta}</span>
-                  </div>
+          <div className={`horario-estudo-tabela-container ${
+              acaoEstudoSelected === "Visualizar" ? "visualizar-mode" : ""
+            }`}>
+            {turnoEstudoSelected === "Matutino"
+              ? horarioEstudoMatutinoList.map((el) => {
+                  return (
+                    <div
+                      key={el.horarioEstudoId}
+                      className="horario-estudo-tabela-body-line"
+                    >
+                      <div className="anotacoes-tabela-body-horario">
+                        <span>{`${el.horarioInicio} - ${el.horarioFim}`}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-segunda">
+                        <span>{el.segunda}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-terca">
+                        <span>{el.terca}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-quarta">
+                        <span>{el.quarta}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-quinta">
+                        <span>{el.quinta}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-sexta">
+                        <span>{el.sexta}</span>
+                      </div>
 
-                  {isFimSemana === "Sim" ? (
-                    <>
-                      <div className="anotacoes-tabela-body-sabado">
-                        <span>{el.sabado}</span>
+                      {isFimSemana === "Sim" ? (
+                        <>
+                          <div className="anotacoes-tabela-body-sabado">
+                            <span>{el.sabado}</span>
+                          </div>
+                          <div className="anotacoes-tabela-body-domingo">
+                            <span>{el.domingo}</span>
+                          </div>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  );
+                })
+              : turnoEstudoSelected === "Vespertino"
+              ? horarioEstudoVespertinoList.map((el) => {
+                  return (
+                    <div
+                      key={el.horarioEstudoId}
+                      className="horario-estudo-tabela-body-line"
+                    >
+                      <div className="anotacoes-tabela-body-horario">
+                        <span>{`${el.horarioInicio} - ${el.horarioFim}`}</span>
                       </div>
-                      <div className="anotacoes-tabela-body-domingo">
-                        <span>{el.domingo}</span>
+                      <div className="anotacoes-tabela-body-segunda">
+                        <span>{el.segunda}</span>
                       </div>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              );
-            })}
+                      <div className="anotacoes-tabela-body-terca">
+                        <span>{el.terca}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-quarta">
+                        <span>{el.quarta}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-quinta">
+                        <span>{el.quinta}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-sexta">
+                        <span>{el.sexta}</span>
+                      </div>
+
+                      {isFimSemana === "Sim" ? (
+                        <>
+                          <div className="anotacoes-tabela-body-sabado">
+                            <span>{el.sabado}</span>
+                          </div>
+                          <div className="anotacoes-tabela-body-domingo">
+                            <span>{el.domingo}</span>
+                          </div>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  );
+                })
+              : turnoEstudoSelected === "Noturno"
+              ? horarioEstudoNoturnoList.map((el) => {
+                  return (
+                    <div
+                      key={el.horarioEstudoId}
+                      className="horario-estudo-tabela-body-line"
+                    >
+                      <div className="anotacoes-tabela-body-horario">
+                        <span>{`${el.horarioInicio} - ${el.horarioFim}`}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-segunda">
+                        <span>{el.segunda}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-terca">
+                        <span>{el.terca}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-quarta">
+                        <span>{el.quarta}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-quinta">
+                        <span>{el.quinta}</span>
+                      </div>
+                      <div className="anotacoes-tabela-body-sexta">
+                        <span>{el.sexta}</span>
+                      </div>
+
+                      {isFimSemana === "Sim" ? (
+                        <>
+                          <div className="anotacoes-tabela-body-sabado">
+                            <span>{el.sabado}</span>
+                          </div>
+                          <div className="anotacoes-tabela-body-domingo">
+                            <span>{el.domingo}</span>
+                          </div>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  );
+                })
+              : ""}
           </div>
         </div>
         {turnoEstudoSelected === "Matutino" ? (
@@ -278,7 +439,6 @@ export function HorarioEstudo() {
                     value={horarioEstudo.horarioInicio}
                     label="Horario de início do estudo"
                     onChange={handleChangeHorarioEstudoHorarioInicio}
-                    defaultValue="06:00"
                   >
                     <MenuItem value={"06:00"}>06:00</MenuItem>
                     <MenuItem value={"07:00"}>07:00</MenuItem>
@@ -299,7 +459,6 @@ export function HorarioEstudo() {
                     labelId="demo-select-small"
                     id="demo-select-small"
                     value={horarioEstudo.horarioFim}
-                    defaultValue="06:00"
                     label="Horario do fim do estudo"
                     onChange={handleChangeHorarioEstudoHorarioFim}
                   >
@@ -319,6 +478,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-segunda-dialog"
                 label="Segunda-feira"
+                value={horarioEstudo.segunda}
+                onChange={handleChangeHorarioEstudoSegunda}
                 fullWidth
               />
               <TextField
@@ -326,6 +487,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-terca-dialog"
                 label="Terça-feira"
+                value={horarioEstudo.terca}
+                onChange={handleChangeHorarioEstudoTerca}
                 fullWidth
               />
               <TextField
@@ -333,6 +496,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-quarta-dialog"
                 label="Quarta-feira"
+                value={horarioEstudo.quarta}
+                onChange={handleChangeHorarioEstudoQuarta}
                 fullWidth
               />
               <TextField
@@ -340,6 +505,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-quinta-dialog"
                 label="Quinta-feira"
+                value={horarioEstudo.quinta}
+                onChange={handleChangeHorarioEstudoQuinta}
                 fullWidth
               />
               <TextField
@@ -347,6 +514,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-sexta-dialog"
                 label="Sexta-feira"
+                value={horarioEstudo.sexta}
+                onChange={handleChangeHorarioEstudoSexta}
                 fullWidth
               />
               {isFimSemana === "Sim" ? (
@@ -356,6 +525,8 @@ export function HorarioEstudo() {
                     margin="dense"
                     id="horario-estudo-sabado-dialog"
                     label="Sabado"
+                    value={horarioEstudo.sabado}
+                    onChange={handleChangeHorarioEstudoSabado}
                     fullWidth
                   />
                   <TextField
@@ -363,6 +534,8 @@ export function HorarioEstudo() {
                     margin="dense"
                     id="horario-estudo-domingo-dialog"
                     label="Domingo"
+                    value={horarioEstudo.domingo}
+                    onChange={handleChangeHorarioEstudoDomingo}
                     fullWidth
                   />
                 </>
@@ -380,7 +553,11 @@ export function HorarioEstudo() {
               </button>
               <button
                 className="btn-dialog-submit"
-                onClick={handleCloseHorarioEstudo}
+                onClick={() => {
+                  salvarHorario();
+                  resetHorarioEstudoData();
+                  handleCloseHorarioEstudo();
+                }}
               >
                 Salvar
               </button>
@@ -405,7 +582,6 @@ export function HorarioEstudo() {
                     value={horarioEstudo.horarioInicio}
                     label="Horario de início do estudo"
                     onChange={handleChangeHorarioEstudoHorarioInicio}
-                    defaultValue="12:00"
                   >
                     <MenuItem value={"12:00"}>12:00</MenuItem>
                     <MenuItem value={"13:00"}>13:00</MenuItem>
@@ -426,7 +602,6 @@ export function HorarioEstudo() {
                     labelId="demo-select-small"
                     id="demo-select-small"
                     value={horarioEstudo.horarioFim}
-                    defaultValue="12:00"
                     label="Horario do fim do estudo"
                     onChange={handleChangeHorarioEstudoHorarioFim}
                   >
@@ -445,6 +620,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-segunda-dialog"
                 label="Segunda-feira"
+                value={horarioEstudo.segunda}
+                onChange={handleChangeHorarioEstudoSegunda}
                 fullWidth
               />
               <TextField
@@ -452,6 +629,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-terca-dialog"
                 label="Terça-feira"
+                value={horarioEstudo.terca}
+                onChange={handleChangeHorarioEstudoTerca}
                 fullWidth
               />
               <TextField
@@ -459,6 +638,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-quarta-dialog"
                 label="Quarta-feira"
+                value={horarioEstudo.quarta}
+                onChange={handleChangeHorarioEstudoQuarta}
                 fullWidth
               />
               <TextField
@@ -466,6 +647,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-quinta-dialog"
                 label="Quinta-feira"
+                value={horarioEstudo.quinta}
+                onChange={handleChangeHorarioEstudoQuinta}
                 fullWidth
               />
               <TextField
@@ -473,6 +656,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-sexta-dialog"
                 label="Sexta-feira"
+                value={horarioEstudo.sexta}
+                onChange={handleChangeHorarioEstudoSexta}
                 fullWidth
               />
               {isFimSemana === "Sim" ? (
@@ -482,6 +667,8 @@ export function HorarioEstudo() {
                     margin="dense"
                     id="horario-estudo-sabado-dialog"
                     label="Sabado"
+                    value={horarioEstudo.sabado}
+                    onChange={handleChangeHorarioEstudoSabado}
                     fullWidth
                   />
                   <TextField
@@ -489,6 +676,8 @@ export function HorarioEstudo() {
                     margin="dense"
                     id="horario-estudo-domingo-dialog"
                     label="Domingo"
+                    value={horarioEstudo.domingo}
+                    onChange={handleChangeHorarioEstudoDomingo}
                     fullWidth
                   />
                 </>
@@ -506,7 +695,11 @@ export function HorarioEstudo() {
               </button>
               <button
                 className="btn-dialog-submit"
-                onClick={handleCloseHorarioEstudo}
+                onClick={() => {
+                  salvarHorario();
+                  resetHorarioEstudoData();
+                  handleCloseHorarioEstudo();
+                }}
               >
                 Salvar
               </button>
@@ -531,7 +724,6 @@ export function HorarioEstudo() {
                     value={horarioEstudo.horarioInicio}
                     label="Horario de início do estudo"
                     onChange={handleChangeHorarioEstudoHorarioInicio}
-                    defaultValue="18:00"
                   >
                     <MenuItem value={"18:00"}>18:00</MenuItem>
                     <MenuItem value={"19:00"}>19:00</MenuItem>
@@ -552,7 +744,6 @@ export function HorarioEstudo() {
                     labelId="demo-select-small"
                     id="demo-select-small"
                     value={horarioEstudo.horarioFim}
-                    defaultValue="18:00"
                     label="Horario do fim do estudo"
                     onChange={handleChangeHorarioEstudoHorarioFim}
                   >
@@ -571,6 +762,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-segunda-dialog"
                 label="Segunda-feira"
+                value={horarioEstudo.segunda}
+                onChange={handleChangeHorarioEstudoSegunda}
                 fullWidth
               />
               <TextField
@@ -578,6 +771,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-terca-dialog"
                 label="Terça-feira"
+                value={horarioEstudo.terca}
+                onChange={handleChangeHorarioEstudoTerca}
                 fullWidth
               />
               <TextField
@@ -585,6 +780,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-quarta-dialog"
                 label="Quarta-feira"
+                value={horarioEstudo.quarta}
+                onChange={handleChangeHorarioEstudoQuarta}
                 fullWidth
               />
               <TextField
@@ -592,6 +789,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-quinta-dialog"
                 label="Quinta-feira"
+                value={horarioEstudo.quinta}
+                onChange={handleChangeHorarioEstudoQuinta}
                 fullWidth
               />
               <TextField
@@ -599,6 +798,8 @@ export function HorarioEstudo() {
                 margin="dense"
                 id="horario-estudo-sexta-dialog"
                 label="Sexta-feira"
+                value={horarioEstudo.sexta}
+                onChange={handleChangeHorarioEstudoSexta}
                 fullWidth
               />
               {isFimSemana === "Sim" ? (
@@ -608,6 +809,8 @@ export function HorarioEstudo() {
                     margin="dense"
                     id="horario-estudo-sabado-dialog"
                     label="Sabado"
+                    value={horarioEstudo.sabado}
+                    onChange={handleChangeHorarioEstudoSabado}
                     fullWidth
                   />
                   <TextField
@@ -615,6 +818,8 @@ export function HorarioEstudo() {
                     margin="dense"
                     id="horario-estudo-domingo-dialog"
                     label="Domingo"
+                    value={horarioEstudo.domingo}
+                    onChange={handleChangeHorarioEstudoDomingo}
                     fullWidth
                   />
                 </>
@@ -632,7 +837,11 @@ export function HorarioEstudo() {
               </button>
               <button
                 className="btn-dialog-submit"
-                onClick={handleCloseHorarioEstudo}
+                onClick={() => {
+                  salvarHorario();
+                  resetHorarioEstudoData();
+                  handleCloseHorarioEstudo();
+                }}
               >
                 Salvar
               </button>
