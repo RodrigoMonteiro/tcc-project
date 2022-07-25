@@ -19,19 +19,20 @@
 
 .horario-estudo-radio-btn-container {
     /* background-color: red; */
+    display: flex;
     margin-top: 3%;
     margin-left: 5%;
-    width: 75%;
+    width: 70%;
     color: black;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .horario-estudo-tabela-container {
+    display: flex;
+    flex-direction: column ;
     width: 80%;
-    align-self: center;
-    margin-top: 2%;
     height: 50%;
-    border-radius: 5px;
-    background-color: #c4c4c4;
 }
 
 
@@ -42,6 +43,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top:15px ;
 }
 .horario-estudo-tabela-header-horario,
 .horario-estudo-tabela-header-segunda,
@@ -72,16 +74,19 @@
 }
 
 .btn-add-horario-container{
-    width: 80%;
-    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 50%;
  
 }
 .btn-add-horario{
-    width: 16%;
-    height: 100%;
+    width: 22.5%;
+    height: 90%;
     border-radius: 5px;
     border-style: none;
-    background-color: #0f4a8d;
+    background-color: #1976d2;
     color: white;
     font-size: 1.05rem;
     cursor: pointer;
@@ -91,4 +96,33 @@
 transition: 0.25s;
 opacity: 0.95;
 
+}
+
+.horario-estudo-tabela-body-line{
+     display: flex;
+     margin-top: 1px;
+    width: 125%;
+    height: 100%;
+}
+
+.anotacoes-tabela-body-horario,
+.anotacoes-tabela-body-segunda,
+.anotacoes-tabela-body-terca,
+.anotacoes-tabela-body-quarta,
+.anotacoes-tabela-body-quinta,
+.anotacoes-tabela-body-sexta,
+.anotacoes-tabela-body-sabado,
+.anotacoes-tabela-body-domingo
+
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 20%;
+    height: 20%;
+    margin-right: 1px;
+    color: black;
+     overflow: hidden;
+    white-space: nowrap;
 }
