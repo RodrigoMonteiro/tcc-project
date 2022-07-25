@@ -37,6 +37,9 @@
 }
 
 .navbar-header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 20vh;
     width: 100%;
     /* background-color: yellowgreen; */

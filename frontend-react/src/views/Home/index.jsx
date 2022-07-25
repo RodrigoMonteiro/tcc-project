@@ -60,7 +60,7 @@ export function Home() {
       <div className="home-container">
         <div className="home-form-container">
           <div className="home-form-header">
-            <img src="" alt="Logo over here" />
+            <img  style={{width: "32%", height: "58%"}}src="assets/logo.png" alt="Logo over here" />
             <h2>Otimize seu tempo</h2>
           </div>
           <div className="home-form-body">

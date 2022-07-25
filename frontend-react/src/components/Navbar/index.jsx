@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React, { useState ,useContext } from "react";
 import {Link} from 'react-router-dom'
 import { NavbarItem } from "./Navbar-item";
 import { FaChevronLeft } from "react-icons/fa";
-import { useState } from "react";
 import { navbarItemList as List } from "./navbar-items";
 
 import { GlobalContext } from "../../providers/globalProps";
@@ -48,7 +47,7 @@ export function Navbar() {
             globalProps.isNavbarOpen ? "" : "navbar-header-logo-closed"
           }`}
         >
-          <img src="logo.png" alt="LOGO OVER HERE" />
+          <img  src="assets/logo.png" alt="LOGO OVER HERE" />
         </div>
         <div
           className={`navbar-header-title ${

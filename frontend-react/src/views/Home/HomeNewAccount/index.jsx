@@ -70,7 +70,11 @@ export function HomeNewAccount() {
       <div className="home-container-new-account">
         <div className="home-form-container-new-account">
           <div className="home-form-header-new-account">
-            <img src="" alt="Logo over here" />
+            <img
+              style={{ width: "22%", height: "78%", marginTop: "7px" }}
+              src="assets/logo.png"
+              alt="Logo over here"
+            />
             <h2>Otimize seu tempo</h2>
           </div>
           <div className="home-form-body-new-account">
