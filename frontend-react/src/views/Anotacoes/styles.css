@@ -15,7 +15,7 @@
     align-items: flex-start;
 }
 .anotacoes-tabela-container {
-    width: 70%;
+    width: 80%;
     align-self: center;
     /* margin-top: 1%; */
     height: 50%;
@@ -41,8 +41,9 @@
     align-items: center;
     background-color: #0f4a8d;
     width: 15%;
-    height: 100%;
+    height: 110%;
     margin-right: 1px;
+    padding: 2px;
 }
 .anotacoes-tabela-header-descricao{
     border-radius: 5px 0 0 0;
@@ -56,7 +57,7 @@
     display: flex;
     flex-direction: column ;
     width: 100%;
-    height: 10%;
+    height: 15%;
 }
 .anotacoes-tabela-body-line{
     width: 100%;

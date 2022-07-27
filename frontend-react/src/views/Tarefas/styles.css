@@ -28,10 +28,10 @@
 }
 
 .tarefas-pendentes-container, .tarefas-realizadas-container , .criar-tarefas-container {
-    width: 70%;
+    width: 80%;
     align-self: center;
     margin-top: 2%;
-    height: 50%;
+    height: 60%;
     border-radius: 5px 5px 0 0;
 }
 
@@ -64,6 +64,7 @@
     width: 15%;
     height: 100%;
     margin-right: 1px;
+    padding: 2px;
     
 }
 .tarefas-pendentes-tabela-header-descricao, .tarefas-realizadas-tabela-header-descricao{
@@ -106,6 +107,7 @@
     color: black;
      overflow: hidden;
     white-space: nowrap;
+    padding: 7px;
 }
 .tarefas-pendentes-body-descricao, .tarefas-realizadas-body-descricao{
     width: 40%;
