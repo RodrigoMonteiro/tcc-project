@@ -2,7 +2,7 @@ import React, { useState ,useContext } from "react";
 import {Link} from 'react-router-dom'
 import { NavbarItem } from "./Navbar-item";
 import { FaChevronLeft } from "react-icons/fa";
-import { navbarItemList as List } from "./navbar-items";
+import { navbarItemList as List } from "./../../providers/dataTest/navbar-items";
 
 import { GlobalContext } from "../../providers/globalProps";
 import "./styles.css";
