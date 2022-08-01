@@ -9,7 +9,14 @@ export const semestres = [
   {
     semestreId: 2,
     nomeSemestre: "2021.2",
-    disciplinas: ["Mátematica discreta", "Cálculo 2", "Estatística 3", "Física 3"],
+    disciplinas: ["Cálculo 2", "Estatística 3", "Física 3"],
+    anotacoes: [],
+    tarefas: []
+  },
+  {
+    semestreId: 3,
+    nomeSemestre: "2022.1",
+    disciplinas: ["Cálculo 3", "Vetores", "Bando de dados", "Engenharia de software","Sistemas operacionais", "Arquitetura de computadores" ],
     anotacoes: [],
     tarefas: []
   },

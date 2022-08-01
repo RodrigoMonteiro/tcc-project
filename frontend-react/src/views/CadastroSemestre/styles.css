@@ -98,8 +98,6 @@
 }
 
 .cadastro-semestre-tabela-header-span-editar{
-    
-    width: 45%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -114,8 +112,11 @@
 
 .cadastro-semestre-tabela-body-line-editar{
     height: 20%;
-    border-bottom: 1px solid #0f4a8d;
+    border-bottom: 1px solid #c4c4c4;
    background-color: #f1ebeb;
+   color: black;
+   display: flex;
+   align-items: center;
 }
 
 .btn-deletar-semestre{

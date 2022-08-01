@@ -3,7 +3,7 @@ import "./styles.css";
 
 import { MdMode, MdOutlineDelete } from "react-icons/md";
 
-import {semestres} from '../../providers/dataTest/cadastrarSemestre'
+import { semestres } from "../../providers/dataTest/cadastrarSemestre";
 
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -15,68 +15,70 @@ import TextField from "@mui/material/TextField";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function CadastroSemestre() {
-  
   const [optionCadastrarSelected, setOptionCadastrarSelected] = useState(true);
   const [optionEditarSelected, setOptionEditarSelected] = useState(false);
   const [semestreList, setSemestreList] = useState(semestres);
   const [semestre, setSemestre] = useState({
     nomeSemestre: "",
-    disciplinas: []
+    disciplinas: [],
   });
 
-  
-  const actionsBtn = (
-    <>
-      <MdMode
-        color="#0f4a8d"
-        size={18}
-        style={{ marginRight: 15, cursor: "pointer" }}
-        onClick ={editDisciplina}
-        />
-      <MdOutlineDelete
-        color="red"
-        size={18}
-        style={{ marginLeft: 15, cursor: "pointer" }}
-        onClick ={deleteDisciplina}
-      />
-    </>
-  );
-
-const theme = createTheme({
-  typography: {
-    allVariants: {
-      fontFamily: "'Oswald' , 'sans-serif'",
-     
+  const theme = createTheme({
+    typography: {
+      allVariants: {
+        fontFamily: "'Oswald' , 'sans-serif'",
+      },
     },
-  },
-});
+  });
 
-function adicionarDisciplina(){
-  console.log("adicionar disciplina...")
-}
-function editDisciplina(){
-  console.log("Editar disciplina...")
-}
-function deleteDisciplina(){
-  console.log("Deletar disciplina...")
-}
-function deleteSemestre(){
-  console.log("Deletar semestre...")
-}
-function salvarSemestre(){
-  console.log("Salvar semestre...")
-}
+  function adicionarDisciplina() {
+    console.log("adicionar disciplina...");
+  }
+  function editDisciplina() {
+    console.log("Editar disciplina...");
+  }
+
+  function deleteDisciplina(element) {
+    semestreList.map((el, index) => {
+      if (el.nomeSemestre === semestre.nomeSemestre) {
+        setSemestre({
+          ...semestre,
+          disciplinas: semestre.disciplinas.filter((e) => e !== element),
+        });
+
+        setSemestreList(
+          ...semestreList,
+        ...semestreList[index],
+        Object.values(semestreList[index].disciplinas).filter(e => e !== element)
+        );
+        // console.log(semestreList[index]);
+      }
+    });
+  }
+  function deleteSemestre() {
+    console.log("Deletar semestre...");
+  }
+  function salvarSemestre() {
+    console.log("Salvar semestre...");
+  }
 
   function toggleSelected() {
     setOptionCadastrarSelected(!optionCadastrarSelected);
     setOptionEditarSelected(!optionEditarSelected);
   }
 
-
-  const handleChangeSemestre = (event) => {
-    setSemestre(event.target.value);
-  };
-
+  function handleChangeSemestre(event) {
+    let disciplinasAux = [];
+    semestreList.map((e) => {
+      if (e.nomeSemestre === event.target.value) {
+        disciplinasAux = e.disciplinas;
+      }
+    });
+    setSemestre({
+      nomeSemestre: event.target.value,
+      disciplinas: disciplinasAux,
+    });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -105,7 +107,7 @@ function salvarSemestre(){
         {optionCadastrarSelected ? (
           <div className="cadastro-semestre-card-cadastrar">
             <span className="card-cadastrar-semestre">Novo semestre</span>
-            <Box component="form" sx={{ width: "85%"}}>
+            <Box component="form" sx={{ width: "85%" }}>
               <TextField
                 id="filled-basic"
                 label="Nome do semestre"
@@ -116,7 +118,7 @@ function salvarSemestre(){
             <span className="cadastro-semestre-informacao-cadastrar">
               Disciplinas que pertencem a este período
             </span>
-            <Box component="form" sx={{ width:"85%"}}>
+            <Box component="form" sx={{ width: "85%" }}>
               <TextField
                 id="filled-basic"
                 label="Nome da disciplina"
@@ -141,7 +143,7 @@ function salvarSemestre(){
             <span className="cadastro-semestre-span-editar">
               Editar semestres
             </span>
-            <Box sx={{ width:"85%" }} centered>
+            <Box sx={{ width: "85%" }} centered>
               <FormControl fullWidth className="cadastro-semestre">
                 <InputLabel id="selecionar-semestre-editar">
                   Semestre
@@ -149,16 +151,18 @@ function salvarSemestre(){
                 <Select
                   labelId="editar-semestre-editar"
                   id="editar semestre"
-                  value={semestre}
+                  value={semestre.nomeSemestre}
                   label="Semestre"
-                  defaultValue="2021.1"
-                  onChange={handleChangeSemestre}
+                  onChange={(event) => {
+                    handleChangeSemestre(event);
+                  }}
                 >
                   {semestreList.map((el) => {
                     return (
                       <MenuItem
                         key={el.semestreId}
                         className="cadastro-semestre-menuItem-editar"
+                        defaultValue="2021.1"
                         value={el.nomeSemestre}
                       >
                         {el.nomeSemestre}
@@ -170,20 +174,54 @@ function salvarSemestre(){
             </Box>
             <div className="cadastro-semestre-tabela-container-editar">
               <div className="cadastro-semestre-tabela-header-editar">
-                <span className="cadastro-semestre-tabela-header-span-editar">
+                <span
+                  style={{ width: "62.5%" }}
+                  className="cadastro-semestre-tabela-header-span-editar"
+                >
                   Disciplina
                 </span>
-                <span className="cadastro-semestre-tabela-header-span-editar">
+                <span
+                  style={{ width: "37.5%" }}
+                  className="cadastro-semestre-tabela-header-span-editar"
+                >
                   Ações
                 </span>
               </div>
               <div className="cadastro-semestre-tabela-body-editar">
-                <div className="cadastro-semestre-tabela-body-line-editar">
-
-                </div>
-                <div className="cadastro-semestre-tabela-body-line-editar">
-
-                </div>
+                {semestre.disciplinas.map((e) => {
+                  return (
+                    <div
+                      key={e.semestreId}
+                      className="cadastro-semestre-tabela-body-line-editar"
+                    >
+                      <span style={{ width: "69%", paddingLeft: "5px" }}>
+                        {e}
+                      </span>
+                      <span
+                        style={{
+                          width: "31%",
+                          display: "flex",
+                          justifyContent: "space-around",
+                        }}
+                      >
+                        {/* <MdMode
+                          color="#0f4a8d"
+                          size={18}
+                          style={{ marginRight: 15, cursor: "pointer" }}
+                          onClick={editDisciplina}
+                        /> */}
+                        <MdOutlineDelete
+                          color="red"
+                          size={18}
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            deleteDisciplina(e);
+                          }}
+                        />
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="cadastro-semestre-btn-actions-editar">
@@ -202,4 +240,4 @@ function salvarSemestre(){
       </div>
     </ThemeProvider>
   );
-                  }
+}
