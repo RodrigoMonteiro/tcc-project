@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 
-import { MdMode, MdOutlineDelete } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
 
 import { semestres } from "../../providers/dataTest/cadastrarSemestre";
 
@@ -15,14 +15,6 @@ import TextField from "@mui/material/TextField";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function CadastroSemestre() {
-  const [optionCadastrarSelected, setOptionCadastrarSelected] = useState(true);
-  const [optionEditarSelected, setOptionEditarSelected] = useState(false);
-  const [semestreList, setSemestreList] = useState(semestres);
-  const [semestre, setSemestre] = useState({
-    nomeSemestre: "",
-    disciplinas: [],
-  });
-
   const theme = createTheme({
     typography: {
       allVariants: {
@@ -31,38 +23,84 @@ export function CadastroSemestre() {
     },
   });
 
+  const [optionCadastrarSelected, setOptionCadastrarSelected] = useState(true);
+  const [optionEditarSelected, setOptionEditarSelected] = useState(false);
+
+  const [semestreList, setSemestreList] = useState(semestres);
+
+  const [semestre, setSemestre] = useState({
+    nomeSemestre: "",
+    disciplinas: [],
+  });
+
+  const [novoSemestre, setNovoSemestre] = useState("");
+  const [novaDisciplinaSemestre, setNovaDisciplinaSemestre] = useState("");
+
   function adicionarDisciplina() {
-    console.log("adicionar disciplina...");
-  }
-  function editDisciplina() {
-    console.log("Editar disciplina...");
+    setSemestre({
+      nomeSemestre: novoSemestre,
+      disciplinas: [...semestre.disciplinas, novaDisciplinaSemestre],
+    });
+    setNovaDisciplinaSemestre("");
+    console.log(semestre);
   }
 
   function deleteDisciplina(element) {
+
     semestreList.map((el, index) => {
       if (el.nomeSemestre === semestre.nomeSemestre) {
+        
         setSemestre({
           ...semestre,
           disciplinas: semestre.disciplinas.filter((e) => e !== element),
         });
 
-        setSemestreList(
-          ...semestreList,
-        ...semestreList[index],
-        Object.values(semestreList[index].disciplinas).filter(e => e !== element)
-        );
-        // console.log(semestreList[index]);
+        setSemestreList([
+          
+         // code here
+          
+          {
+            ...semestreList[index],
+            [Object.keys(semestreList[index])[2]]: semestre.disciplinas
+          },
+        ]);
+       
+        console.log(semestreList[index ]);
       }
     });
   }
   function deleteSemestre() {
-    console.log("Deletar semestre...");
+    console.log("deletar semestre...");
   }
   function salvarSemestre() {
-    console.log("Salvar semestre...");
+    setSemestreList(
+      semestreList,
+      semestreList.push({
+        semestreId: semestreList.length + 1,
+        ...semestre,
+        anotacoes: [],
+        tarefas: [],
+      })
+    );
+
+    setNovoSemestre("");
+    setNovaDisciplinaSemestre("");
+
+    setSemestre({
+      nomeSemestre: "",
+      disciplinas: [],
+    });
+    console.log(semestreList);
   }
 
   function toggleSelected() {
+    setNovoSemestre("");
+    setNovaDisciplinaSemestre("");
+
+    setSemestre({
+      nomeSemestre: "",
+      disciplinas: [],
+    });
     setOptionCadastrarSelected(!optionCadastrarSelected);
     setOptionEditarSelected(!optionEditarSelected);
   }
@@ -113,6 +151,10 @@ export function CadastroSemestre() {
                 label="Nome do semestre"
                 variant="filled"
                 fullWidth
+                value={novoSemestre}
+                onChange={(event) => {
+                  setNovoSemestre(event.target.value);
+                }}
               />
             </Box>
             <span className="cadastro-semestre-informacao-cadastrar">
@@ -124,6 +166,10 @@ export function CadastroSemestre() {
                 label="Nome da disciplina"
                 variant="filled"
                 fullWidth
+                value={novaDisciplinaSemestre}
+                onChange={(event) => {
+                  setNovaDisciplinaSemestre(event.target.value);
+                }}
               />
             </Box>
             <div className="cadastro-semestre-btn-actions-cadastrar">

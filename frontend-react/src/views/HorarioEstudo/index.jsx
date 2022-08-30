@@ -39,12 +39,13 @@ export function HorarioEstudo() {
   );
   const [horarioEstudoVespertinoList, setHorarioEstudoVespertinoList] =
     useState(listaHorarioEstudoVespertino);
+  
   const [horarioEstudoNoturnoList, setHorarioEstudoNoturnoList] = useState(
     listaHorarioEstudoNoturno
   );
 
   const [horarioEstudo, setHorarioEstudo] = useState({
-    horarioEstudoId: "",
+    horarioEstudoId: 0,
     horarioInicio: "",
     horarioFim: "",
     segunda: "",
@@ -115,35 +116,27 @@ export function HorarioEstudo() {
     setHorarioEstudo({ ...horarioEstudo, domingo: event.target.value });
   }
   function salvarHorario() {
+    
+    setHorarioEstudo({
+      ...horarioEstudo,
+      horarioEstudoId:
+        horarioEstudoMatutinoList.length +
+        horarioEstudoVespertinoList.length +
+        horarioEstudoNoturnoList.length +
+        1,
+    });
+
     if (turnoEstudoSelected === "Matutino") {
-      horarioEstudoMatutinoList.push({
-        ...horarioEstudo,
-        horarioEstudoId:
-          horarioEstudoMatutinoList.length +
-          horarioEstudoVespertinoList.length +
-          horarioEstudoNoturnoList.length+1
-      });
+      horarioEstudoMatutinoList.push(horarioEstudo)
     } else if (turnoEstudoSelected === "Vespertino") {
-      horarioEstudoVespertinoList.push({
-        ...horarioEstudo,
-        horarioEstudoId:
-          horarioEstudoMatutinoList.length +
-          horarioEstudoVespertinoList.length +
-          horarioEstudoNoturnoList.length+1
-      });
+      horarioEstudoVespertinoList.push(horarioEstudo);
     } else {
-      horarioEstudoNoturnoList.push({
-        ...horarioEstudo,
-        horarioEstudoId:
-          horarioEstudoMatutinoList.length +
-          horarioEstudoVespertinoList.length +
-          horarioEstudoNoturnoList.length+1
-      });
+      horarioEstudoNoturnoList.push(horarioEstudo);
     }
   }
   function resetHorarioEstudoData() {
     setHorarioEstudo({
-      horarioEstudoId: "",
+      horarioEstudoId: 0,
       horarioInicio: "",
       horarioFim: "",
       segunda: "",
@@ -238,9 +231,7 @@ export function HorarioEstudo() {
           </div>
         </div>
         <div className="horario-estudo-tabela-container">
-          <div
-            className={`horario-estudo-tabela-header-container`}
-          >
+          <div className={`horario-estudo-tabela-header-container`}>
             {isFimSemana === "Sim" ? (
               <>
                 <div className="horario-estudo-tabela-header-horario">
@@ -291,9 +282,11 @@ export function HorarioEstudo() {
               </>
             )}
           </div>
-          <div className={`horario-estudo-tabela-container ${
+          <div
+            className={`horario-estudo-tabela-container ${
               acaoEstudoSelected === "Visualizar" ? "visualizar-mode" : ""
-            }`}>
+            }`}
+          >
             {turnoEstudoSelected === "Matutino"
               ? horarioEstudoMatutinoList.map((el) => {
                   return (
@@ -305,28 +298,183 @@ export function HorarioEstudo() {
                         <span>{`${el.horarioInicio} - ${el.horarioFim}`}</span>
                       </div>
                       <div className="anotacoes-tabela-body-segunda">
-                        <span>{el.segunda}</span>
+                        <input
+                          className="anotacoes-tabela-body-input"
+                          type="text"
+                          value={el.segunda}
+                          onChange={(event) => {
+                            horarioEstudoMatutinoList.map((e, index) => {
+                              if (e.horarioEstudoId === el.horarioEstudoId) {
+
+                               if(horarioEstudoMatutinoList.length <= 1){
+                                 setHorarioEstudoMatutinoList([
+                                   {
+                                     ...horarioEstudoMatutinoList[index],
+                                     [Object.keys(
+                                       horarioEstudoMatutinoList[index]
+                                     )[3]]: event.target.value,
+                                   },
+                                 ]);
+                               } else {
+                                setHorarioEstudoMatutinoList([
+                                  ...horarioEstudoMatutinoList,
+                                  {
+                                    ...horarioEstudoMatutinoList[index],
+                                    [Object.keys(
+                                      horarioEstudoMatutinoList[index]
+                                    )[3]]: event.target.value,
+                                  },
+                                ]);
+                               }
+                                    
+                                  console.log(
+                                    
+                                      horarioEstudoMatutinoList
+                                    
+                                  );
+                              }
+                            });
+                          }}
+                        />
                       </div>
                       <div className="anotacoes-tabela-body-terca">
-                        <span>{el.terca}</span>
+                        <input
+                          className="anotacoes-tabela-body-input"
+                          type="text"
+                          value={el.terca}
+                          onChange={(event) => {
+                            horarioEstudoMatutinoList.map((e, index) => {
+                              if (e.horarioEstudoId === el.horarioEstudoId) {
+                                setHorarioEstudoMatutinoList([
+                                  {
+                                    ...horarioEstudoMatutinoList[index],
+                                    [Object.keys(
+                                      horarioEstudoMatutinoList[index]
+                                    )[4]]: event.target.value,
+                                  },
+                                ]);
+                              }
+                              // console.log(horarioEstudoMatutinoList)
+                            });
+                          }}
+                        />
                       </div>
                       <div className="anotacoes-tabela-body-quarta">
-                        <span>{el.quarta}</span>
+                        <input
+                          className="anotacoes-tabela-body-input"
+                          type="text"
+                          value={el.quarta}
+                          onChange={(event) => {
+                            horarioEstudoMatutinoList.map((e, index) => {
+                              if (e.horarioEstudoId === el.horarioEstudoId) {
+                                setHorarioEstudoMatutinoList([
+                                  {
+                                    ...horarioEstudoMatutinoList[index],
+                                    [Object.keys(
+                                      horarioEstudoMatutinoList[index]
+                                    )[5]]: event.target.value,
+                                  },
+                                ]);
+                              }
+                              // console.log(horarioEstudoMatutinoList)
+                            });
+                          }}
+                        />
                       </div>
                       <div className="anotacoes-tabela-body-quinta">
-                        <span>{el.quinta}</span>
+                        <input
+                          className="anotacoes-tabela-body-input"
+                          type="text"
+                          value={el.quinta}
+                          onChange={(event) => {
+                            horarioEstudoMatutinoList.map((e, index) => {
+                              if (e.horarioEstudoId === el.horarioEstudoId) {
+                                setHorarioEstudoMatutinoList([
+                                  {
+                                    ...horarioEstudoMatutinoList[index],
+                                    [Object.keys(
+                                      horarioEstudoMatutinoList[index]
+                                    )[6]]: event.target.value,
+                                  },
+                                ]);
+                              }
+                              // console.log(horarioEstudoMatutinoList)
+                            });
+                          }}
+                        />
                       </div>
                       <div className="anotacoes-tabela-body-sexta">
-                        <span>{el.sexta}</span>
+                        <input
+                          className="anotacoes-tabela-body-input"
+                          type="text"
+                          value={el.sexta}
+                          onChange={(event) => {
+                            horarioEstudoMatutinoList.map((e, index) => {
+                              if (e.horarioEstudoId === el.horarioEstudoId) {
+                                setHorarioEstudoMatutinoList([
+                                  {
+                                    ...horarioEstudoMatutinoList[index],
+                                    [Object.keys(
+                                      horarioEstudoMatutinoList[index]
+                                    )[7]]: event.target.value,
+                                  },
+                                ]);
+                              }
+                              // console.log(horarioEstudoMatutinoList)
+                            });
+                          }}
+                        />
                       </div>
 
                       {isFimSemana === "Sim" ? (
                         <>
                           <div className="anotacoes-tabela-body-sabado">
-                            <span>{el.sabado}</span>
+                            <input
+                              className="anotacoes-tabela-body-input"
+                              type="text"
+                              value={el.sabado}
+                              onChange={(event) => {
+                                horarioEstudoMatutinoList.map((e, index) => {
+                                  if (
+                                    e.horarioEstudoId === el.horarioEstudoId
+                                  ) {
+                                    setHorarioEstudoMatutinoList([
+                                      {
+                                        ...horarioEstudoMatutinoList[index],
+                                        [Object.keys(
+                                          horarioEstudoMatutinoList[index]
+                                        )[8]]: event.target.value,
+                                      },
+                                    ]);
+                                  }
+                                  // console.log(horarioEstudoMatutinoList)
+                                });
+                              }}
+                            />
                           </div>
                           <div className="anotacoes-tabela-body-domingo">
-                            <span>{el.domingo}</span>
+                            <input
+                              className="anotacoes-tabela-body-input"
+                              type="text"
+                              value={el.domingo}
+                              onChange={(event) => {
+                                horarioEstudoMatutinoList.map((e, index) => {
+                                  if (
+                                    e.horarioEstudoId === el.horarioEstudoId
+                                  ) {
+                                    setHorarioEstudoMatutinoList([
+                                      {
+                                        ...horarioEstudoMatutinoList[index],
+                                        [Object.keys(
+                                          horarioEstudoMatutinoList[index]
+                                        )[9]]: event.target.value,
+                                      },
+                                    ]);
+                                  }
+                                  console.log(horarioEstudoMatutinoList);
+                                });
+                              }}
+                            />
                           </div>
                         </>
                       ) : (

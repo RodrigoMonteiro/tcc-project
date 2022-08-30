@@ -30,6 +30,8 @@ span{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 5%;
+    margin-top: 2%;
 }
 .home-form-header-new-account > img{
     height: 70%;

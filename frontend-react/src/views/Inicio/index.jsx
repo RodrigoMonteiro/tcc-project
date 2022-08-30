@@ -69,8 +69,7 @@ export  function Inicio() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography className="accordion-content">
-              É necessário primeiramente cadastrar um semestre, assim podemos
-              associar disciplinas a esse semestre.
+             Esta aplicação tem como objetivo auxiliar estudantes universitarios em suas atividades acadêmicas, trazendo uma maior .... 
             </Typography>
           </AccordionDetails>
         </Accordion>

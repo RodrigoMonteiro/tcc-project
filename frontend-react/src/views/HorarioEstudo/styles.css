@@ -129,6 +129,16 @@ opacity: 0.95;
     white-space: nowrap;
 }
 
+.anotacoes-tabela-body-input{
+    height: 95%;
+    width: 95%;
+    border-style: none;
+    font-size: 1.05rem;
+    padding-left: 5px;
+    overflow-x: hidden;
+    white-space: nowrap;;
+}
+
 .visualizar-mode{
   pointer-events:none;
 }
