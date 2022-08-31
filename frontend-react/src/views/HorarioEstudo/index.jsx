@@ -27,6 +27,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useState } from "react";
 
 export function HorarioEstudo() {
+  
   const [isFimSemana, setIsFimSemana] = useState("Nao");
   const [turnoEstudoSelected, setIsTurnoEstudoSelected] = useState("Matutino");
   const [semestreEstudoSelected, setSemestreEstudoSelected] =

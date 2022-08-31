@@ -14,16 +14,15 @@
     animation: views-container-opened-navbar;
     animation-duration: 0.75s;
     animation-fill-mode: forwards;
-    background-color: #c4c4c4;
-    color: white;
+    
 }
 
 .views-container-navbar-opened{
     animation: views-container-closed-navbar;
     animation-duration: 0.75s;
     animation-fill-mode: forwards;
-    color: white;
-    background-color: #c4c4c4;
+    
+ 
 }
 
 @keyframes views-container-closed-navbar {

@@ -5,13 +5,21 @@ import { Switch } from "../Switch";
 import { FaUserAlt } from "react-icons/fa";
 import { Select } from "../Select/index";
 
-export function Header(props) {
-  const { globalProps } = useContext(GlobalContext);
+export function Header() {
+
+  const {globalProps, setGlobalProps} = useContext(GlobalContext)
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   function toggleSelect() {
     setIsSelectOpen(!isSelectOpen);
     console.log(isSelectOpen);
+  }
+
+  function toggleTheme(){
+    setGlobalProps({
+      ...globalProps,
+       isLightTheme: !globalProps.isLightTheme
+    })
   }
   
 
@@ -22,9 +30,9 @@ export function Header(props) {
       </span>
       <Switch
         rounded={true}
-        isToggled={props.isLight}
         onToggle={() => {
-          props.changeTheme();
+
+          toggleTheme();
         }}
       ></Switch>
       <div className="header-btn">

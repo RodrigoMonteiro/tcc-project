@@ -189,7 +189,7 @@ export function CadastroSemestre() {
             <span className="cadastro-semestre-span-editar">
               Editar semestres
             </span>
-            <Box sx={{ width: "85%" }} centered>
+            <Box sx={{ width: "90%" }} centered>
               <FormControl fullWidth className="cadastro-semestre">
                 <InputLabel id="selecionar-semestre-editar">
                   Semestre

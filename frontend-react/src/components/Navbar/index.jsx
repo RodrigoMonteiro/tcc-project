@@ -8,8 +8,10 @@ import { GlobalContext } from "../../providers/globalProps";
 import "./styles.css";
 
 export function Navbar() {
+
   const { globalProps, setGlobalProps } = useContext(GlobalContext);
   const [nameSelectedItem, setNameSelectedItem] = useState("Início");
+  
   function toggleOpen() {
     setGlobalProps({...globalProps , isNavbarOpen: !globalProps.isNavbarOpen})
   }

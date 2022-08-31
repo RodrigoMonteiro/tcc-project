@@ -23,6 +23,7 @@ export function Views() {
       }`}
     >
       <Routes>
+        <Route path="/" element={<Inicio />}></Route>
         <Route path="/Inicio" element={<Inicio />}></Route>
         <Route path="/CadastroSemestre" element={<CadastroSemestre />}></Route>
         <Route path="/HorarioSemestre" element={<HorarioSemestre />}></Route>

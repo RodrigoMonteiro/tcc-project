@@ -14,19 +14,16 @@ import { Views } from "./views";
 import { Home } from "./views/Home";
 
 function App() {
-  const [isLightTheme, setIsLightTheme] = useState(true);
+  
   const { globalProps } = useContext(GlobalContext);
 
-  function toggleTheme() {
-    setIsLightTheme(!isLightTheme);
-  }
   return (
     <BrowserRouter>
-      <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
+      <ThemeProvider theme={globalProps.isLightTheme ? lightTheme : darkTheme}>
         <div className="App-container">
           {globalProps.isLogged && globalProps.hasAccount ? (
             <>
-              <Header isLight={isLightTheme} changeTheme={toggleTheme}></Header>
+              <Header></Header>
               <Navbar></Navbar>
               <Views></Views>
             </>

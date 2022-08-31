@@ -7,7 +7,8 @@ export const GlobalProvider = (props) => {
         titleName: "Início",
         isNavbarOpen: false,
         isLogged: false,
-        hasAccount: true
+        hasAccount: true,
+        isLightTheme: true,
     })
   
   return ( 

@@ -8,6 +8,7 @@ export default createGlobalStyle`
     outline:0;
     box-sizing: border-box;
     font-family: 'Oswald' , sans-serif;
+    
 
 }
 html , body , :root{
@@ -15,8 +16,22 @@ html , body , :root{
 }
 
 body{
-    background-color: ${(props) => props.theme.colors.background};
-    color:  ${(props) => props.theme.colors.text}
+    background-color: ${(props) => props.theme.colors.background} ;
+    color:  ${(props) => props.theme.colors.text};
 }
+
+h1{
+    color:  ${(props) => props.theme.colors.text};
+    font-size: 2rem;
+    font-weight:semi-bold;
+}
+h2{
+    color:  ${(props) => props.theme.colors.title};
+    font-size: 1.75rem;
+}
+h3, h4{
+    font-weight:normal;
+}
+
 
 `;
