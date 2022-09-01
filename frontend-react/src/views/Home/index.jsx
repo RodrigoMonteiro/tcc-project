@@ -60,8 +60,12 @@ export function Home() {
       <div className="home-container">
         <div className="home-form-container">
           <div className="home-form-header">
-            <img  style={{width: "32%", height: "58%"}}src="assets/logo.png" alt="Logo over here" />
-            <h2>Otimize seu tempo</h2>
+            <img
+              style={{ width: "32%", height: "58%" }}
+              src="assets/logo.png"
+              alt="Logo over here"
+            />
+            <h2 style={{ color: "#0f4a8d" }}>Otimize seu tempo</h2>
           </div>
           <div className="home-form-body">
             <Box component="form" sx={{ width: "100%" }}>
@@ -99,11 +103,14 @@ export function Home() {
                 label="Password"
               />
             </FormControl>
-              <button className="home-form-body-btn" onClick={login}>
-            <Link to="inicio" style={{ textDecoration: 'none', color: 'white'}}>
+            <button className="home-form-body-btn" onClick={login}>
+              <Link
+                to="inicio"
+                style={{ textDecoration: "none", color: "white" }}
+              >
                 Entrar
-            </Link>
-              </button>
+              </Link>
+            </button>
             <span className="cadastrar">
               Não possui conta? Se cadastre{" "}
               <span

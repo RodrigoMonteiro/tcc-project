@@ -6,6 +6,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.1rem;
+    letter-spacing: 0.04rem;
 }
 span{
     font-size: 1.05rem;
@@ -51,8 +53,9 @@ span{
     
 }
 .home-form-body-btn{
-    width: 30%;
-    height: 10%;
+
+     width: 45%;
+    height: 12%;
     align-self: center;
     border-radius: 7px;
     border-style: none;
@@ -60,6 +63,7 @@ span{
     color: white;
     font-size: 1.1rem;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .home-form-body-btn:hover{

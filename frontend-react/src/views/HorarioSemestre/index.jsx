@@ -4,7 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
@@ -12,6 +12,7 @@ import {
   horarioSemestreVespertino,
   horarioSemestreNoturno,
 } from "../../providers/dataTest/horarioSemestre";
+import { GlobalContext } from "../../providers/globalProps";
 
 export function HorarioSemestre() {
 
@@ -25,13 +26,15 @@ export function HorarioSemestre() {
     useState(horarioSemestreVespertino);
   const [horarioSemestreNoturnoList, setHorarioSemestreNoturnoList] = useState(
     horarioSemestreNoturno
-  );
-
+  )
+ const { globalProps } = useContext(GlobalContext);
   const theme = createTheme({
     typography: {
       allVariants: {
         fontFamily: "'Oswald' , 'sans-serif'",
-      },
+        color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+        letterSpacing: "0.04rem"
+      }
     },
   });
 
@@ -53,6 +56,9 @@ export function HorarioSemestre() {
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Semestre</InputLabel>
               <Select
+                sx={{
+                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+                }}
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={semestreSelected}
@@ -60,17 +66,28 @@ export function HorarioSemestre() {
                 onChange={handleChangeSemestre}
                 defaultValue="2021.1"
               >
-                <MenuItem value={"2021.1"}>2021.1</MenuItem>
-                <MenuItem value={"2021.2"}>2021.2</MenuItem>
-                <MenuItem value={"2022.1"}>2022.1</MenuItem>
-                <MenuItem value={"2022.2"}>2022.2</MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2021.1"}>
+                  2021.1
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2021.2"}>
+                  2021.2
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2022.1"}>
+                  2022.1
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2022.2"}>
+                  2022.2
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
           <Box sx={{ minWidth: 180 }}>
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{}}>
               <InputLabel id="demo-select-small">Turno</InputLabel>
               <Select
+                sx={{
+                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+                }}
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={turnoSelected}
@@ -88,6 +105,9 @@ export function HorarioSemestre() {
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Ação</InputLabel>
               <Select
+                sx={{
+                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+                }}
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={acaoSelected}
@@ -196,9 +216,9 @@ export function HorarioSemestre() {
                             type="text"
                             placeholder={e}
                             value={
-                              Object.values(
-                                horarioSemestreMatutinoList.terca
-                              )[index]
+                              Object.values(horarioSemestreMatutinoList.terca)[
+                                index
+                              ]
                             }
                             onChange={(event) => {
                               setHorarioSemestreMatutinoList({
@@ -230,9 +250,9 @@ export function HorarioSemestre() {
                             type="text"
                             placeholder={e}
                             value={
-                              Object.values(
-                                horarioSemestreMatutinoList.quarta
-                              )[index]
+                              Object.values(horarioSemestreMatutinoList.quarta)[
+                                index
+                              ]
                             }
                             onChange={(event) => {
                               setHorarioSemestreMatutinoList({
@@ -265,9 +285,9 @@ export function HorarioSemestre() {
                             type="text"
                             placeholder={e}
                             value={
-                              Object.values(
-                                horarioSemestreMatutinoList.quinta
-                              )[index]
+                              Object.values(horarioSemestreMatutinoList.quinta)[
+                                index
+                              ]
                             }
                             onChange={(event) => {
                               setHorarioSemestreMatutinoList({
@@ -300,9 +320,9 @@ export function HorarioSemestre() {
                             type="text"
                             placeholder={e}
                             value={
-                              Object.values(
-                                horarioSemestreMatutinoList.sexta
-                              )[index]
+                              Object.values(horarioSemestreMatutinoList.sexta)[
+                                index
+                              ]
                             }
                             onChange={(event) => {
                               setHorarioSemestreMatutinoList({
@@ -317,8 +337,8 @@ export function HorarioSemestre() {
                                   )[index]]: event.target.value,
                                 },
                               });
-                              
-                              console.log(horarioSemestreMatutinoList)
+
+                              console.log(horarioSemestreMatutinoList);
                             }}
                           />
                         </div>
@@ -360,9 +380,9 @@ export function HorarioSemestre() {
                             type="text"
                             placeholder={e}
                             value={
-                              Object.values(horarioSemestreVespertinoList.segunda)[
-                                index
-                              ]
+                              Object.values(
+                                horarioSemestreVespertinoList.segunda
+                              )[index]
                             }
                             onChange={(event) => {
                               setHorarioSemestreVespertinoList({
@@ -555,7 +575,7 @@ export function HorarioSemestre() {
 
                 <div className="horario-semestre-tabela-segunda">
                   {Object.values(horarioSemestreNoturnoList.segunda).map(
-                    (e,index) => {
+                    (e, index) => {
                       return (
                         <div className="horario-semestre-tabela-segunda-body">
                           <input
@@ -563,9 +583,9 @@ export function HorarioSemestre() {
                             type="text"
                             placeholder={e}
                             value={
-                              Object.values(
-                                horarioSemestreNoturnoList.segunda
-                              )[index]
+                              Object.values(horarioSemestreNoturnoList.segunda)[
+                                index
+                              ]
                             }
                             onChange={(event) => {
                               setHorarioSemestreNoturnoList({
@@ -589,127 +609,143 @@ export function HorarioSemestre() {
                 </div>
 
                 <div className="horario-semestre-tabela-terca">
-                  {Object.values(horarioSemestreNoturnoList.terca).map((e, index) => {
-                    return (
-                      <div className="horario-semestre-tabela-segunda-body">
-                        <input
-                          className="horario-semestre-field"
-                          type="text"
-                          placeholder={e}
-                          value={
-                            Object.values(horarioSemestreNoturnoList.terca)[
-                              index
-                            ]
-                          }
-                          onChange={(event) => {
-                            setHorarioSemestreNoturnoList({
-                              ...horarioSemestreNoturnoList,
+                  {Object.values(horarioSemestreNoturnoList.terca).map(
+                    (e, index) => {
+                      return (
+                        <div className="horario-semestre-tabela-segunda-body">
+                          <input
+                            className="horario-semestre-field"
+                            type="text"
+                            placeholder={e}
+                            value={
+                              Object.values(horarioSemestreNoturnoList.terca)[
+                                index
+                              ]
+                            }
+                            onChange={(event) => {
+                              setHorarioSemestreNoturnoList({
+                                ...horarioSemestreNoturnoList,
 
-                              [Object.keys(horarioSemestreNoturnoList)[1]]: {
-                                ...Object.values(horarioSemestreNoturnoList)[1],
-                                [Object.keys(horarioSemestreNoturnoList.terca)[
-                                  index
-                                ]]: event.target.value,
-                              },
-                            });
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
+                                [Object.keys(horarioSemestreNoturnoList)[1]]: {
+                                  ...Object.values(
+                                    horarioSemestreNoturnoList
+                                  )[1],
+                                  [Object.keys(
+                                    horarioSemestreNoturnoList.terca
+                                  )[index]]: event.target.value,
+                                },
+                              });
+                            }}
+                          />
+                        </div>
+                      );
+                    }
+                  )}
                 </div>
                 <div className="horario-semestre-tabela-quarta">
-                  {Object.values(horarioSemestreNoturnoList.quarta).map((e, index) => {
-                    return (
-                      <div className="horario-semestre-tabela-quarta-body">
-                        <input
-                          className="horario-semestre-field"
-                          type="text"
-                          placeholder={e}
-                          value={
-                            Object.values(horarioSemestreNoturnoList.quarta)[
-                              index
-                            ]
-                          }
-                          onChange={(event) => {
-                            setHorarioSemestreNoturnoList({
-                              ...horarioSemestreNoturnoList,
+                  {Object.values(horarioSemestreNoturnoList.quarta).map(
+                    (e, index) => {
+                      return (
+                        <div className="horario-semestre-tabela-quarta-body">
+                          <input
+                            className="horario-semestre-field"
+                            type="text"
+                            placeholder={e}
+                            value={
+                              Object.values(horarioSemestreNoturnoList.quarta)[
+                                index
+                              ]
+                            }
+                            onChange={(event) => {
+                              setHorarioSemestreNoturnoList({
+                                ...horarioSemestreNoturnoList,
 
-                              [Object.keys(horarioSemestreNoturnoList)[2]]: {
-                                ...Object.values(horarioSemestreNoturnoList)[2],
-                                [Object.keys(horarioSemestreNoturnoList.quarta)[
-                                  index
-                                ]]: event.target.value,
-                              },
-                            });
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
+                                [Object.keys(horarioSemestreNoturnoList)[2]]: {
+                                  ...Object.values(
+                                    horarioSemestreNoturnoList
+                                  )[2],
+                                  [Object.keys(
+                                    horarioSemestreNoturnoList.quarta
+                                  )[index]]: event.target.value,
+                                },
+                              });
+                            }}
+                          />
+                        </div>
+                      );
+                    }
+                  )}
                 </div>
 
                 <div className="horario-semestre-tabela-quinta">
-                  {Object.values(horarioSemestreNoturnoList.quinta).map((e, index) => {
-                    return (
-                      <div className="horario-semestre-tabela-quinta-body">
-                        <input
-                          className="horario-semestre-field"
-                          type="text"
-                          placeholder={e}
-                          value={
-                            Object.values(horarioSemestreNoturnoList.quinta)[
-                              index
-                            ]
-                          }
-                          onChange={(event) => {
-                            setHorarioSemestreNoturnoList({
-                              ...horarioSemestreNoturnoList,
+                  {Object.values(horarioSemestreNoturnoList.quinta).map(
+                    (e, index) => {
+                      return (
+                        <div className="horario-semestre-tabela-quinta-body">
+                          <input
+                            className="horario-semestre-field"
+                            type="text"
+                            placeholder={e}
+                            value={
+                              Object.values(horarioSemestreNoturnoList.quinta)[
+                                index
+                              ]
+                            }
+                            onChange={(event) => {
+                              setHorarioSemestreNoturnoList({
+                                ...horarioSemestreNoturnoList,
 
-                              [Object.keys(horarioSemestreNoturnoList)[3]]: {
-                                ...Object.values(horarioSemestreNoturnoList)[3],
-                                [Object.keys(horarioSemestreNoturnoList.quinta)[
-                                  index
-                                ]]: event.target.value,
-                              },
-                            });
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
+                                [Object.keys(horarioSemestreNoturnoList)[3]]: {
+                                  ...Object.values(
+                                    horarioSemestreNoturnoList
+                                  )[3],
+                                  [Object.keys(
+                                    horarioSemestreNoturnoList.quinta
+                                  )[index]]: event.target.value,
+                                },
+                              });
+                            }}
+                          />
+                        </div>
+                      );
+                    }
+                  )}
                 </div>
 
                 <div className="horario-semestre-tabela-sexta">
-                  {Object.values(horarioSemestreNoturnoList.sexta).map((e, index) => {
-                    return (
-                      <div className="horario-semestre-tabela-sexta-body">
-                        <input
-                          className="horario-semestre-field"
-                          type="text"
-                          placeholder={e}
-                          value={
-                            Object.values(horarioSemestreNoturnoList.sexta)[
-                              index
-                            ]
-                          }
-                          onChange={(event) => {
-                            setHorarioSemestreNoturnoList({
-                              ...horarioSemestreNoturnoList,
+                  {Object.values(horarioSemestreNoturnoList.sexta).map(
+                    (e, index) => {
+                      return (
+                        <div className="horario-semestre-tabela-sexta-body">
+                          <input
+                            className="horario-semestre-field"
+                            type="text"
+                            placeholder={e}
+                            value={
+                              Object.values(horarioSemestreNoturnoList.sexta)[
+                                index
+                              ]
+                            }
+                            onChange={(event) => {
+                              setHorarioSemestreNoturnoList({
+                                ...horarioSemestreNoturnoList,
 
-                              [Object.keys(horarioSemestreNoturnoList)[4]]: {
-                                ...Object.values(horarioSemestreNoturnoList)[4],
-                                [Object.keys(horarioSemestreNoturnoList.sexta)[
-                                  index
-                                ]]: event.target.value,
-                              },
-                            });
-                            console.log(horarioSemestreNoturnoList);
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
+                                [Object.keys(horarioSemestreNoturnoList)[4]]: {
+                                  ...Object.values(
+                                    horarioSemestreNoturnoList
+                                  )[4],
+                                  [Object.keys(
+                                    horarioSemestreNoturnoList.sexta
+                                  )[index]]: event.target.value,
+                                },
+                              });
+                              console.log(horarioSemestreNoturnoList);
+                            }}
+                          />
+                        </div>
+                      );
+                    }
+                  )}
                 </div>
               </>
             ) : (

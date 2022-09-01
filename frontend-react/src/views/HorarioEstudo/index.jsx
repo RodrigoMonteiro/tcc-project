@@ -9,7 +9,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
-
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -23,8 +22,8 @@ import {
 } from "../../providers/dataTest/horarioEstudo";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-import { useState } from "react";
+import {GlobalContext} from '../../providers/globalProps'
+import { useState, useContext } from "react";
 
 export function HorarioEstudo() {
   
@@ -58,10 +57,14 @@ export function HorarioEstudo() {
     domingo: "",
   });
 
-  const theme = createTheme({
+const {globalProps} = useContext(GlobalContext)
+  
+const theme = createTheme({
     typography: {
       allVariants: {
         fontFamily: "'Oswald' , 'sans-serif'",
+        color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+        letterSpacing: "0.04rem",
       },
     },
   });
@@ -158,6 +161,9 @@ export function HorarioEstudo() {
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Semestre</InputLabel>
               <Select
+                sx={{
+                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+                }}
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={semestreEstudoSelected}
@@ -165,10 +171,18 @@ export function HorarioEstudo() {
                 onChange={handleChangeSemestreEstudo}
                 defaultValue="2021.1"
               >
-                <MenuItem value={"2021.1"}>2021.1</MenuItem>
-                <MenuItem value={"2021.2"}>2021.2</MenuItem>
-                <MenuItem value={"2022.1"}>2022.1</MenuItem>
-                <MenuItem value={"2022.2"}>2022.2</MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2021.1"}>
+                  2021.1
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2021.2"}>
+                  2021.2
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2022.1"}>
+                  2022.1
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2022.2"}>
+                  2022.2
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -176,6 +190,9 @@ export function HorarioEstudo() {
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Turno</InputLabel>
               <Select
+                sx={{
+                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+                }}
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={turnoEstudoSelected}
@@ -183,9 +200,15 @@ export function HorarioEstudo() {
                 onChange={handleChangeTurnoEstudo}
                 defaultValue="Matutino"
               >
-                <MenuItem value={"Matutino"}>Matutino</MenuItem>
-                <MenuItem value={"Vespertino"}>Vespertino</MenuItem>
-                <MenuItem value={"Noturno"}>Noturno</MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"Matutino"}>
+                  Matutino
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"Vespertino"}>
+                  Vespertino
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"Noturno"}>
+                  Noturno
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -193,6 +216,9 @@ export function HorarioEstudo() {
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Ação</InputLabel>
               <Select
+                sx={{
+                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+                }}
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={acaoEstudoSelected}
@@ -200,8 +226,12 @@ export function HorarioEstudo() {
                 onChange={handleChangeAcaoEstudo}
                 defaultValue="Visualizar"
               >
-                <MenuItem value={"Visualizar"}>Visualizar</MenuItem>
-                <MenuItem value={"Editar"}>Editar</MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"Visualizar"}>
+                  Visualizar
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"Editar"}>
+                  Editar
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -306,33 +336,28 @@ export function HorarioEstudo() {
                           onChange={(event) => {
                             horarioEstudoMatutinoList.map((e, index) => {
                               if (e.horarioEstudoId === el.horarioEstudoId) {
+                                if (horarioEstudoMatutinoList.length <= 1) {
+                                  setHorarioEstudoMatutinoList([
+                                    {
+                                      ...horarioEstudoMatutinoList[index],
+                                      [Object.keys(
+                                        horarioEstudoMatutinoList[index]
+                                      )[3]]: event.target.value,
+                                    },
+                                  ]);
+                                } else {
+                                  setHorarioEstudoMatutinoList([
+                                    ...horarioEstudoMatutinoList,
+                                    {
+                                      ...horarioEstudoMatutinoList[index],
+                                      [Object.keys(
+                                        horarioEstudoMatutinoList[index]
+                                      )[3]]: event.target.value,
+                                    },
+                                  ]);
+                                }
 
-                               if(horarioEstudoMatutinoList.length <= 1){
-                                 setHorarioEstudoMatutinoList([
-                                   {
-                                     ...horarioEstudoMatutinoList[index],
-                                     [Object.keys(
-                                       horarioEstudoMatutinoList[index]
-                                     )[3]]: event.target.value,
-                                   },
-                                 ]);
-                               } else {
-                                setHorarioEstudoMatutinoList([
-                                  ...horarioEstudoMatutinoList,
-                                  {
-                                    ...horarioEstudoMatutinoList[index],
-                                    [Object.keys(
-                                      horarioEstudoMatutinoList[index]
-                                    )[3]]: event.target.value,
-                                  },
-                                ]);
-                               }
-                                    
-                                  console.log(
-                                    
-                                      horarioEstudoMatutinoList
-                                    
-                                  );
+                                console.log(horarioEstudoMatutinoList);
                               }
                             });
                           }}
@@ -574,7 +599,7 @@ export function HorarioEstudo() {
             open={openDialogHorarioEstudo}
             onClose={handleCloseHorarioEstudo}
           >
-            <DialogTitle>Criar novo horário de estudo</DialogTitle>
+            <DialogTitle sx={{color:"#0f4a8d"}}>Criar novo horário de estudo</DialogTitle>
 
             <DialogContent>
               <Box sx={{ minWidth: 180, mt: 2 }}>
@@ -695,13 +720,13 @@ export function HorarioEstudo() {
 
             <DialogActions>
               <button
-                className="btn-dialog-close"
+                className="horarioEstudo-btn-dialog-close"
                 onClick={handleCloseHorarioEstudo}
               >
                 Cancelar
               </button>
               <button
-                className="btn-dialog-submit"
+                className="horarioEstudo-btn-dialog-submit"
                 onClick={() => {
                   salvarHorario();
                   resetHorarioEstudoData();
@@ -979,13 +1004,13 @@ export function HorarioEstudo() {
 
             <DialogActions>
               <button
-                className="btn-dialog-close"
+                className="horarioEstudo-btn-dialog-close"
                 onClick={handleCloseHorarioEstudo}
               >
                 Cancelar
               </button>
               <button
-                className="btn-dialog-submit"
+                className="horarioEstudo-btn-dialog-submit"
                 onClick={() => {
                   salvarHorario();
                   resetHorarioEstudoData();

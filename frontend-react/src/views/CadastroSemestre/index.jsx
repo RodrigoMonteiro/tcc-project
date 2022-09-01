@@ -177,7 +177,7 @@ export function CadastroSemestre() {
                 className="btn-adicionar-semestre-cadastrar"
                 onClick={adicionarDisciplina}
               >
-                Adicionar disciplina
+                + Adicionar disciplina
               </button>
               <button className="btn-salvar-cadastrar" onClick={salvarSemestre}>
                 Salvar Semestre

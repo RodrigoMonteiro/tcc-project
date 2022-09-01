@@ -1,6 +1,6 @@
 //NOSONAR
 import "./styles.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   MdRemoveRedEye,
   MdMode,
@@ -21,6 +21,7 @@ import {
 import Box from "@mui/material/Box";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { GlobalContext } from "../../providers/globalProps";
 
 export function Tarefas() {
   const [tarefasPendentesList, setTarefasPendentesList] = useState(
@@ -53,11 +54,13 @@ export function Tarefas() {
     tarefaCriadoEm: "",
     tarefaFinalizadoEm: "",
   });
-
+ const {globalProps} = useContext(GlobalContext)
   const theme = createTheme({
     typography: {
       allVariants: {
         fontFamily: "'Oswald' , 'sans-serif'",
+        color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+        letterSpacing: "0.04rem",
       },
     },
   });
@@ -342,7 +345,7 @@ export function Tarefas() {
           <>
             <div className="criar-tarefas-container">
               <div className="criar-tarefas-card-container">
-                <span style={{ marginTop: "2%", color: "#0f4a8d" }}>
+                <span style={{ marginTop: "2%", color: "#1976d2" }}>
                   {" "}
                   Criar uma nova tarefa
                 </span>
@@ -362,11 +365,11 @@ export function Tarefas() {
                     variant="outlined"
                     value={tarefaPendente.tarefaDescricao}
                     onChange={handleDescricaoTarefaPendente}
-                  />
+                    />
                   <TextField
                     sx={{
                       width: "100%",
-                      mt: 3,
+                      marginTop: "15%",
                     }}
                     id="outlined-basic"
                     label="Pertence a disciplina"
@@ -397,7 +400,9 @@ export function Tarefas() {
         open={openDialogVisualizarTarefa}
         onClose={handleCloseVisualizarTarefa}
       >
-        <DialogTitle>Visualização da tarefa pendente</DialogTitle>
+        <DialogTitle sx={{ color: "#0f4a8d" }}>
+          Visualização da tarefa pendente
+        </DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -421,7 +426,7 @@ export function Tarefas() {
         </DialogContent>
         <DialogActions>
           <button
-            className="btn-dialog-close"
+            className="tarefas-btn-dialog-close"
             onClick={handleCloseVisualizarTarefa}
           >
             Sair
@@ -434,7 +439,7 @@ export function Tarefas() {
         open={openDialogEditarTarefa}
         onClose={handleCloseEditarTarefa}
       >
-        <DialogTitle>Editar tarefa</DialogTitle>
+        <DialogTitle sx={{ color: "#0f4a8d" }}>Editar tarefa</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -458,13 +463,13 @@ export function Tarefas() {
         </DialogContent>
         <DialogActions>
           <button
-            className="btn-dialog-close"
+            className="tarefas-btn-dialog-close"
             onClick={handleCloseEditarTarefa}
           >
             Sair
           </button>
           <button
-            className="btn-dialog-submit"
+            className="tarefas-btn-dialog-submit"
             onClick={() => {
               editTarefa(tarefaPendente.tarefaId);
               handleCloseEditarTarefa();

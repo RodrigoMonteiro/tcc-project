@@ -1,6 +1,6 @@
 import "./styles.css";
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { GlobalContext } from "../../providers/globalProps";
 import { MdRemoveRedEye, MdMode, MdOutlineDelete } from "react-icons/md";
 
 import { anotacoesList } from "../../providers/dataTest/anotacoes";
@@ -20,10 +20,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function Anotacoes() {
+  const { globalProps } = useContext(GlobalContext);
   const theme = createTheme({
     typography: {
       allVariants: {
         fontFamily: "'Oswald' , 'sans-serif'",
+        color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+        letterSpacing: "0.04rem",
       },
     },
   });
@@ -140,6 +143,9 @@ export function Anotacoes() {
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Semestre</InputLabel>
               <Select
+                sx={{
+                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
+                }}
                 labelId="semestre-anotacoes"
                 id="semestre-anotacoes-id"
                 value={semestreAnotacoes}
@@ -147,18 +153,26 @@ export function Anotacoes() {
                 onChange={handleSemestreAnotacoes}
                 defaultValue={"2021.1"}
               >
-                <MenuItem value={"2021.1"}>2021.1</MenuItem>
-                <MenuItem value={"2021.2"}>2021.2</MenuItem>
-                <MenuItem value={"2022.1"}>2022.1</MenuItem>
-                <MenuItem value={"2022.2"}>2022.2</MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2021.1"}>
+                  2021.1
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2021.2"}>
+                  2021.2
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2022.1"}>
+                  2022.1
+                </MenuItem>
+                <MenuItem sx={{ color: "#191919" }} value={"2022.2"}>
+                  2022.2
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
           <button
-            className="btn-criar-anotacao"
+            className="anotacoes-btn-criar-anotacao"
             onClick={handleClickOpenCriarAnotacao}
           >
-            Criar nova anotação
+            + Criar nova anotação
           </button>
         </div>
         <div className="anotacoes-tabela-container">
@@ -200,7 +214,7 @@ export function Anotacoes() {
                         color={"#0f4a8d"}
                         onClick={() => {
                           setEditarAnotacao({
-                           ...el
+                            ...el,
                           });
                           handleClickOpenVisualizar();
                         }}
@@ -214,7 +228,7 @@ export function Anotacoes() {
                       onClick={() => {
                         editAnotacoes();
                         setEditarAnotacao({
-                          ...el
+                          ...el,
                         });
                         handleClickOpenEditar();
                       }}
@@ -231,7 +245,6 @@ export function Anotacoes() {
               );
             })}
           </div>
-         
         </div>
 
         <Dialog
@@ -239,7 +252,9 @@ export function Anotacoes() {
           open={openDialogCriarAnotacao}
           onClose={handleCloseCriarAnotacao}
         >
-          <DialogTitle>Criar nova anotação</DialogTitle>
+          <DialogTitle sx={{ color: "#0f4a8d" }}>
+            Criar nova anotação
+          </DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -265,13 +280,13 @@ export function Anotacoes() {
           </DialogContent>
           <DialogActions>
             <button
-              className="btn-dialog-close"
+              className="anotacoes-btn-dialog-close"
               onClick={handleCloseCriarAnotacao}
             >
               Cancelar
             </button>
             <button
-              className="btn-dialog-submit"
+              className="anotacoes-btn-dialog-submit"
               onClick={() => {
                 anotacaoList.push({
                   ...novaAnotacao,
@@ -315,13 +330,16 @@ export function Anotacoes() {
             />
           </DialogContent>
           <DialogActions>
-            <button className="btn-dialog-close" onClick={handleCloseEditar}>
+            <button
+              className="anotacoes-btn-dialog-close"
+              onClick={handleCloseEditar}
+            >
               Cancelar
             </button>
             <button
-              className="btn-dialog-submit"
+              className="anotacoes-btn-dialog-submit"
               onClick={() => {
-                editAnotacoes(editarAnotacao.anotacaoId); 
+                editAnotacoes(editarAnotacao.anotacaoId);
                 handleCloseEditar();
               }}
             >
@@ -359,7 +377,7 @@ export function Anotacoes() {
           </DialogContent>
           <DialogActions>
             <button
-              className="btn-dialog-close"
+              className="anotacoes-btn-dialog-close"
               onClick={handleCloseVisualizar}
             >
               Sair

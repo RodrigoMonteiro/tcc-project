@@ -75,7 +75,7 @@ export function HomeNewAccount() {
               src="assets/logo.png"
               alt="Logo over here"
             />
-            <h2>Otimize seu tempo</h2>
+            <h2 style={{ color: "#0f4a8d" }}>Otimize seu tempo</h2>
           </div>
           <div className="home-form-body-new-account">
             <Box component="form" sx={{ width: "100%", mb: 2, mt: 2 }}>

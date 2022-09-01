@@ -5,6 +5,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    font-size: 1.1rem;
+    letter-spacing: 0.04rem;
+    
 }
 
 .anotacoes-options-contanier {
@@ -17,10 +20,8 @@
 .anotacoes-tabela-container {
     width: 80%;
     align-self: center;
-    /* margin-top: 1%; */
     height: 50%;
     border-radius: 5px;
-    background-color: #c4c4c4;
 }
 .anotacoes-tabela-header-container {
     border-radius: 5px 5px 0 0 ;
@@ -39,11 +40,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0f4a8d;
+    background-color: #1976d2;
     width: 15%;
     height: 110%;
     margin-right: 1px;
-    padding: 2px;
+    padding: 7px;
+
 }
 .anotacoes-tabela-header-descricao{
     border-radius: 5px 0 0 0;
@@ -85,6 +87,8 @@
     cursor: pointer;
     overflow: hidden;
     white-space: nowrap;
+    padding: 7px;
+
 }
 .anotacoes-tabela-body-descricao{
     padding: 5px;
@@ -97,42 +101,42 @@
     padding: 4.45px;
     justify-content: space-around;
 }
-.btn-criar-anotacao, .btn-dialog-close , .btn-dialog-submit{
+.anotacoes-btn-criar-anotacao, .anotacoes-btn-dialog-close , .anotacoes-btn-dialog-submit{
 margin-top: 3%;
 margin-bottom: 5%;
 margin-right: 2.5%;
-width: 20%;
+width: 25%;
 color: white;
 background-color: #0f4a8d;
 border-style: none;
 border-radius: 5px;
-height: 30px;
 font-size: 1.01rem;
 cursor: pointer;
 }
 
-.btn-criar-anotacao{
-width: 15%;
+.anotacoes-btn-criar-anotacao{
+width: 10%;
 margin-top: 0%;
-height: 56px;
-width: 240px;
-background-color: #1976d2;
+height: 48px;
+width: 220px;
+font-size: 1.1rem !important;
+letter-spacing: 0.04rem !important;
+
 
 }
 
-.btn-criar-anotacao:hover , .btn-dialog-close:hover , .btn-dialog-submit{
+.anotacoes-btn-criar-anotacao:hover , .anotacoes-btn-dialog-close:hover , .anotacoes-btn-dialog-submit:hover{
     transition: 0.25s;
     opacity: 90%;
 }
 
-.btn-dialog-close{
-width: 15%;
+.anotacoes-btn-dialog-close{
 background-color: red;
+padding: 5px;
 }
 
-.btn-dialog-submit{
-width: 15%;
-margin-right: 18px;
+.anotacoes-btn-dialog-submit{
+    padding: 5px;
 }
 
 
