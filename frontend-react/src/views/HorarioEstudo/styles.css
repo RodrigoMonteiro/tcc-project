@@ -92,7 +92,7 @@
     cursor: pointer;
 }
 
-.btn-add-horario:hover ,.horarioEstudo-btn-dialog-close:hover ,.horarioEstudo-btn-dialog-submit:hover {
+.btn-add-horario:hover ,.horarioEstudo-btn-dialog-close:hover ,.horarioEstudo-btn-dialog-submit:hover , .anotacao-btn-deletar:hover {
 transition: 0.25s;
 opacity: 0.95;
 }
@@ -110,11 +110,30 @@ height: 36px;
     
 }
 
+
 .horario-estudo-tabela-body-line{
-     display: flex;
+    display: flex;
     width: 125%;
     height: 10%;
     margin-bottom: 1px;
+    position: relative;
+}
+.anotacao-btn-deletar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   height: 100%;
+    width: 4%;
+    color: red;
+    border: 2px solid red;
+    position: absolute;
+    border-radius: 5px;
+    left: -5%; 
+    cursor: pointer;
+    background-color: transparent;
+}
+.anotacao-btn-deletar-hidden{
+    visibility: hidden;
 }
 
 .anotacoes-tabela-body-horario,

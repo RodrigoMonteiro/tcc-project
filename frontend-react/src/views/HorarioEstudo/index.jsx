@@ -24,6 +24,7 @@ import {
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {GlobalContext} from '../../providers/globalProps'
 import { useState, useContext } from "react";
+import { MdOutlineDelete } from "react-icons/md";
 
 export function HorarioEstudo() {
   
@@ -151,6 +152,16 @@ const theme = createTheme({
       sabado: "",
       domingo: "",
     });
+  }
+
+  function deleteHorarioEstudoMatutino(id) {
+    setHorarioEstudoMatutinoList(horarioEstudoMatutinoList.filter((el) => el.horarioEstudoId !== id) )
+  }
+  function deleteHorarioEstudoVespertino(id) {
+    setHorarioEstudoVespertinoList(horarioEstudoVespertinoList.filter((el) => el.horarioEstudoId !== id) )
+  }
+  function deleteHorarioNoturno(id) {
+    setHorarioEstudoNoturnoList(horarioEstudoNoturnoList.filter((el) => el.horarioEstudoId !== id) )
   }
 
   return (
@@ -325,6 +336,20 @@ const theme = createTheme({
                       key={el.horarioEstudoId}
                       className="horario-estudo-tabela-body-line"
                     >
+                      <button
+                        className={`anotacao-btn-deletar ${
+                          acaoEstudoSelected === "Editar"
+                            ? "anotacao-btn-deletar-visible"
+                            : "anotacao-btn-deletar-hidden"
+                        }`}
+                      >
+                        <MdOutlineDelete size={28}
+                        onClick={() => {
+                          deleteHorarioEstudoMatutino(el.horarioEstudoId)
+                        }}
+                        ></MdOutlineDelete>
+                      </button>
+
                       <div className="anotacoes-tabela-body-horario">
                         <span>{`${el.horarioInicio} - ${el.horarioFim}`}</span>
                       </div>
@@ -516,6 +541,20 @@ const theme = createTheme({
                       key={el.horarioEstudoId}
                       className="horario-estudo-tabela-body-line"
                     >
+                      <button
+                        className={`anotacao-btn-deletar ${
+                          acaoEstudoSelected === "Editar"
+                            ? "anotacao-btn-deletar-visible"
+                            : "anotacao-btn-deletar-hidden"
+                        }`}
+                      >
+                        <MdOutlineDelete
+                          size={28}
+                          onClick={() => {
+                            deleteHorarioEstudoMatutino(el.horarioEstudoId);
+                          }}
+                        ></MdOutlineDelete>
+                      </button>
                       <div className="anotacoes-tabela-body-horario">
                         <span>{`${el.horarioInicio} - ${el.horarioFim}`}</span>
                       </div>
@@ -557,6 +596,20 @@ const theme = createTheme({
                       key={el.horarioEstudoId}
                       className="horario-estudo-tabela-body-line"
                     >
+                      <button
+                        className={`anotacao-btn-deletar ${
+                          acaoEstudoSelected === "Editar"
+                            ? "anotacao-btn-deletar-visible"
+                            : "anotacao-btn-deletar-hidden"
+                        }`}
+                      >
+                        <MdOutlineDelete
+                          size={28}
+                          onClick={() => {
+                            deleteHorarioEstudoMatutino(el.horarioEstudoId);
+                          }}
+                        ></MdOutlineDelete>
+                      </button>
                       <div className="anotacoes-tabela-body-horario">
                         <span>{`${el.horarioInicio} - ${el.horarioFim}`}</span>
                       </div>
