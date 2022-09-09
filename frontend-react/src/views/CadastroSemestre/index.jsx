@@ -12,6 +12,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function CadastroSemestre() {
@@ -36,6 +41,17 @@ export function CadastroSemestre() {
   const [novoSemestre, setNovoSemestre] = useState("");
   const [novaDisciplinaSemestre, setNovaDisciplinaSemestre] = useState("");
 
+  const [openDialogCadastroSemestre, setOpenDialogCadastroSemestre] =
+    useState(false);
+
+  const handleClickOpenCadastroSemestre = () => {
+    setOpenDialogCadastroSemestre(true);
+  };
+
+  const handleCloseCadastroSemestre = () => {
+    setOpenDialogCadastroSemestre(false);
+  };
+
   function adicionarDisciplina() {
     setSemestre({
       nomeSemestre: novoSemestre,
@@ -44,34 +60,49 @@ export function CadastroSemestre() {
     setNovaDisciplinaSemestre("");
     console.log(semestre);
   }
-
-  function deleteDisciplina(element) {
-
+  function adicionarDisciplinaSemestre() {
     semestreList.map((el, index) => {
       if (el.nomeSemestre === semestre.nomeSemestre) {
-        
+        setSemestreList([
+          ...semestreList,
+          ...semestreList[index].disciplinas.push(novaDisciplinaSemestre)
+        ]);
+      }
+    });
+  }
+
+  function deleteDisciplina(element) {
+    semestreList.map((el, index) => {
+      if (el.nomeSemestre === semestre.nomeSemestre) {
         setSemestre({
           ...semestre,
           disciplinas: semestre.disciplinas.filter((e) => e !== element),
         });
 
         setSemestreList([
-          
-         // code here
-          
+          // code here
+
           {
             ...semestreList[index],
-            [Object.keys(semestreList[index])[2]]: semestre.disciplinas
+            [Object.keys(semestreList[index])[2]]: semestre.disciplinas,
           },
         ]);
-       
-        console.log(semestreList[index ]);
+
+        console.log(semestreList[index]);
       }
     });
   }
+
   function deleteSemestre() {
-    console.log("deletar semestre...");
+    setSemestreList(
+      semestreList.filter((el) => el.nomeSemestre !== semestre.nomeSemestre)
+    );
+    setSemestre({
+      nomeSemestre: "",
+      disciplinas: [],
+    });
   }
+
   function salvarSemestre() {
     setSemestreList(
       semestreList,
@@ -82,7 +113,6 @@ export function CadastroSemestre() {
         tarefas: [],
       })
     );
-
     setNovoSemestre("");
     setNovaDisciplinaSemestre("");
 
@@ -272,11 +302,12 @@ export function CadastroSemestre() {
             </div>
             <div className="cadastro-semestre-btn-actions-editar">
               <button className="btn-deletar-semestre" onClick={deleteSemestre}>
+                {" "}
                 Deletar semestre
               </button>
               <button
                 className="btn-adicionar-disciplina"
-                onClick={adicionarDisciplina}
+                onClick={handleClickOpenCadastroSemestre}
               >
                 Adicionar disciplina
               </button>
@@ -284,6 +315,48 @@ export function CadastroSemestre() {
           </div>
         )}
       </div>
+      <Dialog
+        open={openDialogCadastroSemestre}
+        onClose={handleCloseCadastroSemestre}
+      >
+        <DialogTitle>Criar nova disciplina para o semestre</DialogTitle>
+
+        <DialogContent>
+          <Box sx={{ minWidth: 180, mt: 2 }}>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="nova-disciplina-dialog"
+              label="Nova disciplina"
+              value={novaDisciplinaSemestre}
+              onChange={(event) => {
+                setNovaDisciplinaSemestre(event.target.value)
+              }}
+              fullWidth
+            />
+          </Box>
+        </DialogContent>
+
+        <DialogActions>
+          <button
+            className="close-cadastro-semestre-dialog"
+            onClick={handleCloseCadastroSemestre}
+          >
+            Cancelar
+          </button>
+          <button
+            className="salvar-cadastro-semestre-dialog"
+            onClick={() => {
+              handleCloseCadastroSemestre();
+              adicionarDisciplinaSemestre();
+              setNovaDisciplinaSemestre("")
+              console.log(semestreList)
+            }}
+          >
+            Salvar
+          </button>
+        </DialogActions>
+      </Dialog>
     </ThemeProvider>
   );
 }

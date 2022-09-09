@@ -361,16 +361,6 @@ const theme = createTheme({
                           onChange={(event) => {
                             horarioEstudoMatutinoList.map((e, index) => {
                               if (e.horarioEstudoId === el.horarioEstudoId) {
-                                if (horarioEstudoMatutinoList.length <= 1) {
-                                  setHorarioEstudoMatutinoList([
-                                    {
-                                      ...horarioEstudoMatutinoList[index],
-                                      [Object.keys(
-                                        horarioEstudoMatutinoList[index]
-                                      )[3]]: event.target.value,
-                                    },
-                                  ]);
-                                } else {
                                   setHorarioEstudoMatutinoList([
                                     ...horarioEstudoMatutinoList,
                                     {
@@ -379,8 +369,9 @@ const theme = createTheme({
                                         horarioEstudoMatutinoList[index]
                                       )[3]]: event.target.value,
                                     },
+                                  
                                   ]);
-                                }
+                                
 
                                 console.log(horarioEstudoMatutinoList);
                               }
@@ -551,7 +542,7 @@ const theme = createTheme({
                         <MdOutlineDelete
                           size={28}
                           onClick={() => {
-                            deleteHorarioEstudoMatutino(el.horarioEstudoId);
+                            deleteHorarioEstudoVespertino(el.horarioEstudoId);
                           }}
                         ></MdOutlineDelete>
                       </button>
@@ -606,7 +597,7 @@ const theme = createTheme({
                         <MdOutlineDelete
                           size={28}
                           onClick={() => {
-                            deleteHorarioEstudoMatutino(el.horarioEstudoId);
+                            deleteHorarioNoturno(el.horarioEstudoId);
                           }}
                         ></MdOutlineDelete>
                       </button>
