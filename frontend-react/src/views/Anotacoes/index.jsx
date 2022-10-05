@@ -1,6 +1,5 @@
 import "./styles.css";
-import { useState, useContext } from "react";
-import { GlobalContext } from "../../providers/globalProps";
+import { useState} from "react";
 import { MdRemoveRedEye, MdMode, MdOutlineDelete } from "react-icons/md";
 
 import { anotacoesList } from "../../providers/dataTest/anotacoes";
@@ -17,19 +16,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export function Anotacoes() {
-  const { globalProps } = useContext(GlobalContext);
-  const theme = createTheme({
-    typography: {
-      allVariants: {
-        fontFamily: "'Oswald' , 'sans-serif'",
-        color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
-        letterSpacing: "0.04rem",
-      },
-    },
-  });
+  
 
   const [openDialogCriarAnotacao, setOpenDialogCriarAnotacao] = useState(false);
   const [openDialogVisualizar, setOpenDialogVisualizar] = useState(false);
@@ -136,16 +125,14 @@ export function Anotacoes() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+   
       <div className="anotacoes-container">
         <div className="anotacoes-options-contanier">
           <Box sx={{ minWidth: 240 }}>
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Semestre</InputLabel>
               <Select
-                sx={{
-                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
-                }}
+               
                 labelId="semestre-anotacoes"
                 id="semestre-anotacoes-id"
                 value={semestreAnotacoes}
@@ -153,16 +140,16 @@ export function Anotacoes() {
                 onChange={handleSemestreAnotacoes}
                 defaultValue={"2021.1"}
               >
-                <MenuItem sx={{ color: "#191919" }} value={"2021.1"}>
+                <MenuItem  value={"2021.1"}>
                   2021.1
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2021.2"}>
+                <MenuItem  value={"2021.2"}>
                   2021.2
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2022.1"}>
+                <MenuItem  value={"2022.1"}>
                   2022.1
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2022.2"}>
+                <MenuItem  value={"2022.2"}>
                   2022.2
                 </MenuItem>
               </Select>
@@ -385,6 +372,5 @@ export function Anotacoes() {
           </DialogActions>
         </Dialog>
       </div>
-    </ThemeProvider>
   );
 }

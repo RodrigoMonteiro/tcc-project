@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import "./App.css";
 import { GlobalContext } from "./providers/globalProps";
-import { ThemeProvider } from "styled-components";
+import {  ThemeProvider } from '@mui/material/styles';
 import { darkTheme, lightTheme } from "./theme/theme";
 import GlobalStyle from "./theme/global";
 
@@ -12,6 +12,7 @@ import { Navbar } from "./components/Navbar";
 import { HomeNewAccount } from "./views/Home/HomeNewAccount";
 import { Views } from "./views";
 import { Home } from "./views/Home";
+import { CssBaseline } from "@mui/material";
 
 function App() {
   
@@ -33,8 +34,9 @@ function App() {
             <HomeNewAccount></HomeNewAccount>
           )}
 
-          <GlobalStyle></GlobalStyle>
         </div>
+          <GlobalStyle ></GlobalStyle>
+          <CssBaseline/>
       </ThemeProvider>
     </BrowserRouter>
   );

@@ -5,8 +5,6 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { useState, useContext } from "react";
-
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   horarioSemestreMatutino,
   horarioSemestreVespertino,
@@ -28,15 +26,7 @@ export function HorarioSemestre() {
     horarioSemestreNoturno
   )
  const { globalProps } = useContext(GlobalContext);
-  const theme = createTheme({
-    typography: {
-      allVariants: {
-        fontFamily: "'Oswald' , 'sans-serif'",
-        color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
-        letterSpacing: "0.04rem"
-      }
-    },
-  });
+  
 
   function handleChangeTurno(event) {
     setIsTurnoSelected(event.target.value);
@@ -49,16 +39,14 @@ export function HorarioSemestre() {
   }
   
   return (
-    <ThemeProvider theme={theme}>
+   
       <div className="horario-semestre-container">
         <div className="horario-semestre-options-contanier">
           <Box sx={{ minWidth: 180 }}>
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Semestre</InputLabel>
               <Select
-                sx={{
-                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
-                }}
+               
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={semestreSelected}
@@ -66,16 +54,16 @@ export function HorarioSemestre() {
                 onChange={handleChangeSemestre}
                 defaultValue="2021.1"
               >
-                <MenuItem sx={{ color: "#191919" }} value={"2021.1"}>
+                <MenuItem  value={"2021.1"}>
                   2021.1
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2021.2"}>
+                <MenuItem  value={"2021.2"}>
                   2021.2
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2022.1"}>
+                <MenuItem  value={"2022.1"}>
                   2022.1
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2022.2"}>
+                <MenuItem  value={"2022.2"}>
                   2022.2
                 </MenuItem>
               </Select>
@@ -754,6 +742,6 @@ export function HorarioSemestre() {
           </div>
         </div>
       </div>
-    </ThemeProvider>
+   
   );
 }

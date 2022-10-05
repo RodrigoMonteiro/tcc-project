@@ -1,5 +1,4 @@
 import "./styles.css";
-
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
@@ -21,9 +20,7 @@ import {
   horarioEstudoNoturno as listaHorarioEstudoNoturno,
 } from "../../providers/dataTest/horarioEstudo";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import {GlobalContext} from '../../providers/globalProps'
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { MdOutlineDelete } from "react-icons/md";
 
 export function HorarioEstudo() {
@@ -56,18 +53,6 @@ export function HorarioEstudo() {
     sexta: "",
     sabado: "",
     domingo: "",
-  });
-
-const {globalProps} = useContext(GlobalContext)
-  
-const theme = createTheme({
-    typography: {
-      allVariants: {
-        fontFamily: "'Oswald' , 'sans-serif'",
-        color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
-        letterSpacing: "0.04rem",
-      },
-    },
   });
 
   const handleClickOpenHorarioEstudo = () => {
@@ -165,16 +150,14 @@ const theme = createTheme({
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    
       <div className="horario-estudo-container">
         <div className="horario-estudo-options-contanier">
           <Box sx={{ minWidth: 180 }}>
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Semestre</InputLabel>
               <Select
-                sx={{
-                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
-                }}
+                
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={semestreEstudoSelected}
@@ -182,16 +165,16 @@ const theme = createTheme({
                 onChange={handleChangeSemestreEstudo}
                 defaultValue="2021.1"
               >
-                <MenuItem sx={{ color: "#191919" }} value={"2021.1"}>
+                <MenuItem  value={"2021.1"}>
                   2021.1
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2021.2"}>
+                <MenuItem  value={"2021.2"}>
                   2021.2
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2022.1"}>
+                <MenuItem  value={"2022.1"}>
                   2022.1
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"2022.2"}>
+                <MenuItem  value={"2022.2"}>
                   2022.2
                 </MenuItem>
               </Select>
@@ -201,9 +184,7 @@ const theme = createTheme({
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Turno</InputLabel>
               <Select
-                sx={{
-                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
-                }}
+                
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={turnoEstudoSelected}
@@ -211,13 +192,13 @@ const theme = createTheme({
                 onChange={handleChangeTurnoEstudo}
                 defaultValue="Matutino"
               >
-                <MenuItem sx={{ color: "#191919" }} value={"Matutino"}>
+                <MenuItem  value={"Matutino"}>
                   Matutino
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"Vespertino"}>
+                <MenuItem  value={"Vespertino"}>
                   Vespertino
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"Noturno"}>
+                <MenuItem  value={"Noturno"}>
                   Noturno
                 </MenuItem>
               </Select>
@@ -227,9 +208,7 @@ const theme = createTheme({
             <FormControl fullWidth>
               <InputLabel id="demo-select-small">Ação</InputLabel>
               <Select
-                sx={{
-                  color: globalProps.isLightTheme ? "#191919" : "#c4c4c4",
-                }}
+                
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={acaoEstudoSelected}
@@ -237,10 +216,10 @@ const theme = createTheme({
                 onChange={handleChangeAcaoEstudo}
                 defaultValue="Visualizar"
               >
-                <MenuItem sx={{ color: "#191919" }} value={"Visualizar"}>
+                <MenuItem  value={"Visualizar"}>
                   Visualizar
                 </MenuItem>
-                <MenuItem sx={{ color: "#191919" }} value={"Editar"}>
+                <MenuItem  value={"Editar"}>
                   Editar
                 </MenuItem>
               </Select>
@@ -1069,6 +1048,6 @@ const theme = createTheme({
           ""
         )}
       </div>
-    </ThemeProvider>
+   
   );
 }

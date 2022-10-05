@@ -2,25 +2,35 @@
     height: 100%;
     width: 90%;
 }
+
 .inicio-title {
     margin-top: 3%;
     text-align: center;
     letter-spacing: 0.08rem !important;
-    
+    font-size: 2rem;
+
 }
 
 .inicio-subtitle {
     margin-top: 2%;
     text-align: center;
     font-size: 1.25rem;
-    font-weight: 200;
 }
-.accordion-title , .accordion-content {
-    font-family: 'Oswald' , sans-serif !important;
+
+.title-light {
+    color: #0f4a8d
+}
+
+.subtitle-light {
+    color: #1976d2;
+}
+
+.accordion-title, .accordion-content {
+    font-family: 'Oswald', sans-serif !important;
     font-size: 1.1rem !important;
     letter-spacing: 0.04rem !important;
 }
 
-.inicio-body{
+.inicio-body {
     margin-top: 5%;
 }
