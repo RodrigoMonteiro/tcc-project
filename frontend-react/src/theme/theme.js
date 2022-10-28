@@ -99,9 +99,9 @@ export const lightTheme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          padding: '0 5px',
+          padding: '0 4px',
           backgroundColor: '#c4c4c4',
-          color: '#191919'
+          color: '#191919',
         },
       }
     },

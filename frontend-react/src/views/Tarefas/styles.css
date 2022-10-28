@@ -138,6 +138,8 @@
     margin: auto;
     border-radius: 5px;
     height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 .btn-salvar-tarefa , .tarefas-btn-dialog-close ,.tarefas-btn-dialog-submit{
 align-self: flex-end;
